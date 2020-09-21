@@ -162,7 +162,7 @@ module.exports = msgHandler = async (client = new Client(), message) => {
             const random = coin[Math.floor(Math.random() * (coin.length))]
             await client.reply(from, `Lu dapet *${random}*`)
         break
-
+        
         // Buat bikin stiker
         case 'sticker':
         case 'stiker': {
