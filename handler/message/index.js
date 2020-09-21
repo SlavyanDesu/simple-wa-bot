@@ -115,7 +115,7 @@ module.exports = msgHandler = async (client = new Client(), message) => {
         case 'clock':
         case 'jam':
         case 'waktu':
-            await client.sendText(from, `Waktu Indonesia Barat: ${moment().utcOffset('+0700').format('HH:mm')} WIB \nWaktu Indonesia Tengah: ${moment().utcOffset('+0800').format('HH:mm')} WITA \nWaktu Indonesia Timur: ${moment().utcOffset('+0900').format('HH:mm')} WIT`)
+            await client.sendText(from, `Waktu Indonesia Barat: *${moment().utcOffset('+0700').format('HH:mm')}* WIB \nWaktu Indonesia Tengah: *${moment().utcOffset('+0800').format('HH:mm')}* WITA \nWaktu Indonesia Timur: *${moment().utcOffset('+0900').format('HH:mm')}* WIT`)
             break
 
         // Fun
@@ -221,9 +221,9 @@ module.exports = msgHandler = async (client = new Client(), message) => {
             break
             case 'fb':
             case 'facebook':
-                if (args.length !== 1) return client.reply(from, 'Maaf, format pesan salah silahkan periksa menu. [Wrong Format]', id)
-                if (!isUrl(url) && !url.includes('facebook.com')) return client.reply(from, 'Maaf, url yang kamu kirim tidak valid. [Invalid Link]', id)
-                await client.reply(from, '_Scraping Metadata..._ \n\nTerimakasih telah menggunakan bot ini, kamu dapat membantu pengembangan bot ini dengan menyawer melalui https://saweria.co/donate/yogasakti atau mentrakteer melalui https://trakteer.id/red-emperor \nTerimakasih.', id)
+                if (args.length !== 1) return client.reply(from, 'Lah? Salah bego. Cek formatnya di *$menu*', id)
+                if (!isUrl(url) && !url.includes('facebook.com')) return client.reply(from, 'Link lu kagak valid', id)
+                await client.reply(from, 'Tunggu bentar...', id)
                 downloader.facebook(url).then(async (videoMeta) => {
                     const title = videoMeta.response.title
                     const thumbnail = videoMeta.response.thumbnail
@@ -236,12 +236,12 @@ module.exports = msgHandler = async (client = new Client(), message) => {
                         shorts.push(links[i])
                     }
                     const link = shorts.map((x) => `${x.resolution} Quality: ${x.short}`)
-                    const caption = `Text: ${title} \n\nLink Download: \n${link.join('\n')} \n\nProcessed for ${processTime(t, moment())} _Second_`
+                    const caption = `Teks: ${title} \n\nLink download: \n${link.join('\n')} \n\nBerhasil diproses selama ${processTime(t, moment())} detik`
                     await client.sendFileFromUrl(from, thumbnail, 'videos.jpg', caption, null, null, true)
-                        .then((serialized) => console.log(`Sukses Mengirim File dengan id: ${serialized} diproses selama ${processTime(t, moment())}`))
+                        .then((serialized) => console.log(`Sukses mengirm file dengan ID: ${serialized} diproses selama ${processTime(t, moment())}`))
                         .catch((err) => console.error(err))
                 })
-                    .catch((err) => client.reply(from, `Error, url tidak valid atau tidak memuat video. [Invalid Link or No Video] \n\n${err}`, id))
+                    .catch((err) => client.reply(from, `Link lu kagak valid \n\n${err}`, id))
             break
             case 'twt':
             case 'twitter':
@@ -253,7 +253,7 @@ module.exports = msgHandler = async (client = new Client(), message) => {
                         const content = data.variants.filter(x => x.content_type !== 'application/x-mpegURL').sort((a, b) => b.bitrate - a.bitrate)
                         const result = await urlShortener(content[0].url)
                         console.log('Shortlink: ' + result)
-                        await client.sendFileFromUrl(from, content[0].url, 'video.mp4', `Download: ${result} \n\nBerhasil diproses selama ${processTime(t, moment())} detik`, null, null, true)
+                        await client.sendFileFromUrl(from, content[0].url, 'video.mp4', `Link download: ${result} \n\nBerhasil diproses selama ${processTime(t, moment())} detik`, null, null, true)
                             .then((serialized) => console.log(`Sukses mengirim file dengan ID: ${serialized} diproses selama ${processTime(t, moment())}`))
                             .catch((err) => console.error(err))
                     } else if (data.type === 'photo') {
@@ -264,7 +264,7 @@ module.exports = msgHandler = async (client = new Client(), message) => {
                         }
                     }
                 })
-                    .catch(() => client.sendText(from, 'Link lu kagak valid'))
+                    .catch(() => client.sendText(from, `Link lu kagak valid \n\n${err}`, id))
                 break
         
         // Group Commands (group admin only)
