@@ -4,7 +4,7 @@ const options = require('./utils/options')
 const msgHandler = require('./handler/message')
 
 const start = (client = new Client()) => {
-    console.log('[DEV]', color('Slavyan', 'blue'))
+    console.log('[DEV]', color('Slavyan', 'orange'))
     console.log('[CLIENT] CLIENT Started!')
 
     // Force it to keep the current session
@@ -31,19 +31,20 @@ const start = (client = new Client()) => {
         client.getGroupMembersId(id)
             .then((ids) => {
                 console.log('[CLIENT]', color(`Invited to Group. [ ${name} : ${ids.length}]`, 'yellow'))
-                // conditions if the group members are less than 10 then the bot will leave the group
+                /** conditions if the group members are less than 10 then the bot will leave the group
                 if (ids.length <= 2) {
                     client.sendText(id, 'Minimum member harus 2. Gw harus out bye.').then(() => client.leaveGroup(id))
                 } else {
                     client.sendText(id, `Yo *${name}*, makasih dah invite. Ketik *$menu* buat liat command.`)
                 }
+                */
             }))
 
     client.onRemovedFromGroup((data) => {
         console.log(data)
     })
 
-    // listen paricipant event on group (wellcome message)
+    // listen paricipant event on group (welcome message)
     client.onGlobalParicipantsChanged((event) => {
         // if (event.action === 'add') client.sendTextWithMentions(event.chat, `Hello, Welcome to the group @${event.who.replace('@c.us', '')} \n\nHave fun with us✨`)
     })
