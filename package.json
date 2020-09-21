@@ -14,7 +14,7 @@
   "author": "Slavyan",
   "repository": {
     "type": "git",
-    "url": "https://github.com/HungXiao007/fga-wa-bot.git"
+    "url": "git+https://github.com/HungXiao007/fga-wa-bot.git"
   },
   "bugs": {
     "url": "https://github.com/HungXiao007/fga-wa-bot/issues"
