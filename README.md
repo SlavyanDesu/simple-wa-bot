@@ -1,1 +1,1 @@
-Gak tau.
+Bot WhatsApp buat FGA.
