@@ -1,118 +1,106 @@
 exports.textTnC = () => {
     return `
-Source code / bot ini merupakan program open-source (gratis) yang ditulis menggunakan Javascript, kamu dapat menggunakan, menyalin, memodifikasi, menggabungkan, menerbitkan, mendistribusikan, mensublisensikan, dan atau menjual salinan dengan tanpa menghapus author utama dari source code / bot ini.
+Pertama-tama gw mau makasih ama Yoga Sakti yang udah mau minjemin source code, serius lu the best dah. Ngke lamun urang ameng deui ka Bandung ku urang traktir batagor kuah hareupeun imah lah.
+Lalu, gw Slavyan ngoding dan merevisi beberapa line agar mudah dicerna. Apaan sih gaje.
 
-Dengan menggunakan source code / bot ini maka anda setuju dengan Syarat dan Kondisi sebagai berikut:
-- Source code / bot tidak menyimpan data anda di server kami.
-- Source code / bot tidak bertanggung jawab atas sticker yang anda buat dari bot ini serta video, gambar maupun data lainnya yang anda dapatkan dari Source code / bot ini.
-- Source code / bot tidak boleh digunakan untuk layanan yang bertujuan/berkontribusi dalam: 
-    • seks / perdagangan manusia
-    • perjudian
-    • perilaku adiktif yang merugikan 
-    • kejahatan
-    • kekerasan (kecuali jika diperlukan untuk melindungi keselamatan publik)
-    • pembakaran hutan / penggundulan hutan
-    • ujaran kebencian atau diskriminasi berdasarkan usia, jenis kelamin, identitas gender, ras, seksualitas, agama, kebangsaan
-
-Source Code BOT : https://github.com/YogaSakti/imageToSticker
-NodeJS WhatsApp library: https://github.com/open-wa/wa-automate-nodejs
-
-Best regards, Yoga Sakti.`
+GitHub Slavyan: https://github.com/HungXiao007/
+GitHub Yoga: https://github.com/YogaSakti/
+`
 }
 
 exports.textMenu = (pushname) => {
     return `
-Hi, ${pushname}! 👋️
-Berikut adalah beberapa fitur yang ada pada bot ini!✨
+Ada beberapa hal yang bisa gw lakuin:
 
-Sticker Creator:
-1. *#sticker*
-Untuk merubah gambar menjadi sticker. 
-Penggunaan: kirim gambar dengan caption #sticker atau balas gambar yang sudah dikirim dengan #sticker
+Downloader (Baru ini doang):
+1. *$instagram* _<URL Instagram>_
+Buat download gambar atau video dari IG. Nih buat lu Bil anj.
+Aliases: ig
+Penggunaan: pake command dengan format *$ig https://www.instagram.com/p/xxxxxxxx/*
 
-2. *#sticker* _<Url Gambar>_
-Untuk merubah gambar dari url menjadi sticker. 
-Penggunaan: 
+Bikin stiker:
+1. *$sticker*
+Bikin gambar lu jadi stiker.
+Aliases: stiker
+Penggunaan: kirim gambar dengan caption *$sticker* atau balas gambar yang udah dikirim dengan *$sticker*
 
-3. *#gifsticker* _<Giphy URL>_ / *#stickergif* _<Giphy URL>_
-Untuk merubah gif menjadi sticker (Giphy Only)
-Penggunaan: Kirim pesan dengan format *gifsticker https://media.giphy.com/media/JUvI2c1ddyzkwK4RlV/giphy.gif*
+2. *$sticker* _<URL Gambar>_
+Bikin stiker juga, tapi lewat image link.
+Aliases: stiker
+Penggunaan: kirim URL dengan command *$sticker* atau balas URL yang udah dikirim dengan *$sticker*
 
-4. *#memesticker* _<teks atas>_ | _<teks bawah>_
-Untuk membuat sticker meme dengan teks atas dan bawah
-Penggunaan: kirim gambar dengan caption _*#meme aku atas | kamu bawah*_, atau juga bisa dengan membalas gambar yang sudah ada.
+Gak guna:
+1. *$readme*
+Isinya copyright buat source code doang.
+Alias: tnc
+Penggunaan: *$readme*
 
-Downloader:
-1. *#tiktok* _<tiktok url>_
-Untuk mengunduh video dari video tiktok.
-Penggunaan: kirim pesan dengan format *#tiktok https://www.tiktok.com/@itsandani/video/6869248690381425922* 
+2. *$say*
+Bikin gw mengatakan apa yang lu katakan. <> Abaikan.
+Alias: talk
+Penggunaan: *$say* <teks lu>
 
-2. *#fb* _<post/video url>_
-Untuk mengunduh video dari Facebook.
-Penggunaan: kirim pesan dengan format *#fb https://www.facebook.com/.....*
+3. *$ask*
+Tanya gw tentang apa aja, gw jawab sebisanya. <> Abaikan.
+Aliases: 8ball
+Penggunaan:: *$ask* <pertanyaan lu>
 
-3. *#ig* _<instagram post url>_
-Untuk mengunduh photo dan video dari instagram.
-Penggunaan: kirim pesan dengan format *#ig https://www.instagram.com/p/BPOd1vhDMIp/*
+4. *$menu*
+Ya buat cek command.
+Aliases: help
+Penggunaan: *$menu*
 
-4. *#twt* _<twitter post url>_
-Untuk mengunduh photo dan video dari Twitter.
-Penggunaan: kirim pesan dengan format *#twt https://twitter.com/ntsana_/status/1306108656887324672*
+5. *$reverse*
+.nasilut nikilaB
+Aliases: - 
+Penggunaan: *$reverse* <teks lu>
 
-Lain-lain:
-1. *#translate* _<kode bahasa>_
-Untuk mengartikan pesan menjadi bahasa yang ditentukan.
-Penggunaan: Balas/quote/reply pesan yang ingin kamu translate dengan _*#translate id*_ <- id adalah kode bahasa. kode bahasa dapat dilihat di *https://bit.ly/33FVldE*
+Utilities:
+1. *$ping*
+Buat ngecek respon bot.
+Alias: speed
+Penggunaan: *$ping*
 
-2. *#resi* _<kurir>_ _<nomer resi>_
-Untuk memeriksa status pengiriman barang, daftar kurir: jne, pos, tiki, wahana, jnt, rpx, sap, sicepat, pcp, jet, dse, first, ninja, lion, idl, rex.
-Penggunaan: kirim pesan dengan format _*#resi jne 1238757632*_
+2. *$server*
+Liat spesifikasi server.
+Alias: -
+Penggunaan: *$server*
 
-3. *#meme* _<teks atas>_ | _<teks bawah>_
-Untuk membuat meme dengan teks atas dan bawah
-Penggunaan: kirim gambar dengan caption _*#meme aku atas | kamu bawah*_, atau juga bisa dengan membalas gambar yang sudah ada.
-
-4. *#ceklokasi*
-Cek lokasi penyebaran covid-19 di daerah sekitarmu (kelurahan).
-Penggunaan: kirimkan lokasimu lalu balas/quote/reply lokasi yang kamu kirim dengan _*#ceklokasi*_
-
-5. *#tnc*
-Menampilkan Syarat dan Kondisi Bot.
-
-6. *#donasi*
-menampilkan informasi donasi.
-
-Hope you have a great day!✨`
+3. *$eval*
+Buat evaluates string JavaScript tanpa terminal anjay canggih. <> Abaikan.
+Alias: ev
+Penggunaan: *$eval* <string>
+`
 }
 
 exports.textAdmin = () => {
     return `
-⚠ [ *Admin Group Only* ] ⚠ 
-Berikut adalah beberapa fitur admin grup yang ada pada bot ini!
+⚠ [ *ADMIN ONLY* ] ⚠ 
+Lo males ke sana ke mari jadi admin? Gw bisa bantu dengan command berikut:
 
-1. *#kick* @user
-Untuk mengeluarkan member dari grup (bisa lebih dari 1).
+1. *$kick*
+Buat kick member rese, lebih dari satu? Boleeeeeh.
+Penggunaan: *$kick* @member
 
-2. *#promote* @user
-Untuk mempromosikan member menjadi Admin grup.
+2. *$promote*
+Buat naikin jabatan member ke admin.
+Penggunaan: *$promote* @member
 
-3. *#demote* @user
-Untuk demosikan Admin grup.
+3. *$demote*
+Buat lengserin admin ke rakyat jelata.
+Penggunaan: *$demote* @member
 
-4. *#tagall*
-Untuk mention semua member grup. (Premium Only)
+4. *$del*
+Buat hapus pesan dari gw.
+Penggunaan: reply pesan yang mau dihapus lalu ketik command *$del*
 
-5. *#del*
-Untuk menghapus pesan bot (balas pesan bot dengan #del)`
-}
+5. *$status*
+Buat cek status bot.
+Penggunaan: *$status*
 
-exports.textDonasi = () => {
-    return `
-Hai, terimakasih telah menggunakan bot ini, untuk mendukung bot ini kamu dapat membantu dengan berdonasi melalui link berikut:
-1. Saweria: https://saweria.co/yogasakti
-2. Trakteer: https://trakteer.id/red-emperor 
-
-Donasi akan digunakan untuk pengembangan dan pengoperasian bot ini.
-
-Terimakasih.`
+6. *$bye*
+Keluarin gw dari grup.
+Aliases: out
+Penggunaan: *$bye*
+`
 }
