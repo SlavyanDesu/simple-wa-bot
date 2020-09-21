@@ -1,10 +1,26 @@
 exports.textTnC = () => {
     return `
-Pertama-tama gw mau makasih ama Yoga Sakti yang udah mau minjemin source code, serius lu the best dah. Ngke lamun urang ameng deui ka Bandung ku urang traktir batagor kuah hareupeun imah lah.
-Lalu, gw Slavyan ngoding dan merevisi beberapa line agar mudah dicerna. Apaan sih gaje.
+    MIT License
 
-GitHub Slavyan: https://github.com/HungXiao007/
-GitHub Yoga: https://github.com/YogaSakti/
+    Copyright (c) 2020 Heikal Syah Shiddiq
+    
+    Permission is hereby granted, free of charge, to any person obtaining a copy
+    of this software and associated documentation files (the "Software"), to deal
+    in the Software without restriction, including without limitation the rights
+    to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+    copies of the Software, and to permit persons to whom the Software is
+    furnished to do so, subject to the following conditions:
+    
+    The above copyright notice and this permission notice shall be included in all
+    copies or substantial portions of the Software.
+    
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+    SOFTWARE.
 `
 }
 
@@ -12,48 +28,53 @@ exports.textMenu = (pushname) => {
     return `
 Ada beberapa hal yang bisa gw lakuin:
 
-Downloader (Baru ini doang):
+Downloader (TWITTER DAN FACEBOOK UPDATE):
 1. *$instagram* _<URL Instagram>_
-Buat download gambar atau video dari IG. Nih buat lu Bil anj.
+Buat download gambar atau video dari IG.
 Aliases: ig
-Penggunaan: pake command dengan format *$ig https://www.instagram.com/p/xxxxxxxx/*
+Penggunaan: pake command dengan format *$instagram* <link postingan>
+
+2. *$facebook*
+Buat download gambar atau video dari Facebook.
+Aliases: fb
+Penggunaan: *$facebook* <link postingan>
+
+3. *$twitter*
+Buat download gambar atau video dari Twitter.
+Aliases: twt
+Penggunaan: *$twitter* <link tweet>
 
 Bikin stiker:
 1. *$sticker*
-Bikin gambar lu jadi stiker.
+Bikin gambar lu jadi stiker, bisa juga pake link.
 Aliases: stiker
-Penggunaan: kirim gambar dengan caption *$sticker* atau balas gambar yang udah dikirim dengan *$sticker*
+Penggunaan: kirim gambar dengan caption *$sticker* atau balas gambar yang udah dikirim dengan *$sticker*. Link juga bisa.
 
-2. *$sticker* _<URL Gambar>_
-Bikin stiker juga, tapi lewat image link.
-Aliases: stiker
-Penggunaan: kirim URL dengan command *$sticker* atau balas URL yang udah dikirim dengan *$sticker*
-
-Gak guna:
-1. *$readme*
-Isinya copyright buat source code doang.
-Alias: tnc
-Penggunaan: *$readme*
-
-2. *$say*
+Fun:
+1. *$say*
 Bikin gw mengatakan apa yang lu katakan. <> Abaikan.
 Alias: talk
 Penggunaan: *$say* <teks lu>
 
-3. *$ask*
+2. *$ask*
 Tanya gw tentang apa aja, gw jawab sebisanya. <> Abaikan.
 Aliases: 8ball
 Penggunaan:: *$ask* <pertanyaan lu>
 
-4. *$menu*
-Ya buat cek command.
-Aliases: help
-Penggunaan: *$menu*
-
-5. *$reverse*
+3. *$reverse*
 .nasilut nikilaB
 Aliases: - 
 Penggunaan: *$reverse* <teks lu>
+
+4. *$roll*
+Buat ngeroll dadu.
+Aliases: dice
+Penggunaan: *$roll*
+
+5. *$coinflip*
+Lempar koin.
+Aliases: coin, flip
+Penggunaan: *$coinflip*
 
 Utilities:
 1. *$ping*
@@ -70,6 +91,22 @@ Penggunaan: *$server*
 Buat evaluates string JavaScript tanpa terminal anjay canggih. <> Abaikan.
 Alias: ev
 Penggunaan: *$eval* <string>
+
+4. *$clock*
+Buat ngecek waktu Indonesia.
+Aliases: waktu, jam
+Penggunaan: *$clock*
+
+5. *$readme*
+Isinya copyright buat source code doang.
+Alias: tnc
+Penggunaan: *$readme*
+
+6. *$menu*
+Ya buat cek command.
+Aliases: help
+Penggunaan: *$menu*
+
 `
 }
 

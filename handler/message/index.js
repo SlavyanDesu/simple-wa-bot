@@ -1,8 +1,10 @@
 require('dotenv').config()
 const { decryptMedia, Client } = require('@open-wa/wa-automate')
 const moment = require('moment-timezone')
-const momentz = require('moment')
 const os = require('os')
+const fs = require('fs')
+const { getLyrics } = require('genius-lyrics-api')
+const figlet = require('figlet')
 moment.tz.setDefault('Asia/Jakarta').locale('id')
 const { downloader, cekResi, removebg, urlShortener, meme, translate, getLocationData } = require('../../lib')
 const { msgFilter, color, processTime, isUrl } = require('../../utils')
@@ -35,6 +37,7 @@ const responses = [
 ]
 
 const { menuId, menuEn } = require('./text') // Indonesian & English menu
+const { youtube } = require('video-url-link')
 
 module.exports = msgHandler = async (client = new Client(), message) => {
     try {
@@ -80,7 +83,7 @@ module.exports = msgHandler = async (client = new Client(), message) => {
         msgFilter.addFilter(from)
 
         switch (command) {
-        // Menu
+        // Utilities
         case 'speed':
         case 'ping':
             await client.sendText(from, `Pong!!!!\nSpeed: ${processTime(t, moment())} _Second_`)
@@ -90,36 +93,9 @@ module.exports = msgHandler = async (client = new Client(), message) => {
             await client.sendText(from, menuId.textMenu(pushname))
                 .then(() => ((isGroupMsg) && (isGroupAdmins)) ? client.sendText(from, 'Menu buat admin: *$admin*') : null)
             break
-        case 'admin':
-            if (!isGroupMsg) return client.reply(from, 'Command ini cuman bisa dipake di grup', id)
-            if (!isGroupAdmins) return client.reply(from, 'Lo bukan admin juga woy!', id)
-            await client.sendText(from, menuId.textAdmin())
-            break
-        case 'talk':
-        case 'say':
-            const sayMessage = args.join(' ')
-            if (!sayMessage) return client.reply(from, 'Lah? Salah bego. Cek formatnya di *$menu*')
-            await client.sendText(from, sayMessage)
-            break
         case 'tnc':
         case 'readme':
             await client.sendText(from, menuId.textTnC())
-            break
-        case 'reverse':
-            if (args.length < 1) return client.reply(from, 'Lah? Salah bego. Cek formatnya di *$menu*')
-            await client.sendText(from, args.join(' ').split('').reverse().join(''))
-            break
-        case 'roll':
-        case 'dice':
-            let roll = Math.floor(Math.random() * 6) + 1
-            await client.reply(from, `Lu mendapatkan angka *${roll}*.`)
-            break
-        case 'ask':
-        case '8ball':
-            const question = args.join(' ')
-            const answer = responses[Math.floor(Math.random() * (responses.length))]
-            if (!question) client.reply(from, 'Lah? Salah bego. Cek formatnya di *$menu*')
-            await client.sendText(from, `Pertanyaan lu: ${question} \n\nJawaban gw: ${answer}`)
             break
         case 'server':
             await client.sendText(from, `Penggunaan RAM: *${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)}MB / ${Math.round(require('os').totalmem / 1024 / 1024)}MB*\nCPU: *${os.cpus().length} ${os.cpus()[0].model}*`)
@@ -138,6 +114,56 @@ module.exports = msgHandler = async (client = new Client(), message) => {
             } catch (err) {
                 client.sendText(`\`ERROR\` \`\`\`xl\n${clean(err)}\n\`\`\``)
             }
+            break
+        case 'clock':
+        case 'jam':
+        case 'waktu':
+            await client.sendText(from, `Waktu Indonesia Barat: ${moment().utcOffset('+0700').format('HH:mm')} WIB \nWaktu Indonesia Tengah: ${moment().utcOffset('+0800').format('HH:mm')} WITA \nWaktu Indonesia Timur: ${moment().utcOffset('+0900').format('HH:mm')} WIT`)
+            break
+
+        // Fun
+        case 'ascii':
+            if (!args) return client.reply(from, 'Lah? Salah bego. Cek formatnya di *$menu*')
+            figlet (args.join(' '), function (err, data) {
+                if (err) {
+                    console.log('Something is wrong...')
+                    console.dir(err)
+                    return
+                }
+                client.sendText(from, '```' + data + '```')
+            })
+            break
+        case 'ask':
+        case '8ball':
+            const question = args.join(' ')
+            const answer = responses[Math.floor(Math.random() * (responses.length))]
+            if (!question) client.reply(from, 'Lah? Salah bego. Cek formatnya di *$menu*')
+            await client.sendText(from, `Pertanyaan lu: ${question} \n\nJawaban gw: ${answer}`)
+            break
+        case 'reverse':
+            if (args.length < 1) return client.reply(from, 'Lah? Salah bego. Cek formatnya di *$menu*')
+            await client.sendText(from, args.join(' ').split('').reverse().join(''))
+            break
+        case 'roll':
+        case 'dice':
+            let roll = Math.floor(Math.random() * 6) + 1
+            await client.reply(from, `Lu mendapatkan angka *${roll}*.`)
+            break
+        case 'talk':
+        case 'say':
+            const sayMessage = args.join(' ')
+            if (!sayMessage) return client.reply(from, 'Lah? Salah bego. Cek formatnya di *$menu*')
+            await client.sendText(from, sayMessage)
+            break
+        case 'coinflip':
+        case 'coin':
+        case 'flip':
+            const coin = [
+                'Heads',
+                'Tails'
+            ]
+            const random = coin[Math.floor(Math.random() * (coin.length))]
+            await client.reply(from, `Lu dapet *${random}*`)
         break
 
         // Buat bikin stiker
@@ -163,11 +189,11 @@ module.exports = msgHandler = async (client = new Client(), message) => {
             break
         }
         
-        // Video Downloader
+        // Downloader
         case 'ig':
         case 'instagram':
             if (args.length !== 1) return client.reply(from, 'Lah? Salah bego. Cek formatnya di *$menu*', id)
-            if (!isUrl(url) && !url.includes('instagram.com')) return client.reply(from, 'Link lu ga valid.', id)
+            if (!isUrl(url) && !url.includes('instagram.com')) return client.reply(from, 'Link lu kagak valid.', id)
             await client.reply(from, 'Tunggu bentar...', id)
             downloader.insta(url).then(async (data) => {
                 if (data.type == 'GraphSidecar') {
@@ -196,8 +222,60 @@ module.exports = msgHandler = async (client = new Client(), message) => {
                     client.reply(from, 'Gak bisa, kayaknya link lu invalid atau IG-nya private', id)
                 })
             break
+            case 'fb':
+            case 'facebook':
+                if (args.length !== 1) return client.reply(from, 'Lah? Salah bego. Cek formatnya di *$menu*', id)
+                if (!isUrl(url) && !url.includes('facebook.com')) return client.reply(from, 'Link lu kagak valid', id)
+                await client.reply('Tunggu bentar...')
+                downloader.facebook(url).then(async (videoMeta) => {
+                    const title = videoMeta.response.title
+                    const thumbnail = videoMeta.response.thumbnail
+                    const links = videoMeta.response.links
+                    const shorts = []
+                    for (let i = 0; i < links.length; i++) {
+                        const shortener = await urlShortener(links[i].url)
+                        console.log('Shortlink: ' + shortener)
+                        links[i].short = shortener
+                        shorts.push(links[i])
+                    }
+                    const link = shorts.map((x) => `${x.resolution} Quality: ${x.short}`)
+                    const caption = `Teks: ${title} \n\nDownload: \n${link.join('\n')} \n\nBerhasil diproses selama ${processTime(t, moment())} detik`
+                    await client.sendFileFromUrl(from, thumbnail, 'videos.jpg', caption, null, null, true)
+                        .then((serialized) => console.log(`Sukses Mengirim File dengan id: ${serialized} diproses selama ${processTime(t, moment())}`))
+                        .catch((err) => console.error(err))
+                })
+                    .catch((err) => client.reply(from, `Link lu kagak valid \n\n${err}`, id))
+                break
+            case 'twt':
+            case 'twitter':
+                if (args.length !== 1) return client.reply(from, 'Lah? Salah bego. Cek formatnya di *$menu*', id)
+                if (!isUrl(url) & !url.includes('twitter.com') || url.includes('t.co')) return client.reply(from, 'Link lu kagak valid', id)
+                await client.reply(from, 'Tunggu bentar...', id)
+                downloader.tweet(url).then(async (data) => {
+                    if (data.type === 'video') {
+                        const content = data.variants.filter(x => x.content_type !== 'application/x-mpegURL').sort((a, b) => b.bitrate - a.bitrate)
+                        const result = await urlShortener(content[0].url)
+                        console.log('Shortlink: ' + result)
+                        await client.sendFileFromUrl(from, content[0].url, 'video.mp4', `Download: ${result} \n\nBerhasil diproses selama ${processTime(t, moment())} detik`, null, null, true)
+                            .then((serialized) => console.log(`Sukses Mengirim File dengan id: ${serialized} diproses selama ${processTime(t, moment())}`))
+                            .catch((err) => console.error(err))
+                    } else if (data.type === 'photo') {
+                        for (let i = 0; i < data.variants.length; i++) {
+                            await client.sendFileFromUrl(from, data.variants[i], data.variants[i].split('/media/')[1], '', null, null, true)
+                                .then((serialized) => console.log(`Sukses Mengirim File dengan id: ${serialized} diproses selama ${processTime(t, moment())}`))
+                                .catch((err) => console.error(err))
+                        }
+                    }
+                })
+                    .catch(() => client.sendText(from, 'Link lu kagak valid'))
+                break
         
         // Group Commands (group admin only)
+        case 'admin':
+            if (!isGroupMsg) return client.reply(from, 'Command ini cuman bisa dipake di grup', id)
+            if (!isGroupAdmins) return client.reply(from, 'Lo bukan admin juga woy!', id)
+            await client.sendText(from, menuId.textAdmin())
+            break
         case 'kick':
             if (!isGroupMsg) return client.reply(from, 'Command ini cuman bisa dipake di grup', id)
             if (!isGroupAdmins) return client.reply(from, 'Lo bukan admin juga woy!', id)
