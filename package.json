@@ -1,7 +1,7 @@
 {
-  "name": "whatsapp-bot-sticker-creator",
-  "version": "10.0.0",
-  "description": "Whatsapp Bot - sticker creator",
+  "name": "fga-wa-bot",
+  "version": "0.5.0",
+  "description": "WhatsApp FGA bot.",
   "main": "index.js",
   "engines": {
     "node": "12.x",
@@ -11,16 +11,16 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js"
   },
-  "author": "Yoga Sakti",
+  "author": "Slavyan",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/YogaSakti/imageToSticker.git"
+    "url": "https://github.com/HungXiao007/fga-wa-bot.git"
   },
   "bugs": {
-    "url": "https://github.com/YogaSakti/imageToSticker/issues"
+    "url": "https://github.com/HungXiao007/fga-wa-bot/issues"
   },
-  "homepage": "https://github.com/YogaSakti/imageToSticker",
-  "license": "ISC",
+  "homepage": "https://github.com/HungXiao007/fga-wa-bot",
+  "license": "MIT",
   "dependencies": {
     "@open-wa/wa-automate": "^2.0.22",
     "chalk": "^4.1.0",
