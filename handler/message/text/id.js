@@ -26,39 +26,40 @@ exports.textTnC = () => {
 
 exports.textMenu = (pushname) => {
     return `
-Ada beberapa hal yang bisa gw lakuin:
+⚠ [ *ALL YOU CAN USE* ] ⚠ 
+Berikut command yang tersedia:
 
 Downloader (TWITTER DAN FACEBOOK UPDATE):
 1. *$instagram* _<URL Instagram>_
-Buat download gambar atau video dari IG.
-Aliases: ig
-Penggunaan: pake command dengan format *$instagram* <link postingan>
+Untuk megunduh foto atau video dari Instagram.
+Aliases: *ig*
+Penggunaan: gunakan command dengan format *$instagram* <link postingan>
 
 2. *$facebook*
-Buat download gambar atau video dari Facebook.
-Aliases: fb
+Untuk megunduh foto atau video dari Facebook.
+Aliases: *fb*
 Penggunaan: *$facebook* <link postingan>
 
 3. *$twitter*
-Buat download gambar atau video dari Twitter.
-Aliases: twt
+Untuk megunduh foto atau video dari Twitter.
+Aliases: *twt*
 Penggunaan: *$twitter* <link tweet>
 
-Bikin stiker:
+Sticker maker:
 1. *$sticker*
-Bikin gambar lu jadi stiker, bisa juga pake link.
-Aliases: stiker
-Penggunaan: kirim gambar dengan caption *$sticker* atau balas gambar yang udah dikirim dengan *$sticker*. Link juga bisa.
+Membuat custom sticker dari foto yang diberikan atau di-reply.
+Aliases: *stiker*
+Penggunaan: kirim gambar dengan caption *$sticker* atau balas gambar yang sudah dikirim dengan *$sticker*. Link juga bisa.
 
 Fun:
 1. *$say*
 Bikin gw mengatakan apa yang lu katakan. <> Abaikan.
-Alias: talk
+Aliases: *talk*
 Penggunaan: *$say* <teks lu>
 
 2. *$ask*
 Tanya gw tentang apa aja, gw jawab sebisanya. <> Abaikan.
-Aliases: 8ball
+Aliases: *8ball*
 Penggunaan:: *$ask* <pertanyaan lu>
 
 3. *$reverse*
@@ -68,76 +69,80 @@ Penggunaan: *$reverse* <teks lu>
 
 4. *$roll*
 Buat ngeroll dadu.
-Aliases: dice
+Aliases: *dice*
 Penggunaan: *$roll*
 
 5. *$coinflip*
 Lempar koin.
-Aliases: coin, flip
+Aliases: *coin* - *flip*
 Penggunaan: *$coinflip*
 
 Utilities:
 1. *$ping*
 Buat ngecek respon bot.
-Alias: speed
+Alias: *speed*
 Penggunaan: *$ping*
 
 2. *$server*
 Liat spesifikasi server.
-Alias: -
+Aliases: -
 Penggunaan: *$server*
 
 3. *$eval*
 Buat evaluates string JavaScript tanpa terminal anjay canggih. <> Abaikan.
-Alias: ev
+Alias: *ev*
 Penggunaan: *$eval* <string>
 
 4. *$clock*
 Buat ngecek waktu Indonesia.
-Aliases: waktu, jam
+Aliases: *waktu* - *jam*
 Penggunaan: *$clock*
 
 5. *$readme*
 Isinya copyright buat source code doang.
-Alias: tnc
+Alias: *tnc*
 Penggunaan: *$readme*
 
 6. *$menu*
 Ya buat cek command.
-Aliases: help
+Aliases: *help* - *h*
 Penggunaan: *$menu*
-
 `
 }
 
 exports.textAdmin = () => {
     return `
 ⚠ [ *ADMIN ONLY* ] ⚠ 
-Lo males ke sana ke mari jadi admin? Gw bisa bantu dengan command berikut:
+Gunakan command ini jika admin terlalu malas:
 
 1. *$kick*
-Buat kick member rese, lebih dari satu? Boleeeeeh.
-Penggunaan: *$kick* @member
+Buat kick member rese. Bisa lebih dari satu.
+Aliases: -
+Penggunaan: *$kick* @member @member
 
 2. *$promote*
-Buat naikin jabatan member ke admin.
+Naikin jabatan member ke admin.
+Aliases: -
 Penggunaan: *$promote* @member
 
 3. *$demote*
-Buat lengserin admin ke rakyat jelata.
+Lengserin admin.
+Aliases: -
 Penggunaan: *$demote* @member
 
-4. *$del*
-Buat hapus pesan dari gw.
-Penggunaan: reply pesan yang mau dihapus lalu ketik command *$del*
+4. *$delete*
+Hapus pesan yang saya kirim.
+Aliases: *del*
+Penggunaan: reply pesan yang mau dihapus lalu ketik command *$delete*
 
 5. *$status*
-Buat cek status bot.
+Untuk cek status bot.
+Aliases: *stats*
 Penggunaan: *$status*
 
 6. *$bye*
-Keluarin gw dari grup.
-Aliases: out
+Keluarkan saya dari grup.
+Aliases: *out*
 Penggunaan: *$bye*
 `
 }
