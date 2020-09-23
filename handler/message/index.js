@@ -92,6 +92,7 @@ module.exports = msgHandler = async (client = new Client(), message) => {
             break
             case 'menu':
             case 'help':
+            case 'h':
                 await client.sendText(from, menuId.textMenu(pushname))
                     .then(() => ((isGroupMsg) && (isGroupAdmins)) ? client.sendText(from, 'Menu buat admin: *$admin*') : null)
             break
