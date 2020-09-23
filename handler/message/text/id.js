@@ -125,6 +125,7 @@ exports.hiddenMenu = () => {
     return `
 🔞 [ *NSFW* ] 🔞
 Command untuk para lort:
+
 1. *$ecchi*
 Kirim foto lewd berbasis dari r/ecchi.
 Aliases: -
