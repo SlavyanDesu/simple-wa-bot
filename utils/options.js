@@ -1,7 +1,6 @@
 const fs = require('fs')
 
 module.exports = options = (headless, start) => {
-
     const options = {
         headless: headless,
         qrRefreshS: 20,

@@ -1,6 +1,7 @@
 const chalk = require('chalk')
 const moment = require('moment-timezone')
 moment.tz.setDefault('Asia/Jakarta').locale('id')
+
 /**
  * Get text with color
  * @param  {String} text
@@ -20,6 +21,7 @@ const processTime = (timestamp, now) => {
     // timestamp => timestamp when message was received
     return moment.duration(now - moment(timestamp * 1000)).asSeconds()
 }
+
 /**
  * is it url?
  * @param  {String} url
@@ -47,7 +49,7 @@ const addFilter = (from) => {
     usedCommandRecently.add(from)
     setTimeout(() => {
         return usedCommandRecently.delete(from)
-    }, 2000) // 5sec is delay before processing next command
+    }, 3000) // 3 Seconds delay before next command
 }
 
 module.exports = {

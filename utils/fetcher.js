@@ -43,7 +43,6 @@ const fetchText = (url, options) => {
  * Fetch base64 from url
  * @param {String} url
  */
-
 const fetchBase64 = (url, mimetype) => {
     return new Promise((resolve, reject) => {
         console.log('Get base64 from:', url)
@@ -66,7 +65,6 @@ const fetchBase64 = (url, mimetype) => {
  * @param  {String} base64 image buffer
  * @param  {Boolean} resize
  */
-
 const uploadImages = (buffData, type) => {
     // eslint-disable-next-line no-async-promise-executor
     return new Promise(async (resolve, reject) => {
