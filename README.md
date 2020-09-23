@@ -5,3 +5,8 @@
 </h1>
 
 <h3 align=center>A simple WhatsApp bot built with <a href="https://github.com/open-wa/wa-automate-nodejs">wa-automate-nodejs</a></h3>
+
+<div align= "center">
+    <img alt="node-current" src="https://img.shields.io/node/v/package">
+    <img alt="APM" src="https://img.shields.io/apm/l/vim-mode">
+</div>
