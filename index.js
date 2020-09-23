@@ -5,7 +5,7 @@ const msgHandler = require('./handler/message')
 
 const start = (client = new Client()) => {
     console.log('[DEV]', color('Slavyan', 'orange'))
-    console.log('[CLIENT] CLIENT Started!')
+    console.log('[CLIENT] Bot is now online!')
 
     // Force it to keep the current session
     client.onStateChanged((state) => {
@@ -13,44 +13,28 @@ const start = (client = new Client()) => {
         if (state === 'CONFLICT') client.forceRefocus()
     })
 
-    // listening on message
+    // Listening on message
     client.onMessage((message) => {
         client.getAmountOfLoadedMessages() // Cut message Cache if cache more than 3K
             .then((msg) => {
                 if (msg >= 3000) {
-                    console.log('[CLIENT]', color(`Loaded Message Reach ${msg}, cuting message cache...`, 'yellow'))
+                    console.log('[CLIENT]', color(`Loaded message reach ${msg}, cuting message cache...`, 'yellow'))
                     client.cutMsgCache()
                 }
             })
-        // Message Handler
+        // Message handler
         msgHandler(client, message)
     })
 
-    // listen group invitation
+    // Listen group invitation
     client.onAddedToGroup(({ groupMetadata: { id }, contact: { name } }) =>
         client.getGroupMembersId(id)
             .then((ids) => {
                 console.log('[CLIENT]', color(`Invited to Group. [ ${name} : ${ids.length}]`, 'yellow'))
-                /** conditions if the group members are less than 10 then the bot will leave the group
-                if (ids.length <= 2) {
-                    client.sendText(id, 'Minimum member harus 2. Gw harus out bye.').then(() => client.leaveGroup(id))
-                } else {
-                    client.sendText(id, `Yo *${name}*, makasih dah invite. Ketik *$menu* buat liat command.`)
-                }
-                */
             }))
 
     client.onRemovedFromGroup((data) => {
         console.log(data)
-    })
-
-    // listen paricipant event on group (welcome message)
-    client.onGlobalParicipantsChanged((event) => {
-        // if (event.action === 'add') client.sendTextWithMentions(event.chat, `Hello, Welcome to the group @${event.who.replace('@c.us', '')} \n\nHave fun with us✨`)
-    })
-
-    client.onIncomingCall((callData) => {
-        // client.contactBlock(callData.peerJid)
     })
 }
 
