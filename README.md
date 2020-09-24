@@ -76,7 +76,7 @@ After that scan the QR code and wait until it authenticated.
 | Status       |      ✔️      |
 | Mention All  |    📝 Todo   |
 | Add User     |    📝 Todo   |
-| Group Link   |    📝 Todo   |
+| Group Link   |      ✔️      |
 
 ## 🙏 Special Thanks to
 * [`Open-Wa/wa-automate-nodejs`](https://github.com/open-wa/wa-automate-nodejs)
