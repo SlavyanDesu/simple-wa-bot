@@ -12,3 +12,25 @@
     <img src="https://camo.githubusercontent.com/5c22deff6293ca12d3bc1159c6cc3a5cc9579550/68747470733a2f2f696d672e736869656c64732e696f2f6e6f64652f762f406f70656e2d77612f77612d6175746f6d617465">
     <img alt="APM" src="https://img.shields.io/apm/l/vim-mode">
 </div>
+
+## 📝 Cloning this repo
+```bash
+> git clone https://github.com/SlavyanDesu/simple-wa-bot
+> cd simple-wa-bot
+```
+
+## 🔍 Installing the dependencies
+```bash
+> npm install
+```
+
+## 🆗 Running the bot
+```bash
+> npm start
+```
+After that scan the QR code and wait until it authenticated.
+
+## ❓ Features
+|       Downloader      | Availability |
+| :-----------------: |              |
+| Instagram video/image
