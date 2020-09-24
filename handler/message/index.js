@@ -3,6 +3,7 @@ const { decryptMedia, Client } = require('@open-wa/wa-automate')
 const moment = require('moment-timezone')
 const os = require('os')
 const axios = require('axios')
+const got = require('got')
 moment.tz.setDefault('Asia/Jakarta').locale('id')
 const { downloader, urlShortener, meme, ecchi } = require('../../lib')
 const { msgFilter, color, processTime, isUrl } = require('../../utils')
@@ -37,6 +38,7 @@ const responses = [
 ]
 
 const { menuId } = require('./text') // For help command
+const { get } = require('http')
 
 module.exports = msgHandler = async (client = new Client(), message) => {
     try {
@@ -124,6 +126,9 @@ module.exports = msgHandler = async (client = new Client(), message) => {
             case 'waktu':
                 await client.sendText(from, `Waktu Indonesia Barat: *${moment().utcOffset('+0700').format('HH:mm')}* WIB \nWaktu Indonesia Tengah: *${moment().utcOffset('+0800').format('HH:mm')}* WITA \nWaktu Indonesia Timur: *${moment().utcOffset('+0900').format('HH:mm')}* WIT`)
             break
+            case 'info':
+                await client.sendLinkWithAutoPreview(from, 'https://github.com/SlavyanDesu/simple-wa-bot', id)
+            break
 
             // Fun
             case 'ask':
@@ -165,6 +170,39 @@ module.exports = msgHandler = async (client = new Client(), message) => {
                         client.sendFileFromUrl(from, `${url}`, 'meme.jpg', `${title}\nTag: r/${subreddit}\nAuthor: u/${author}`, null, null, true)
                     })
                     .catch((err) => console.error(err))
+            break
+            case 'wait':
+                if (isMedia) {
+                    const fetch = require('node-fetch')
+                    const mediaData = await decryptMedia(message, uaOverride)
+                    const imageBase64 = `data:${mimetype};base64,${mediaData.toString('base64')}`
+                    client.reply(from, '_Searching..._', id)
+                    fetch('https://trace.moe/api/search', {
+                        method: 'POST',
+                        body: JSON.stringify({ image: imageBase64 }),
+                        headers: { "Content-Type": "application/json" }
+                    })
+                    .then(respon => respon.json())
+                    .then(resolt => {
+                        if (resolt.docs && resolt.docs.length <= 0) {
+                            client.reply(from, '😔 Maaf, saya tidak tau anime ini.', id)
+                        }
+                        const { title, title_chinese, title_romaji, title_english, episode, similarity, filename, at, tokenthumb, anilist_id } = resolt.docs[0]
+                        teks = ''
+                        if (similarity < 0.92) {
+                            teks = '🤨 Tingkat kesamaan rendah:\n'
+                        }
+                        teks += `Title: ${title}\nTitle Chinese: ${title_chinese}\nTitle Romaji: ${title_romaji}\nTitle English: ${title_english}\n`
+                        teks += `Episode: ${episode.toString()}\n`
+                        teks += `Tingkat Kesamaan: ${(similarity * 100).toFixed(1)}%\n`
+                        var video = `https://media.trace.moe/video/${anilist_id}/${encodeURIComponent(filename)}?t=${at}&token=${tokenthumb}`;
+                            client.sendFileFromUrl(from, video, 'anime.mp4', teks, id)
+                        })
+                    .catch(err => {
+                        console.error(err)
+                        client.reply(from, `Error: ${err}`, id)
+                    })
+                }
             break
         
             // Buat bikin stiker
@@ -317,13 +355,22 @@ module.exports = msgHandler = async (client = new Client(), message) => {
                 if (!quotedMsgObj.fromMe) return client.reply(from, '⚠️ Format salah! Ketik *$menu* untuk penggunaan.', id)
                 client.deleteMessage(quotedMsgObj.chatId, quotedMsgObj.id, false)
             break
-            case 'status': {
+            case 'status':
                 if (!isGroupAdmins) return client.reply(from, '❌ Hanya admin yang bisa menggunakan command ini!', id)
                 const loadedMsg = await client.getAmountOfLoadedMessages()
                 const chatIds = await client.getAllChatIds()
                 const groups = await client.getAllGroups()
                 client.sendText(from, `Status :\n- *${loadedMsg}* Message terload\n- *${groups.length}* Group\n- *${chatIds.length - groups.length}* Private chat\n- *${chatIds.length}* Total chat`)
-            }
+            break
+            case 'linkgrup':
+            case 'linkgroup':
+                if (!isGroupMsg) return await client.reply(from, '❌ Command ini hanya bisa digunakan di group saja!', id)
+                if (!isGroupAdmins) return await client.reply(from, '❌ Hanya admin yang bisa menggunakan command ini!', id)
+                if (!isBotGroupAdmins) return await client.reply(from, '❌ Jadikan saya admin terlebih dahulu!', id)
+                if (isGroupMsg) {
+                    const inviteLink = await client.getGroupInviteLink(groupId)
+                    client.sendLinkWithAutoPreview(from, inviteLink, `\nLink group *${name}*`)
+                }
             break
             default:
                 console.log(color('[ERROR]', 'red'), color(moment(t * 1000).format('DD/MM/YY HH:mm:ss'), 'yellow'), 'Unregistered command from', color(pushname))

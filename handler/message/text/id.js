@@ -77,7 +77,7 @@ Lempar koin.
 Aliases: *coin* - *flip*
 Penggunaan: *$coinflip*
 
-~6. $ascii~
+~6. *$ascii*~
 ~Buat teks mu menjadi ASCII art.~
 ~Aliases: -~
 ~Penggunaan: *$ascii* <teks lu>~
@@ -87,6 +87,11 @@ Penggunaan: *$coinflip*
 Kirim random meme dari reddit.
 Aliases: *reddit*
 Penggunaan: *$randmeme*
+
+8. *$wait*
+What anime is this? Identifikasi anime via foto!
+Aliases: -
+Penggunaan: kirim foto lalu tambahkan caption *$wait*
 
 Utilities:
 1. *$ping*
@@ -118,6 +123,11 @@ Penggunaan: *$readme*
 Ya buat cek command.
 Aliases: *help* - *h*
 Penggunaan: *$menu*
+
+7. *$info*
+Info bot.
+Aliases: -
+Penggunaan: *$info*
 `
 }
 
@@ -155,6 +165,11 @@ Penggunaan: *$status*
 Keluarkan saya dari grup.
 Aliases: *out*
 Penggunaan: *$bye*
+
+7. *$linkgroup*
+Memberikan link group yang disinggahi.
+Aliases: *linkgrup*
+Penggunaan: *$linkgroup*
 `
 }
 
