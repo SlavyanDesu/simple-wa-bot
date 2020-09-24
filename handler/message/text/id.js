@@ -53,7 +53,7 @@ Penggunaan: kirim gambar dengan caption *$sticker* atau balas gambar yang sudah 
 
 Fun:
 1. *$say*
-It's just a say command, whatd'ya expect?. <> Abaikan.
+It's just a say command, whatd'ya expect?.
 Aliases: *talk*
 Penggunaan: *$say* <teks>
 
@@ -105,7 +105,7 @@ Aliases: -
 Penggunaan: *$server*
 
 3. *$eval*
-Buat evaluates string JavaScript. <> Abaikan.
+Buat evaluates string JavaScript.
 Alias: *ev*
 Penggunaan: *$eval* <string>
 
