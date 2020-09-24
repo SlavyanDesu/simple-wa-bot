@@ -37,3 +37,9 @@ After that scan the QR code and wait until it authenticated.
 | Facebook video/image  |      ✔️      |
 | Twitter video/image   |      ✔️      |
 | YouTube to MP3        |    Todo 📝   |
+
+|  Sticker Maker  | Availability |
+| :-------------: | :----------: |
+| Send image      |      ✔️      |
+| Send imageURL   |      ✔️      |
+| Reply to image  |      ✔️      |
