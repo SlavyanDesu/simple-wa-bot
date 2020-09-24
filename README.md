@@ -66,6 +66,18 @@ After that scan the QR code and wait until it authenticated.
 | Reddit      |      ✔️      |
 | Ascii       |    📝 Todo   |
 
+|        Weeb        | Availability |
+| :----------------: | :----------: |
+| What Anime Is This |      ✔️      |
+| Random Waifu Image |    📝 Todo   |
+| Random Wallpaper   |    📝 Todo   |
+
+|     NSFW           | Availability |
+| :----------------: | :----------: |
+| Ecchi Reddit       |      ✔️      |
+| Fetishes           |    📝 Todo   |
+| Nhentai Downloader |    📝 Todo   |
+
 |  Moderation  | Availability |
 | :----------: | :----------: |
 | Admin        |      ✔️      |
