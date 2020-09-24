@@ -14,6 +14,8 @@
     <img alt="APM" src="https://img.shields.io/apm/l/vim-mode">
 </div>
 
+---
+
 ## 📝 Cloning This Repo
 ```bash
 > git clone https://github.com/SlavyanDesu/simple-wa-bot
