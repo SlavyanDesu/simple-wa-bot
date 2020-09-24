@@ -121,18 +121,6 @@ Penggunaan: *$menu*
 `
 }
 
-exports.hiddenMenu = () => {
-    return `
-🔞 [ *NSFW* ] 🔞
-Command untuk para lort:
-
-1. *$ecchi*
-Kirim foto lewd berbasis dari r/ecchi.
-Aliases: -
-Penggunaan: *$ecchi*
-    `
-}
-
 exports.textAdmin = () => {
     return `
 ⚠️ [ *ADMIN ONLY* ] ⚠️
@@ -168,4 +156,16 @@ Keluarkan saya dari grup.
 Aliases: *out*
 Penggunaan: *$bye*
 `
+}
+
+exports.hiddenMenu = () => {
+    return `
+🔞 [ *NSFW* ] 🔞
+Command untuk para lort:
+
+1. *$ecchi*
+Kirim foto lewd berbasis dari r/ecchi.
+Aliases: -
+Penggunaan: *$ecchi*
+    `
 }
