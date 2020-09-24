@@ -126,9 +126,6 @@ module.exports = msgHandler = async (client = new Client(), message) => {
             case 'waktu':
                 await client.sendText(from, `Waktu Indonesia Barat: *${moment().utcOffset('+0700').format('HH:mm')}* WIB \nWaktu Indonesia Tengah: *${moment().utcOffset('+0800').format('HH:mm')}* WITA \nWaktu Indonesia Timur: *${moment().utcOffset('+0900').format('HH:mm')}* WIT`)
             break
-            case 'info':
-                await client.sendLinkWithAutoPreview(from, 'https://github.com/SlavyanDesu/simple-wa-bot', id)
-            break
 
             // Fun
             case 'ask':

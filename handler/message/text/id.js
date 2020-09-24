@@ -123,11 +123,6 @@ Penggunaan: *$readme*
 Ya buat cek command.
 Aliases: *help* - *h*
 Penggunaan: *$menu*
-
-7. *$info*
-Info bot.
-Aliases: -
-Penggunaan: *$info*
 `
 }
 
