@@ -13,18 +13,18 @@
     <img alt="APM" src="https://img.shields.io/apm/l/vim-mode">
 </div>
 
-## 📝 Cloning this repo
+## 📝 Cloning This Repo
 ```bash
 > git clone https://github.com/SlavyanDesu/simple-wa-bot
 > cd simple-wa-bot
 ```
 
-## 🔍 Installing the dependencies
+## 🔍 Installing The Dependencies
 ```bash
 > npm install
 ```
 
-## 🆗 Running the bot
+## 🆗 Running The Bot
 ```bash
 > npm start
 ```
@@ -36,10 +36,54 @@ After that scan the QR code and wait until it authenticated.
 | Instagram video/image |      ✔️      |
 | Facebook video/image  |      ✔️      |
 | Twitter video/image   |      ✔️      |
-| YouTube to MP3        |    Todo 📝   |
+| YouTube to MP3        |    📝 Todo   |
 
 |  Sticker Maker  | Availability |
 | :-------------: | :----------: |
 | Send image      |      ✔️      |
 | Send imageURL   |      ✔️      |
 | Reply to image  |      ✔️      |
+
+|  Utilities  | Availability |
+| :---------: | :----------: |
+| Ping        |      ✔️      |
+| Help        |      ✔️      |
+| Server      |      ✔️      |
+| Readme      |      ✔️      |
+| Eval        |      ✔️      |
+| Clock       |   ⚠️ BETA    |
+
+|     Fun     | Availability |
+| :---------: | :----------: |
+| Ask         |      ✔️      |
+| Reverse     |      ✔️      |
+| Dice        |      ✔️      |
+| Say         |      ✔️      |
+| Coin        |      ✔️      |
+| Reddit      |      ✔️      |
+| Ascii       |    📝 Todo   |
+
+|  Moderation  | Availability |
+| :----------: | :----------: |
+| Admin        |      ✔️      |
+| Kick         |      ✔️      |
+| Promote      |      ✔️      |
+| Demote       |      ✔️      |
+| Out Group    |      ✔️      |
+| Status       |      ✔️      |
+| Mention All  |    📝 Todo   |
+| Add User     |    📝 Todo   |
+| Group Link   |    📝 Todo   |
+
+## 🙏 Special Thanks to
+* [`Open-Wa/wa-automate-nodejs`](https://github.com/open-wa/wa-automate-nodejs)
+* [`YogaSakti/imageToSticker`](https://github.com/YogaSakti/imageToSticker)
+* [`fdciabdul/InsideHeartz-WhatsApp-Bot`](https://github.com/fdciabdul/InsideHeartz-WhatsApp-Bot)
+* [`onlyjasonhere/djs-selfbot-v9`](https://github.com/fdciabdul/InsideHeartz-WhatsApp-Bot)
+* [`MhankBarBar/whatsapp-bot`](https://github.com/MhankBarBar/whatsapp-bot)
+
+## Author
+**simple-wa-bot** © [SlavyanDesu](https://github.com/SlavyanDesu), released under the MIT License.
+Authored and maintained by SlavyanDesu.
+
+> Facebook: Kal
