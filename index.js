@@ -25,17 +25,6 @@ const start = (client = new Client()) => {
         // Message handler
         msgHandler(client, message)
     })
-
-    // Listen group invitation
-    client.onAddedToGroup(({ groupMetadata: { id }, contact: { name } }) =>
-        client.getGroupMembersId(id)
-            .then((ids) => {
-                console.log('[CLIENT]', color(`Invited to Group. [ ${name} : ${ids.length}]`, 'yellow'))
-            }))
-
-    client.onRemovedFromGroup((data) => {
-        console.log(data)
-    })
 }
 
 create('Slavyan', options(true, start))
