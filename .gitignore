@@ -1,6 +1,5 @@
 node_modules
 .idea
-debug.log
 *.data.json
 premium.js
 quotemsg.js
