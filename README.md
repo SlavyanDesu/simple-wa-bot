@@ -41,7 +41,7 @@ After that scan the QR code and wait until it authenticated.
 |  Sticker Maker  | Availability |
 | :-------------: | :----------: |
 | Send image      |      ✔️      |
-| Send image URL   |      ✔️      |
+| Send image URL  |      ✔️      |
 | Reply to image  |      ✔️      |
 
 |  Utilities  | Availability |
@@ -50,8 +50,8 @@ After that scan the QR code and wait until it authenticated.
 | Help        |      ✔️      |
 | Server      |      ✔️      |
 | Readme      |      ✔️      |
-| Eval        |      ✔️      |
-| Clock       |   ⚠️ BETA    |
+| Eval        |    ⚠️ BETA   |
+| Clock       |      ✔️      |
 
 |     Fun     | Availability |
 | :---------: | :----------: |
