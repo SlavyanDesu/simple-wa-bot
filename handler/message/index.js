@@ -2,6 +2,7 @@ require('dotenv').config()
 const { decryptMedia, Client } = require('@open-wa/wa-automate')
 const moment = require('moment-timezone')
 const os = require('os')
+const axios = require('axios')
 moment.tz.setDefault('Asia/Jakarta').locale('id')
 const { downloader, urlShortener, meme, ecchi } = require('../../lib')
 const { msgFilter, color, processTime, isUrl } = require('../../utils')
@@ -168,7 +169,7 @@ module.exports = msgHandler = async (client = new Client(), message) => {
         
             // Buat bikin stiker
             case 'sticker':
-            case 'stiker': {
+            case 'stiker': 
                 if ((isMedia || isQuotedImage) && args.length === 0) {
                     const encryptMedia = isQuotedImage ? quotedMsg : message
                     const _mimetype = isQuotedImage ? quotedMsg.mimetype : mimetype
@@ -186,39 +187,26 @@ module.exports = msgHandler = async (client = new Client(), message) => {
                 } else {
                     await client.reply(from, '⚠️ Format salah! Ketik *$menu* untuk penggunaan.', id)
                 }
-                break
-            }
+            break
         
             // Downloader
             case 'ig':
             case 'instagram':
                 if (args.length !== 1) return client.reply(from, '⚠️ Format salah! Ketik *$menu* untuk penggunaan.', id)
-                if (!isUrl(url) && !url.includes('instagram.com')) return client.reply(from, '⚠️ Link tidak valid!', id)
-                await client.reply(from, '_Tunggu sebentar..._', id)
-                downloader.insta(url).then(async (data) => {
-                    if (data.type == 'GraphSidecar') {
-                        if (data.image.length != 0) {
-                            data.image.map((x) => client.sendFileFromUrl(from, x, 'photo.jpg', '', null, null, true))
-                                .then((serialized) => console.log(`Sukses mengirim file dengan ID: ${serialized} diproses selama ${processTime(t, moment())}`))
-                                .catch((err) => console.error(err))
+                client.reply(from, '_Tunggu sebentar..._', message.id)
+                axios.get('https://villahollanda.com/api.php?url='+ args[0])
+                    .then(function (response) {
+                        console.log('IG: ' + args[0])
+                        if (response.data.descriptionc == null) {
+                            client.reply(from, '🔒 Sepertinya akunnya di-private atau link tidak valid.', id)
+                        } else if (response.data.mediatype == 'photo') {
+                            client.sendFileFromUrl(from, response.data.descriptionc)
+                        } else if (response.data.mediatype == 'video') {
+                            client.sendFileFromUrl(from, response.data.descriptionc, 'video.mp4', `Berhasil diproses selama ${processTime(t, moment())} detik`, null, null, true)
                         }
-                        if (data.video.length != 0) {
-                            data.video.map((x) => client.sendFileFromUrl(from, x.videoUrl, 'video.jpg', '', null, null, true))
-                                .then((serialized) => console.log(`Sukses mengirim file dengan ID: ${serialized} diproses selama ${processTime(t, moment())}`))
-                                .catch((err) => console.error(err))
-                        }
-                    } else if (data.type == 'GraphImage') {
-                        client.sendFileFromUrl(from, data.image, 'photo.jpg', '', null, null, true)
-                            .then((serialized) => console.log(`Sukses mengirim file dengan ID: ${serialized} diproses selama ${processTime(t, moment())}`))
-                            .catch((err) => console.error(err))
-                    } else if (data.type == 'GraphVideo') {
-                        client.sendFileFromUrl(from, data.video.videoUrl, 'video.mp4', '', null, null, true)
-                            .then((serialized) => console.log(`Sukses mengirim file dengan ID: ${serialized} diproses selama ${processTime(t, moment())}`))
-                            .catch((err) => console.error(err))
-                    }
-                })
-                    .catch((err) => {
-                        if (err === 'Not a video') { return client.reply(from, '⚠️ Link tidak valid!', id) }
+                    })
+                    .catch(function(error) {
+                        console.log(error)
                         client.reply(from, '🔒 Sepertinya akunnya di-private atau link tidak valid.', id)
                     })
             break
