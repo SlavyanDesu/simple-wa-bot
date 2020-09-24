@@ -19,6 +19,7 @@ module.exports = options = (headless, start) => {
             '--disable-cache',
             '--disable-application-cache',
             '--disable-offline-load-stale-cache',
+            '--disable-extensions',
             '--disk-cache-size=0'
         ]
     }
