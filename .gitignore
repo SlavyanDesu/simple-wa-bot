@@ -1,6 +1,7 @@
 node_modules
 .idea
 *.data.json
+debug.log
 premium.js
 quotemsg.js
 lib/quran.js
