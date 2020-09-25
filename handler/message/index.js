@@ -300,65 +300,66 @@ module.exports = msgHandler = async (client = new Client(), message) => {
                 .catch((err) => console.error(err))
             break
             case 'fetish':
-                const fetish = args.join(' ')
-                if (!fetish) {
-                    client.reply(from, '⚠️ Silakan masukkan tag!', id)
-                } else if (fetish === 'armpits' || 'armpit') {
+                let request = args.join(' ')
+                if (!request) {
+                    client.reply(from, '⚠️ Silakan masukkan tag yang tersedia di *$menu*!', id)
+                }
+                if (request === 'armpits' || 'armpit') {
                     petis.armpits()
-                    .then(({subreddit, title, url, author}) => {
-                        client.sendFileFromUrl(from, `${url}`, 'fetish.jpg', `${title}\nTag: ${subreddit}\nAuthor: u/${author}`, null, null, true)
-                    })
-                    .catch((err) => console.error(err))
-                } else if (fetish === 'feets' || 'feet') {
+                        .then(({subreddit, title, url, author}) => {
+                            client.sendFileFromUrl(from, `${url}`, 'fetish.jpg', `${title}\nTag: ${subreddit}\nAuthor: u/${author}`, null, null, true)
+                        })
+                        .catch((err) => console.error(err))
+                } else if (request === 'feets' || 'feet') {
                     petis.feets()
-                    .then(({subreddit, title, url, author}) => {
-                        client.sendFileFromUrl(from, `${url}`, 'fetish.jpg', `${title}\nTag: ${subreddit}\nAuthor: u/${author}`, null, null, true)
-                    })
-                    .catch((err) => console.error(err))
-                } else if (fetish === 'thighs' || 'thigh') {
+                        .then(({subreddit, title, url, author}) => {
+                            client.sendFileFromUrl(from, `${url}`, 'fetish.jpg', `${title}\nTag: ${subreddit}\nAuthor: u/${author}`, null, null, true)
+                        })
+                        .catch((err) => console.error(err))
+                } else if (request === 'thighs' || 'thigh') {
                     petis.thighs()
-                    .then(({subreddit, title, url, author}) => {
-                        client.sendFileFromUrl(from, `${url}`, 'fetish.jpg', `${title}\nTag: ${subreddit}\nAuthor: u/${author}`, null, null, true)
-                    })
-                    .catch((err) => console.error(err))
-                } else if (fetish === 'booty' || 'booties' || 'ass') {
+                        .then(({subreddit, title, url, author}) => {
+                            client.sendFileFromUrl(from, `${url}`, 'fetish.jpg', `${title}\nTag: ${subreddit}\nAuthor: u/${author}`, null, null, true)
+                        })
+                        .catch((err) => console.error(err))
+                } else if (request === 'booty' || 'ass') {
                     petis.booty()
-                    .then(({subreddit, title, url, author}) => {
-                        client.sendFileFromUrl(from, `${url}`, 'fetish.jpg', `${title}\nTag: ${subreddit}\nAuthor: u/${author}`, null, null, true)
-                    })
-                    .catch((err) => console.error(err))
-                } else if (fetish === 'boobs' || 'boob' || 'oppai') {
+                        .then(({subreddit, title, url, author}) => {
+                            client.sendFileFromUrl(from, `${url}`, 'fetish.jpg', `${title}\nTag: ${subreddit}\nAuthor: u/${author}`, null, null, true)
+                        })
+                        .catch((err) => console.error(err))
+                } else if (request === 'boobs' || 'boob' || 'oppai') {
                     petis.boobs()
-                    .then(({subreddit, title, url, author}) => {
-                        client.sendFileFromUrl(from, `${url}`, 'fetish.jpg', `${title}\nTag: ${subreddit}\nAuthor: u/${author}`, null, null, true)
-                    })
-                    .catch((err) => console.error(err))
-                } else if (fetish === 'necks' || 'neck') {
+                        .then(({subreddit, title, url, author}) => {
+                            client.sendFileFromUrl(from, `${url}`, 'fetish.jpg', `${title}\nTag: ${subreddit}\nAuthor: u/${author}`, null, null, true)
+                        })
+                        .catch((err) => console.error(err))
+                } else if (request === 'necks' || 'neck') {
                     petis.necks()
-                    .then(({subreddit, title, url, author}) => {
-                        client.sendFileFromUrl(from, `${url}`, 'fetish.jpg', `${title}\nTag: ${subreddit}\nAuthor: u/${author}`, null, null, true)
-                    })
-                    .catch((err) => console.error(err))
-                } else if (fetish === 'belly' || 'bellybutton') {
+                        .then(({subreddit, title, url, author}) => {
+                            client.sendFileFromUrl(from, `${url}`, 'fetish.jpg', `${title}\nTag: ${subreddit}\nAuthor: u/${author}`, null, null, true)
+                        })
+                        .catch((err) => console.error(err))
+                } else if (request === 'belly' || 'bellybutton') {
                     petis.belly()
-                    .then(({subreddit, title, url, author}) => {
-                        client.sendFileFromUrl(from, `${url}`, 'fetish.jpg', `${title}\nTag: ${subreddit}\nAuthor: u/${author}`, null, null, true)
-                    })
-                    .catch((err) => console.error(err))
-                } else if (fetish === 'sideboobs' || 'sideboob' || 'sideoppai') {
+                        .then(({subreddit, title, url, author}) => {
+                            client.sendFileFromUrl(from, `${url}`, 'fetish.jpg', `${title}\nTag: ${subreddit}\nAuthor: u/${author}`, null, null, true)
+                        })
+                        .catch((err) => console.error(err))
+                } else if (request === 'sideboobs' || 'sideboob' || 'sideoppai') {
                     petis.sideboobs()
-                    .then(({subreddit, title, url, author}) => {
-                        client.sendFileFromUrl(from, `${url}`, 'fetish.jpg', `${title}\nTag: ${subreddit}\nAuthor: u/${author}`, null, null, true)
-                    })
-                    .catch((err) => console.error(err))
-                } else if (fetish === 'ahegao') {
+                        .then(({subreddit, title, url, author}) => {
+                            client.sendFileFromUrl(from, `${url}`, 'fetish.jpg', `${title}\nTag: ${subreddit}\nAuthor: u/${author}`, null, null, true)
+                        })
+                        .catch((err) => console.error(err))
+                } else if (request === 'ahegao') {
                     petis.ahegao()
-                    .then(({subreddit, title, url, author}) => {
-                        client.sendFileFromUrl(from, `${url}`, 'fetish.jpg', `${title}\nTag: ${subreddit}\nAuthor: u/${author}`, null, null, true)
-                    })
-                    .catch((err) => console.error(err))
+                        .then(({subreddit, title, url, author}) => {
+                            client.sendFileFromUrl(from, `${url}`, 'fetish.jpg', `${title}\nTag: ${subreddit}\nAuthor: u/${author}`, null, null, true)
+                        })
+                        .catch((err) => console.error(err))
                 } else {
-                    client.reply(from, '🙏 Maaf tag belum tersedia.', id)
+                    client.reply(from, '🙏 Maaf tag belum tersedia. Silakan request.')
                 }
             break
 
@@ -407,6 +408,7 @@ module.exports = msgHandler = async (client = new Client(), message) => {
                 client.sendText(from, '👋 Bye-bye!').then(() => client.leaveGroup(groupId))
             break
             case 'del':
+                if (!isGroupMsg) return await client.reply(from, '❌ Command ini hanya bisa digunakan di group saja!', id)
                 if (!isGroupAdmins) return client.reply(from, '❌ Hanya admin yang bisa menggunakan command ini!', id)
                 if (!quotedMsg) return client.reply(from, '⚠️ Format salah! Ketik *$menu* untuk penggunaan.', id)
                 if (!quotedMsgObj.fromMe) return client.reply(from, '⚠️ Format salah! Ketik *$menu* untuk penggunaan.', id)
