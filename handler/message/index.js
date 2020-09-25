@@ -302,51 +302,52 @@ module.exports = msgHandler = async (client = new Client(), message) => {
             case 'fetish':
                 let request = args.join(' ')
                 if (!request) {
-                    client.reply(from, '⚠️ Silakan masukkan tag yang tersedia di *$menu*!', id)
+                    client.reply(from, '⚠️ Silakan masukkan tag yang tersedia di *$menu*!')
                 }
-                if (request === 'armpits' || 'armpit') {
+
+                if (request === 'armpits') {
                     petis.armpits()
                         .then(({subreddit, title, url, author}) => {
                             client.sendFileFromUrl(from, `${url}`, 'fetish.jpg', `${title}\nTag: r/${subreddit}\nAuthor: u/${author}`, null, null, true)
                         })
                         .catch((err) => console.error(err))
-                } else if (request === 'feets' || 'feet') {
+                } else if (request === 'feets') {
                     petis.feets()
                         .then(({subreddit, title, url, author}) => {
                             client.sendFileFromUrl(from, `${url}`, 'fetish.jpg', `${title}\nTag: r/${subreddit}\nAuthor: u/${author}`, null, null, true)
                         })
                         .catch((err) => console.error(err))
-                } else if (request === 'thighs' || 'thigh') {
+                } else if (request === 'thighs') {
                     petis.thighs()
                         .then(({subreddit, title, url, author}) => {
                             client.sendFileFromUrl(from, `${url}`, 'fetish.jpg', `${title}\nTag: r/${subreddit}\nAuthor: u/${author}`, null, null, true)
                         })
                         .catch((err) => console.error(err))
-                } else if (request === 'booty' || 'ass') {
+                } else if (request === 'booty') {
                     petis.booty()
                         .then(({subreddit, title, url, author}) => {
                             client.sendFileFromUrl(from, `${url}`, 'fetish.jpg', `${title}\nTag: r/${subreddit}\nAuthor: u/${author}`, null, null, true)
                         })
                         .catch((err) => console.error(err))
-                } else if (request === 'boobs' || 'boob' || 'oppai') {
+                } else if (request === 'boobs') {
                     petis.boobs()
                         .then(({subreddit, title, url, author}) => {
                             client.sendFileFromUrl(from, `${url}`, 'fetish.jpg', `${title}\nTag: r/${subreddit}\nAuthor: u/${author}`, null, null, true)
                         })
                         .catch((err) => console.error(err))
-                } else if (request === 'necks' || 'neck') {
+                } else if (request === 'necks') {
                     petis.necks()
                         .then(({subreddit, title, url, author}) => {
                             client.sendFileFromUrl(from, `${url}`, 'fetish.jpg', `${title}\nTag: r/${subreddit}\nAuthor: u/${author}`, null, null, true)
                         })
                         .catch((err) => console.error(err))
-                } else if (request === 'belly' || 'bellybutton') {
+                } else if (request === 'belly') {
                     petis.belly()
                         .then(({subreddit, title, url, author}) => {
                             client.sendFileFromUrl(from, `${url}`, 'fetish.jpg', `${title}\nTag: r/${subreddit}\nAuthor: u/${author}`, null, null, true)
                         })
                         .catch((err) => console.error(err))
-                } else if (request === 'sideboobs' || 'sideboob' || 'sideoppai') {
+                } else if (request === 'sideboobs') {
                     petis.sideboobs()
                         .then(({subreddit, title, url, author}) => {
                             client.sendFileFromUrl(from, `${url}`, 'fetish.jpg', `${title}\nTag: r/${subreddit}\nAuthor: u/${author}`, null, null, true)
