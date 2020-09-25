@@ -30,10 +30,10 @@ exports.textMenu = (pushname) => {
 Berikut command yang tersedia:
 
 Downloader (TWITTER DAN FACEBOOK UPDATE):
-1. *$instagram* _<URL Instagram>_
+1. *$instagram*
 Untuk megunduh foto atau video dari Instagram.
 Aliases: *ig*
-Penggunaan: gunakan command dengan format *$instagram* <link postingan>
+Penggunaan: *$instagram* <link postingan>
 
 2. *$facebook*
 Untuk megunduh foto atau video dari Facebook.
@@ -53,7 +53,7 @@ Penggunaan: kirim gambar dengan caption *$sticker* atau balas gambar yang sudah 
 
 Fun:
 1. *$say*
-It's just a say command, whatd'ya expect?.
+It's just a say command, whatd'ya expect?
 Aliases: *talk*
 Penggunaan: *$say* <teks>
 
@@ -171,11 +171,16 @@ Penggunaan: *$linkgroup*
 exports.hiddenMenu = () => {
     return `
 🔞 [ *NSFW* ] 🔞
-Command untuk para lort:
+Command untuk hehe boi:
 
 1. *$ecchi*
 Kirim foto lewd berbasis dari r/ecchi.
 Aliases: -
 Penggunaan: *$ecchi*
+
+2. *$fetish*
+Yang tersedia: *armpits*, *feets*, *thighs*, *booty*, *boobs*, *necks*, *belly*, *sideboobs*, dan *ahegao*.
+Aliases: -
+Penggunaan: *$fetish* <tag>
     `
 }

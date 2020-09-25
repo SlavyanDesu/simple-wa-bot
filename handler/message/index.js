@@ -3,9 +3,8 @@ const { decryptMedia, Client } = require('@open-wa/wa-automate')
 const moment = require('moment-timezone')
 const os = require('os')
 const axios = require('axios')
-const got = require('got')
 moment.tz.setDefault('Asia/Jakarta').locale('id')
-const { downloader, urlShortener, meme, ecchi } = require('../../lib')
+const { downloader, urlShortener, meme, petis, ecchi } = require('../../lib')
 const { msgFilter, color, processTime, isUrl } = require('../../utils')
 const responses = [
     'Adalah yoi',
@@ -38,7 +37,6 @@ const responses = [
 ]
 
 const { menuId } = require('./text') // For help command
-const { get } = require('http')
 
 module.exports = msgHandler = async (client = new Client(), message) => {
     try {
@@ -301,7 +299,69 @@ module.exports = msgHandler = async (client = new Client(), message) => {
                 })
                 .catch((err) => console.error(err))
             break
-        
+            case 'fetish':
+                const fetish = args.join(' ')
+                if (!fetish) {
+                    client.reply(from, '⚠️ Silakan masukkan tag!', id)
+                } else if (fetish === 'armpits' || 'armpit') {
+                    petis.armpits()
+                    .then(({subreddit, title, url, author}) => {
+                        client.sendFileFromUrl(from, `${url}`, 'fetish.jpg', `${title}\nTag: ${subreddit}\nAuthor: u/${author}`, null, null, true)
+                    })
+                    .catch((err) => console.error(err))
+                } else if (fetish === 'feets' || 'feet') {
+                    petis.feets()
+                    .then(({subreddit, title, url, author}) => {
+                        client.sendFileFromUrl(from, `${url}`, 'fetish.jpg', `${title}\nTag: ${subreddit}\nAuthor: u/${author}`, null, null, true)
+                    })
+                    .catch((err) => console.error(err))
+                } else if (fetish === 'thighs' || 'thigh') {
+                    petis.thighs()
+                    .then(({subreddit, title, url, author}) => {
+                        client.sendFileFromUrl(from, `${url}`, 'fetish.jpg', `${title}\nTag: ${subreddit}\nAuthor: u/${author}`, null, null, true)
+                    })
+                    .catch((err) => console.error(err))
+                } else if (fetish === 'booty' || 'booties' || 'ass') {
+                    petis.booty()
+                    .then(({subreddit, title, url, author}) => {
+                        client.sendFileFromUrl(from, `${url}`, 'fetish.jpg', `${title}\nTag: ${subreddit}\nAuthor: u/${author}`, null, null, true)
+                    })
+                    .catch((err) => console.error(err))
+                } else if (fetish === 'boobs' || 'boob' || 'oppai') {
+                    petis.boobs()
+                    .then(({subreddit, title, url, author}) => {
+                        client.sendFileFromUrl(from, `${url}`, 'fetish.jpg', `${title}\nTag: ${subreddit}\nAuthor: u/${author}`, null, null, true)
+                    })
+                    .catch((err) => console.error(err))
+                } else if (fetish === 'necks' || 'neck') {
+                    petis.necks()
+                    .then(({subreddit, title, url, author}) => {
+                        client.sendFileFromUrl(from, `${url}`, 'fetish.jpg', `${title}\nTag: ${subreddit}\nAuthor: u/${author}`, null, null, true)
+                    })
+                    .catch((err) => console.error(err))
+                } else if (fetish === 'belly' || 'bellybutton') {
+                    petis.belly()
+                    .then(({subreddit, title, url, author}) => {
+                        client.sendFileFromUrl(from, `${url}`, 'fetish.jpg', `${title}\nTag: ${subreddit}\nAuthor: u/${author}`, null, null, true)
+                    })
+                    .catch((err) => console.error(err))
+                } else if (fetish === 'sideboobs' || 'sideboob' || 'sideoppai') {
+                    petis.sideboobs()
+                    .then(({subreddit, title, url, author}) => {
+                        client.sendFileFromUrl(from, `${url}`, 'fetish.jpg', `${title}\nTag: ${subreddit}\nAuthor: u/${author}`, null, null, true)
+                    })
+                    .catch((err) => console.error(err))
+                } else if (fetish === 'ahegao') {
+                    petis.ahegao()
+                    .then(({subreddit, title, url, author}) => {
+                        client.sendFileFromUrl(from, `${url}`, 'fetish.jpg', `${title}\nTag: ${subreddit}\nAuthor: u/${author}`, null, null, true)
+                    })
+                    .catch((err) => console.error(err))
+                } else {
+                    client.reply(from, '🙏 Maaf tag belum tersedia.', id)
+                }
+            break
+
             // Group Commands (group admin only)
             case 'admin':
                 if (!isGroupMsg) return client.reply(from, '❌ Command ini hanya bisa digunakan di group saja!', id)
@@ -314,7 +374,7 @@ module.exports = msgHandler = async (client = new Client(), message) => {
                 if (!isBotGroupAdmins) return client.reply(from, '❌ Jadikan saya admin terlebih dahulu!', id)
                 if (mentionedJidList.length === 0) return client.reply(from, '⚠️ Format salah! Ketik *$menu* untuk penggunaan.', id)
                 if (mentionedJidList[0] === botNumber) return await client.reply(from, '⚠️ Format salah! Ketik *$menu* untuk penggunaan.', id)
-                await client.sendTextWithMentions(from, `✔️ Siap mint, wisuda lu:\n${mentionedJidList.map(x => `@${x.replace('@c.us', '')}`).join('\n')}`)
+                await client.sendTextWithMentions(from, `✅ Siap mint, wisuda lu:\n${mentionedJidList.map(x => `@${x.replace('@c.us', '')}`).join('\n')}`)
                 for (let i = 0; i < mentionedJidList.length; i++) {
                     if (groupAdmins.includes(mentionedJidList[i])) return await client.sendText(from, '❌ Gak bisa kick admin gw bro')
                     await client.removeParticipant(groupId, mentionedJidList[i])
@@ -328,7 +388,7 @@ module.exports = msgHandler = async (client = new Client(), message) => {
                 if (groupAdmins.includes(mentionedJidList[0])) return await client.reply(from, '❌ Dia udah jadi admin njir', id)
                 if (mentionedJidList[0] === botNumber) return await client.reply(from, '⚠️ Format salah! Ketik *$menu* untuk penggunaan.', id)
                 await client.promoteParticipant(groupId, mentionedJidList[0])
-                await client.sendTextWithMentions(from, `✔️ Siap mint, anjay sekarang @${mentionedJidList[0].replace('@c.us', '')} jadi admin.`)
+                await client.sendTextWithMentions(from, `✅ Siap mint, anjay sekarang @${mentionedJidList[0].replace('@c.us', '')} jadi admin.`)
             break
             case 'demote':
                 if (!isGroupMsg) return client.reply(from, '❌ Command ini hanya bisa digunakan di group saja!', id)
@@ -338,7 +398,7 @@ module.exports = msgHandler = async (client = new Client(), message) => {
                 if (!groupAdmins.includes(mentionedJidList[0])) return await client.reply(from, '❌ Dia bukan admin, gimana gw demote-nya?', id)
                 if (mentionedJidList[0] === botNumber) return await client.reply(from, '⚠️ Format salah! Ketik *$menu* untuk penggunaan.', id)
                 await client.demoteParticipant(groupId, mentionedJidList[0])
-                await client.sendTextWithMentions(from, `✔️ Siap mint, anjay lengser @${mentionedJidList[0].replace('@c.us', '')}.`)
+                await client.sendTextWithMentions(from, `✅ Siap mint, anjay lengser @${mentionedJidList[0].replace('@c.us', '')}.`)
             break
             case 'out':
             case 'bye':
