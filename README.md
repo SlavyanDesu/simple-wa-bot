@@ -75,7 +75,7 @@ After that scan the QR code and wait until it authenticated.
 |     NSFW           | Availability |
 | :----------------: | :----------: |
 | Ecchi Reddit       |      ✔️      |
-| Fetishes           |    📝 Todo   |
+| Fetishes           |      ✔️      |
 | Nhentai Downloader |    📝 Todo   |
 
 |  Moderation  | Availability |
