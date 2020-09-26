@@ -24,7 +24,7 @@ SOFTWARE.
 `
 }
 
-exports.textMenu = (pushname) => {
+exports.textMenu = () => {
     return `
 ⚠️ [ *ALL YOU CAN USE* ] ⚠️
 Berikut command yang tersedia:

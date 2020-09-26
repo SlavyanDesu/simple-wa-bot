@@ -16,7 +16,7 @@ const start = (client = new Client()) => {
 
     // Set all received message to seen
     client.onAck((x => {
-        const { to, ack } = x
+        const { to } = x
         if (x !== 3) client.sendSeen(to)
     }))
 
