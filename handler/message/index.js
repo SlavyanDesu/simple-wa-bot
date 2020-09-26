@@ -292,10 +292,10 @@ module.exports = msgHandler = async (client = new Client(), message) => {
             break
 
             // NSFW
-            case 'ecchi':
-                ecchi.hentong()
-                .then(({ title, url, author }) => {
-                    client.sendFileFromUrl(from, `${url}`, 'meme.jpg', `${title}\nAuthor: u/${author}`, null, null, true)
+            case 'lewd':
+                lewd.random()
+                .then(({ subreddit, title, url, author }) => {
+                    client.sendFileFromUrl(from, `${url}`, 'lewd.jpg', `${title}\nTag: r/${subreddit}\nAuthor: u/${author}`, null, null, true)
                 })
                 .catch((err) => console.error(err))
             break
@@ -306,55 +306,55 @@ module.exports = msgHandler = async (client = new Client(), message) => {
                 }
 
                 if (request === 'armpits') {
-                    petis.armpits()
+                    fetish.armpits()
                         .then(({subreddit, title, url, author}) => {
                             client.sendFileFromUrl(from, `${url}`, 'fetish.jpg', `${title}\nTag: r/${subreddit}\nAuthor: u/${author}`, null, null, true)
                         })
                         .catch((err) => console.error(err))
                 } else if (request === 'feets') {
-                    petis.feets()
+                    fetish.feets()
                         .then(({subreddit, title, url, author}) => {
                             client.sendFileFromUrl(from, `${url}`, 'fetish.jpg', `${title}\nTag: r/${subreddit}\nAuthor: u/${author}`, null, null, true)
                         })
                         .catch((err) => console.error(err))
                 } else if (request === 'thighs') {
-                    petis.thighs()
+                    fetish.thighs()
                         .then(({subreddit, title, url, author}) => {
                             client.sendFileFromUrl(from, `${url}`, 'fetish.jpg', `${title}\nTag: r/${subreddit}\nAuthor: u/${author}`, null, null, true)
                         })
                         .catch((err) => console.error(err))
                 } else if (request === 'booty') {
-                    petis.booty()
+                    fetish.booty()
                         .then(({subreddit, title, url, author}) => {
                             client.sendFileFromUrl(from, `${url}`, 'fetish.jpg', `${title}\nTag: r/${subreddit}\nAuthor: u/${author}`, null, null, true)
                         })
                         .catch((err) => console.error(err))
                 } else if (request === 'boobs') {
-                    petis.boobs()
+                    fetish.boobs()
                         .then(({subreddit, title, url, author}) => {
                             client.sendFileFromUrl(from, `${url}`, 'fetish.jpg', `${title}\nTag: r/${subreddit}\nAuthor: u/${author}`, null, null, true)
                         })
                         .catch((err) => console.error(err))
                 } else if (request === 'necks') {
-                    petis.necks()
+                    fetish.necks()
                         .then(({subreddit, title, url, author}) => {
                             client.sendFileFromUrl(from, `${url}`, 'fetish.jpg', `${title}\nTag: r/${subreddit}\nAuthor: u/${author}`, null, null, true)
                         })
                         .catch((err) => console.error(err))
                 } else if (request === 'belly') {
-                    petis.belly()
+                    fetish.belly()
                         .then(({subreddit, title, url, author}) => {
                             client.sendFileFromUrl(from, `${url}`, 'fetish.jpg', `${title}\nTag: r/${subreddit}\nAuthor: u/${author}`, null, null, true)
                         })
                         .catch((err) => console.error(err))
                 } else if (request === 'sideboobs') {
-                    petis.sideboobs()
+                    fetish.sideboobs()
                         .then(({subreddit, title, url, author}) => {
                             client.sendFileFromUrl(from, `${url}`, 'fetish.jpg', `${title}\nTag: r/${subreddit}\nAuthor: u/${author}`, null, null, true)
                         })
                         .catch((err) => console.error(err))
                 } else if (request === 'ahegao') {
-                    petis.ahegao()
+                    fetish.ahegao()
                         .then(({subreddit, title, url, author}) => {
                             client.sendFileFromUrl(from, `${url}`, 'fetish.jpg', `${title}\nTag: r/${subreddit}\nAuthor: u/${author}`, null, null, true)
                         })
