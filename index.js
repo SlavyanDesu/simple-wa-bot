@@ -13,10 +13,10 @@ const start = (client = new Client()) => {
         if (state === 'UNPAIRED') client.forceRefocus()
         if (state === 'CONFLICT') client.forceRefocus()
     })
-    
+
     // Set all received message to seen
     client.onAck((x => {
-        const { from, to, ack } = x
+        const { to, ack } = x
         if (x !== 3) client.sendSeen(to)
     }))
 
