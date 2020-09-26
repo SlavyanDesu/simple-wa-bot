@@ -29,8 +29,7 @@ const start = (client = new Client()) => {
                     client.cutMsgCache()
                 }
             })
-        // Message handler
-        msgHandler(client, message)
+        msgHandler(client, message) // Message handler
     })
 }
 
