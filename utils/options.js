@@ -8,6 +8,7 @@ module.exports = options = (headless, start) => {
         linuxChromium: '/usr/bin/chromium-browser', // Linux - Chromium
         darwin: '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' // MacOS
     }
+
     if (fs.existsSync(chromePath.win32)) {
         execPath = chromePath.win32
     } else if (fs.existsSync(chromePath.win64)) {
@@ -22,6 +23,7 @@ module.exports = options = (headless, start) => {
         console.error(new Error('Google Chrome is not installed!'))
         process.exit(1)
     }
+
     const options = {
         qrRefreshS: 20,
         qrTimeout: 0,
@@ -42,6 +44,5 @@ module.exports = options = (headless, start) => {
             '--disk-cache-size=0'
         ]
     }
-
     return options
 }
