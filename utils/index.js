@@ -13,7 +13,7 @@ const color = (text, color) => {
 }
 
 /**
- * Get Time duration
+ * Get time duration
  * @param  {Date} timestamp
  * @param  {Date} now
  */
@@ -23,14 +23,13 @@ const processTime = (timestamp, now) => {
 }
 
 /**
- * is it url?
+ * Is it url?
  * @param  {String} url
  */
 const isUrl = (url) => {
     return url.match(new RegExp(/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&/=]*)/gi))
 }
 
-// Message Filter / Message Cooldowns
 const usedCommandRecently = new Set()
 
 /**
@@ -49,7 +48,7 @@ const addFilter = (from) => {
     usedCommandRecently.add(from)
     setTimeout(() => {
         return usedCommandRecently.delete(from)
-    }, 3000) // 3 Seconds delay before next command
+    }, 5000) // 5 Seconds delay before next command
 }
 
 module.exports = {
