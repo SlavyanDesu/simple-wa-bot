@@ -65,7 +65,8 @@ After that scan the QR code and wait until it authenticated.
 | Say         |      ✔️      |
 | Coin        |      ✔️      |
 | Reddit      |      ✔️      |
-| Ascii       |    📝 Todo   |
+| ASCII       |    📝 Todo   |
+| Lenny       |      ✔️      |
 
 |        Weeb        | Availability |
 | :----------------: | :----------: |
@@ -75,7 +76,7 @@ After that scan the QR code and wait until it authenticated.
 
 |     NSFW           | Availability |
 | :----------------: | :----------: |
-| Ecchi Reddit       |      ✔️      |
+| Lewd               |      ✔️      |
 | Fetish             |      ✔️      |
 | Nhentai Downloader |    📝 Todo   |
 
