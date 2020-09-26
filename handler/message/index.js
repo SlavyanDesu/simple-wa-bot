@@ -4,7 +4,7 @@ const moment = require('moment-timezone')
 const os = require('os')
 const axios = require('axios')
 moment.tz.setDefault('Asia/Jakarta').locale('id')
-const { downloader, urlShortener, meme, petis, ecchi } = require('../../lib')
+const { downloader, urlShortener, meme, fetish, lewd } = require('../../lib')
 const { msgFilter, color, processTime, isUrl } = require('../../utils')
 const responses = [
     'Adalah yoi',
