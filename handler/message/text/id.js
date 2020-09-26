@@ -29,7 +29,7 @@ exports.textMenu = (pushname) => {
 ⚠️ [ *ALL YOU CAN USE* ] ⚠️
 Berikut command yang tersedia:
 
-Downloader (TWITTER DAN FACEBOOK UPDATE):
+Downloader:
 1. *$instagram*
 Untuk megunduh foto atau video dari Instagram.
 Aliases: *ig*
@@ -58,17 +58,17 @@ Aliases: *talk*
 Penggunaan: *$say* <teks>
 
 2. *$ask*
-Tanya tentang apa saja dan saya akan menjawab secara random. <> Abaikan.
+Tanya tentang apa saja dan saya akan menjawab secara random.
 Aliases: *8ball*
 Penggunaan:: *$ask* <pertanyaan>
 
 3. *$reverse*
 .nasilut nikilaB
 Aliases: - 
-Penggunaan: *$reverse* <teks lu>
+Penggunaan: *$reverse* <teks>
 
 4. *$roll*
-Lempar dadu.
+Roll angka.
 Aliases: *dice*
 Penggunaan: *$roll*
 
@@ -80,7 +80,7 @@ Penggunaan: *$coinflip*
 ~6. *$ascii*~
 ~Buat teks mu menjadi ASCII art.~
 ~Aliases: -~
-~Penggunaan: *$ascii* <teks lu>~
+~Penggunaan: *$ascii* <teks>~
 *WIP*
 
 7. *$randmeme*
@@ -89,13 +89,13 @@ Aliases: *reddit*
 Penggunaan: *$randmeme*
 
 8. *$wait*
-What anime is this? Identifikasi anime via foto!
+What anime is this? Identifikasi anime via foto.
 Aliases: -
 Penggunaan: kirim foto lalu tambahkan caption *$wait*
 
 Utilities:
 1. *$ping*
-Cek ping.
+Cek kecepatan respon bot.
 Alias: *speed*
 Penggunaan: *$ping*
 
@@ -105,7 +105,7 @@ Aliases: -
 Penggunaan: *$server*
 
 3. *$eval*
-Buat evaluates string JavaScript.
+Buat evaluate JavaScript arbitary.
 Alias: *ev*
 Penggunaan: *$eval* <string>
 
@@ -120,7 +120,7 @@ Alias: *tnc*
 Penggunaan: *$readme*
 
 6. *$menu*
-Ya buat cek command.
+List command.
 Aliases: *help* - *h*
 Penggunaan: *$menu*
 `
@@ -132,9 +132,9 @@ exports.textAdmin = () => {
 Gunakan command ini jika admin terlalu malas:
 
 1. *$kick*
-Buat kick member rese. Bisa lebih dari satu.
+Untuk kick member rese.
 Aliases: -
-Penggunaan: *$kick* @member @member
+Penggunaan: *$kick* @member
 
 2. *$promote*
 Naikin jabatan member ke admin.
@@ -171,12 +171,12 @@ Penggunaan: *$linkgroup*
 exports.hiddenMenu = () => {
     return `
 🔞 [ *NSFW* ] 🔞
-Command untuk hehe boi:
+Command untuk ( ͡° ͜ʖ ͡°):
 
-1. *$ecchi*
-Kirim foto lewd berbasis dari r/ecchi.
+1. *$lewd*
+Kirim foto lewd secara random.
 Aliases: -
-Penggunaan: *$ecchi*
+Penggunaan: *$lewd*
 
 2. *$fetish*
 Yang tersedia: *armpits*, *feets*, *thighs*, *booty*, *boobs*, *necks*, *belly*, *sideboobs*, dan *ahegao*.
