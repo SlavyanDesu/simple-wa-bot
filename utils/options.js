@@ -23,7 +23,6 @@ module.exports = options = (headless, start) => {
         process.exit(1)
     }
     const options = {
-        headless: headless,
         qrRefreshS: 20,
         qrTimeout: 0,
         authTimeout: 0,
