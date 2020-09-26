@@ -3,6 +3,7 @@ const { decryptMedia, Client } = require('@open-wa/wa-automate')
 const moment = require('moment-timezone')
 const os = require('os')
 const axios = require('axios')
+const { inspect } = require('util')
 moment.tz.setDefault('Asia/Jakarta').locale('id')
 const { downloader, urlShortener, meme, fetish, lewd } = require('../../lib')
 const { msgFilter, color, processTime, isUrl } = require('../../utils')
@@ -51,12 +52,6 @@ module.exports = msgHandler = async (client = new Client(), message) => {
         const groupMembers = isGroupMsg ? await client.getGroupMembersId(groupId) : ''
         const isGroupAdmins = groupAdmins.includes(sender.id) || false
         const isBotGroupAdmins = groupAdmins.includes(botNumber) || false
-        const clean = text => {
-            if (typeof(text) === "string")
-              return text.replace(/`/g, "`" + String.fromCharCode(8203)).replace(/@/g, "@" + String.fromCharCode(8203));
-            else
-                return text;
-          }
 
         // Bot Prefix
         const prefix = '$'
@@ -106,23 +101,36 @@ module.exports = msgHandler = async (client = new Client(), message) => {
             break
             case 'ev':
             case 'eval':
+                let evaled
                 try {
-                    const code = args.join(' ')
-                    if (!code) return client.reply(from, '⚠️ Format salah! Ketik *$menu* untuk penggunaan.')
-                    let evaled = eval(code)
-
-                    if (typeof evaled !== 'string')
-                    evaled = require('util').inspect(evaled)
-
-                    await client.sendText(from, clean(evaled), {code:'xl'})
+                    evaled = await eval(args.join(' '))
+                    if (!evaled) return client.reply(from, '⚠️ Format salah! Ketik *$menu* untuk penggunaan.')
+                    client.sendText(from, inspect(evaled), id)
+                    console.log(inspect(evaled))
                 } catch (err) {
-                    client.sendText(`\`ERROR\` \`\`\`xl\n${clean(err)}\n\`\`\``)
+                    console.error(err)
+                    client.reply(from, err, id)
                 }
             break
             case 'clock':
             case 'jam':
             case 'waktu':
                 await client.sendText(from, `Waktu Indonesia Barat: *${moment().utcOffset('+0700').format('HH:mm')}* WIB \nWaktu Indonesia Tengah: *${moment().utcOffset('+0800').format('HH:mm')}* WITA \nWaktu Indonesia Timur: *${moment().utcOffset('+0900').format('HH:mm')}* WIT`)
+            break
+            case 'delete':
+            case 'del':
+                if (!quotedMsg) return client.reply(from, '⚠️ Format salah! Ketik *$menu* untuk penggunaan.', id)
+                if (!quotedMsgObj.fromMe) return client.reply(from, '⚠️ Format salah! Ketik *$menu* untuk penggunaan.', id)
+                client.deleteMessage(quotedMsgObj.chatId, quotedMsgObj.id, false)
+            break
+            case 'linkgrup':
+            case 'linkgroup':
+                if (!isGroupMsg) return await client.reply(from, '❌ Command ini hanya bisa digunakan di group saja!', id)
+                if (!isBotGroupAdmins) return await client.reply(from, '❌ Jadikan saya admin terlebih dahulu!', id)
+                if (isGroupMsg) {
+                    const inviteLink = await client.getGroupInviteLink(groupId)
+                    client.sendLinkWithAutoPreview(from, inviteLink, `\nLink group *${name}*`)
+                }
             break
 
             // Fun
@@ -132,6 +140,9 @@ module.exports = msgHandler = async (client = new Client(), message) => {
                 const answer = responses[Math.floor(Math.random() * (responses.length))]
                 if (!question) client.reply(from, '⚠️ Format salah! Ketik *$menu* untuk penggunaan.')
                 await client.sendText(from, `Pertanyaan: *${question}* \n\nJawaban: ${answer}`)
+            break
+            case 'lenny':
+                client.sendText(from, '( ͡° ͜ʖ ͡°)', id)
             break
             case 'reverse':
                 if (args.length < 1) return client.reply(from, '⚠️ Format salah! Ketik *$menu* untuk penggunaan.')
@@ -160,6 +171,7 @@ module.exports = msgHandler = async (client = new Client(), message) => {
             break
             case 'reddit':
             case 'randmeme':
+                client.reply(from, '_Sedang mencari..._', id)
                 meme.random()
                     .then(({ subreddit, title, url, author }) => {
                         client.sendFileFromUrl(from, `${url}`, 'meme.jpg', `${title}\nTag: r/${subreddit}\nAuthor: u/${author}`, null, null, true)
@@ -171,7 +183,7 @@ module.exports = msgHandler = async (client = new Client(), message) => {
                     const fetch = require('node-fetch')
                     const mediaData = await decryptMedia(message, uaOverride)
                     const imageBase64 = `data:${mimetype};base64,${mediaData.toString('base64')}`
-                    client.reply(from, '_Searching..._', id)
+                    client.reply(from, '_Sedang mencari..._', id)
                     fetch('https://trace.moe/api/search', {
                         method: 'POST',
                         body: JSON.stringify({ image: imageBase64 }),
@@ -292,7 +304,9 @@ module.exports = msgHandler = async (client = new Client(), message) => {
             break
 
             // NSFW
+            case 'lewds':
             case 'lewd':
+                client.reply(from, '_Sedang mencari..._', id)
                 lewd.random()
                 .then(({ subreddit, title, url, author }) => {
                     client.sendFileFromUrl(from, `${url}`, 'lewd.jpg', `${title}\nTag: r/${subreddit}\nAuthor: u/${author}`, null, null, true)
@@ -304,6 +318,7 @@ module.exports = msgHandler = async (client = new Client(), message) => {
                 if (!request) {
                     client.reply(from, '⚠️ Silakan masukkan tag yang tersedia di *$menu*!')
                 }
+                client.reply(from, '_Sedang mencari..._', id)
 
                 if (request === 'armpits') {
                     fetish.armpits()
@@ -407,13 +422,6 @@ module.exports = msgHandler = async (client = new Client(), message) => {
                 if (!isGroupMsg) return client.reply(from, '❌ Command ini hanya bisa digunakan di group saja!', id)
                 if (!isGroupAdmins) return client.reply(from, '❌ Hanya admin yang bisa menggunakan command ini!', id)
                 client.sendText(from, '👋 Bye-bye!').then(() => client.leaveGroup(groupId))
-            break
-            case 'del':
-                if (!isGroupMsg) return await client.reply(from, '❌ Command ini hanya bisa digunakan di group saja!', id)
-                if (!isGroupAdmins) return client.reply(from, '❌ Hanya admin yang bisa menggunakan command ini!', id)
-                if (!quotedMsg) return client.reply(from, '⚠️ Format salah! Ketik *$menu* untuk penggunaan.', id)
-                if (!quotedMsgObj.fromMe) return client.reply(from, '⚠️ Format salah! Ketik *$menu* untuk penggunaan.', id)
-                client.deleteMessage(quotedMsgObj.chatId, quotedMsgObj.id, false)
             break
             case 'status':
                 if (!isGroupAdmins) return client.reply(from, '❌ Hanya admin yang bisa menggunakan command ini!', id)

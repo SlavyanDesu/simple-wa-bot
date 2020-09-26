@@ -93,6 +93,11 @@ What anime is this? Identifikasi anime via foto.
 Aliases: -
 Penggunaan: kirim foto lalu tambahkan caption *$wait*
 
+7. *$lenny*
+( ͡° ͜ʖ ͡°)
+Aliases: -
+Penggunaan: *$lenny*
+
 Utilities:
 1. *$ping*
 Cek kecepatan respon bot.
@@ -107,7 +112,7 @@ Penggunaan: *$server*
 3. *$eval*
 Buat evaluate JavaScript arbitary.
 Alias: *ev*
-Penggunaan: *$eval* <string>
+Penggunaan: *$eval* <arbitary>
 
 4. *$clock*
 Cek waktu Indonesia sekitar.
@@ -123,6 +128,16 @@ Penggunaan: *$readme*
 List command.
 Aliases: *help* - *h*
 Penggunaan: *$menu*
+
+7. *$delete*
+Hapus pesan yang saya kirim.
+Aliases: *del*
+Penggunaan: reply pesan yang mau dihapus lalu ketik command *$delete*
+
+8. *$linkgroup*
+Memberikan link group yang disinggahi.
+Aliases: *linkgrup*
+Penggunaan: *$linkgroup*
 `
 }
 
@@ -146,25 +161,15 @@ Lengserin admin.
 Aliases: -
 Penggunaan: *$demote* @member
 
-4. *$delete*
-Hapus pesan yang saya kirim.
-Aliases: *del*
-Penggunaan: reply pesan yang mau dihapus lalu ketik command *$delete*
-
-5. *$status*
+4. *$status*
 Untuk cek status bot.
 Aliases: *stats*
 Penggunaan: *$status*
 
-6. *$bye*
+5. *$bye*
 Keluarkan saya dari grup.
 Aliases: *out*
 Penggunaan: *$bye*
-
-7. *$linkgroup*
-Memberikan link group yang disinggahi.
-Aliases: *linkgrup*
-Penggunaan: *$linkgroup*
 `
 }
 
