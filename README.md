@@ -78,7 +78,7 @@ After that scan the QR code and wait until it authenticated.
 | :----------------: | :----------: |
 | Lewd               |      ✔️      |
 | Fetish             |      ✔️      |
-| Nhentai Downloader |    📝 Todo   |
+| nHentai Downloader |    📝 Todo   |
 
 |  Moderation  | Availability |
 | :----------: | :----------: |
