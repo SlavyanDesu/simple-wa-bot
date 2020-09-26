@@ -1,7 +1,4 @@
 const fetch = require('node-fetch')
-const fs = require('fs')
-const { fromBuffer } = require('file-type')
-const resizeImage = require('./imageProcessing')
 
 /**
  *Fetch Json from Url
