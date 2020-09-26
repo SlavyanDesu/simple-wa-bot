@@ -22,7 +22,7 @@ const start = (client = new Client()) => {
 
     // Listening on message
     client.onMessage((message) => {
-        client.getAmountOfLoadedMessages() // Cut message Cache if cache more than 3K
+        client.getAmountOfLoadedMessages() // Cut message cache if it reach more than 3K
             .then((msg) => {
                 if (msg >= 3000) {
                     console.log('[CLIENT]', color(`Loaded message reach ${msg}, cuting message cache...`, 'yellow'))
