@@ -4,7 +4,7 @@ const moment = require('moment-timezone')
 const os = require('os')
 const axios = require('axios')
 moment.tz.setDefault('Asia/Jakarta').locale('id')
-const { downloader, urlShortener, meme, fetish, lewd } = require('../../lib')
+const { downloader, urlShortener, meme, fetish, lewd, waifu } = require('../../lib')
 const { msgFilter, color, processTime, isUrl } = require('../../utils')
 const responses = [
     'Adalah yoi',
@@ -293,6 +293,14 @@ module.exports = msgHandler = async (client = new Client(), message) => {
                     })
                 }
             break
+            case 'waifu':
+                client.reply('_Sedang mencari..._')
+                waifu.random()
+                    .then(({ url }) => {
+                        client.sendFileFromUrl(from, url, 'waifu.jpg', null, null, true)
+                    })
+                    .catch((err) => console.error(err))
+                break
 
             // Hidden
             case 'hidden':
@@ -303,9 +311,9 @@ module.exports = msgHandler = async (client = new Client(), message) => {
             case 'fetish':
                 let request = args.join(' ')
                 if (!request) {
-                    await client.reply(from, '⚠️ Silakan masukkan tag yang tersedia di *$menu*!')
+                    client.reply(from, '⚠️ Silakan masukkan tag yang tersedia di *$menu*!')
                 }
-                await client.reply(from, '_Sedang mencari..._', id)
+                client.reply(from, '_Sedang mencari..._', id)
 
                 if (request === 'armpits') {
                     fetish.armpits()

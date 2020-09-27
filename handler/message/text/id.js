@@ -163,7 +163,12 @@ exports.textMenu5 = () => {
 > _Menu Page 5_
 
 Weeb Zone:
-1. *$wait*
+1. *$waifu*
+Kirim foto waifu random.
+Aliases: -
+Penggunaan: *$waifu*
+
+2. *$wait*
 What anime is this? Identifikasi anime via foto.
 Aliases: -
 Penggunaan: kirim foto lalu tambahkan caption *$wait*

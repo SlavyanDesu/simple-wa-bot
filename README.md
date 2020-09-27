@@ -70,7 +70,7 @@ After that scan the QR code and wait until it authenticated.
 |      Weeb Zone     | Availability |
 | :----------------: | :----------: |
 | What Anime Is This |      ✔️      |
-| Random Waifu Image |    📝 Todo   |
+| Random Waifu Image |      ✔️      |
 | Random Wallpaper   |    📝 Todo   |
 
 |        NSFW        | Availability |
