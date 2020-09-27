@@ -32,7 +32,6 @@
     "genius-lyrics-api": "^3.0.3",
     "got": "^11.7.0",
     "https": "^1.0.0",
-    "moment-duration-format": "^2.3.2",
     "moment-timezone": "^0.5.31",
     "nhentai-api": "^3.0.2",
     "node-fetch": "^2.6.1",

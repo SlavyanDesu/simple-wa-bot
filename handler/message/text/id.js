@@ -109,32 +109,27 @@ Cek spesifikasi server.
 Aliases: -
 Penggunaan: *$server*
 
-3. *$eval*
-Buat evaluate JavaScript arbitary.
-Alias: *ev*
-Penggunaan: *$eval* <arbitary>
-
-4. *$clock*
+3. *$clock*
 Cek waktu Indonesia sekitar.
 Aliases: *waktu* - *jam*
 Penggunaan: *$clock*
 
-5. *$readme*
+4. *$readme*
 Isinya copyright buat source code doang.
 Alias: *tnc*
 Penggunaan: *$readme*
 
-6. *$menu*
+5. *$menu*
 List command.
 Aliases: *help* - *h*
 Penggunaan: *$menu*
 
-7. *$delete*
+6. *$delete*
 Hapus pesan yang saya kirim.
 Aliases: *del*
 Penggunaan: reply pesan yang mau dihapus lalu ketik command *$delete*
 
-8. *$linkgroup*
+7. *$linkgroup*
 Memberikan link group yang disinggahi.
 Aliases: *linkgrup*
 Penggunaan: *$linkgroup*

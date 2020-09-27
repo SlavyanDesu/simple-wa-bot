@@ -3,7 +3,6 @@ const { decryptMedia, Client } = require('@open-wa/wa-automate')
 const moment = require('moment-timezone')
 const os = require('os')
 const axios = require('axios')
-const { inspect } = require('util')
 moment.tz.setDefault('Asia/Jakarta').locale('id')
 const { downloader, urlShortener, meme, fetish, lewd } = require('../../lib')
 const { msgFilter, color, processTime, isUrl } = require('../../utils')
@@ -83,6 +82,7 @@ module.exports = msgHandler = async (client = new Client(), message) => {
             break
             // Utilities
             case 'speed':
+            case 'p':
             case 'ping':
                 await client.sendText(from, `Pong!!!!\nSpeed: ${processTime(t, moment())} detik`)
             break
@@ -97,20 +97,19 @@ module.exports = msgHandler = async (client = new Client(), message) => {
                 await client.sendText(from, menuId.textTnC())
             break
             case 'server':
-                await client.sendText(from, `Penggunaan RAM: *${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)}MB / ${Math.round(require('os').totalmem / 1024 / 1024)}MB*\nCPU: *${os.cpus().length} ${os.cpus()[0].model}*`)
-            break
-            case 'ev':
-            case 'eval':
-                let evaled
-                try {
-                    evaled = await eval(args.join(' '))
-                    if (!evaled) return client.reply(from, '⚠️ Format salah! Ketik *$menu* untuk penggunaan.')
-                    client.sendText(from, inspect(evaled), id)
-                    console.log(inspect(evaled))
-                } catch (err) {
-                    console.error(err)
-                    client.reply(from, err, id)
-                }
+                var ut_sec = os.uptime()
+                var ut_min = ut_sec/60
+                var ut_hour = ut_min/60
+
+                ut_sec = Math.floor(ut_sec)
+                ut_min = Math.floor(ut_min)
+                ut_hour = Math.floor(ut_hour)
+
+                ut_hour = ut_hour%60
+                ut_min = ut_min%60
+                ut_sec = ut_sec%60
+
+                await client.sendText(from, `Uptime: *${ut_hour}* jam *${ut_min}* menit *${ut_sec}* detik\nPenggunaan RAM: *${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)}MB / ${Math.round(require('os').totalmem / 1024 / 1024)}MB*\nCPU: *${os.cpus().length} ${os.cpus()[0].model}*`)
             break
             case 'clock':
             case 'jam':

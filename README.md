@@ -54,7 +54,6 @@ After that scan the QR code and wait until it authenticated.
 | Help        |      ✔️      |
 | Server      |      ✔️      |
 | Readme      |      ✔️      |
-| Eval        |    ⚠️ BETA   |
 | Clock       |      ✔️      |
 
 |     Fun     | Availability |
