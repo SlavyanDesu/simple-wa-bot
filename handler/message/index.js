@@ -39,7 +39,6 @@ const responses = [
 ]
 
 const { menuId } = require('./text') // For help command
-const { visible } = require('chalk')
 
 module.exports = msgHandler = async (client = new Client(), message) => {
     try {
@@ -105,7 +104,7 @@ module.exports = msgHandler = async (client = new Client(), message) => {
                     })
                     .catch((err) => {
                         console.error(err)
-                        client.reply(from, `⚠️ Link tidak valid\n\n${err}`, id)
+                        client.reply(from, `⚠️ Link tidak valid!\n\n${err}`, id)
                     })
             break
             case 'instagram':
@@ -153,48 +152,9 @@ module.exports = msgHandler = async (client = new Client(), message) => {
                     })
                     .catch((err) => {
                         console.error(err)
-                        client.reply(from, `⚠️ Link tidak valid\n\n${err}`, id)
+                        client.reply(from, `⚠️ Link tidak valid!\n\n${err}`, id)
                     })
             break
-            case 'ytmp3':
-                if (args.length !== 1) return client.reply(from, '⚠️ Format salah! Ketik *$menu* untuk penggunaan.', id)
-                let links = url.match(/(?:https?:\/{2})?(?:w{3}\.)?youtu(?:be)?\.(?:com|be)(?:\/watch\?v=|\/)([^\s&]+)/)
-                if (!links) return client.reply(from, '⚠️ Link tidak valid!', id)
-                try {
-                    client.reply(from, '_Tunggu sebentar..._', id)
-                    const response = axios.get('https://slavyandesu.herokuapp.com/api/yta?url=' + links)
-                    if (response.error) {
-                        return await client.reply(from, response.error, id)
-                    } else {
-                        const { title, thumb, filesize, result } = await response
-                        if (Number(filesize.split(' MB')[0]) >= 30.00) return await client.reply(from, '🙏 Maaf durasi video tersebut telah melewati batas maksimal.', id)
-                        client.sendFileFromUrl(from, thumb, 'thumbnail.jpg', `Title: ${title}\nSize: ${filesize}\n\n_Tunggu sebentar..._`)
-                        await client.sendFileFromUrl(from, result, `${title}.mp3`, null, null, true)
-                    }
-                } catch (err) {
-                    console.error(err)
-                    client.reply(from, `Error: ${err}`, id)
-                }
-            break
-            case 'ytmp4':
-                if (args.length !== 1) return client.reply(from, '⚠️ Format salah! Ketik *$menu* untuk penggunaan.', id)
-                let links = url.match(/(?:https?:\/{2})?(?:w${3}\.)?youtu(?:be)?\.(?:com|be)(?:\/watch\?v=|\/)([^\s&]+)/)
-                if (!links) return client.reply(from, '⚠️ Link tidak valid!', id)
-                try {
-                    client.reply(from, '_Tunggu sebentar..._', id)
-                    const ytv = axios.get('https://slavyandesu.herokuapp.com/api/ytv?url=' + links)
-                    if (ytv.error) {
-                        return await client.reply(from, ytv.error, id)
-                    } else {
-                        const { title, thumb, filesize, result } = await ytv
-                        if (Number(ytv.filesize.split(' MB')[0]) >= 40.00) return await client.reply(from, '🙏 Maaf durasi video tersebut telah melewati batas maksimal.', id)
-                        client.sendFileFromUrl(from, thumb, `${title}`, `Title: ${title}\nSize: ${filesize}\n\n_Tunggu sebentar..._`)
-                        await client.sendFileFromUrl(from, result, `${title}.mp4`, null, null, true)
-                    }
-                } catch (err) {
-                    console.error(err)
-                    client.reply(from, `Error: ${err}`, id)
-                }
 
             // Sticker
             case 'sticker':
@@ -216,6 +176,37 @@ module.exports = msgHandler = async (client = new Client(), message) => {
                         : client.reply(from, 'Silakan')).then(() => console.log(`Sticker processed for ${processTime(t, moment())} second`))
                 } else {
                     await client.reply(from, '⚠️ Format salah! Ketik *$menu* untuk penggunaan.', id)
+                }
+            break
+            case 'stickergif':
+            case 'stikergif':
+                if (args.length !== 1) return client.reply(from, '⚠️ Format salah! Ketik *$menu* untuk penggunaan.', id)
+                client.reply(from, '_Tunggu sebentar..._', id)
+                const isGiphy = url.match(new RegExp(/https?:\/\/(www\.)?giphy.com/, 'gi'))
+                const isMediaGiphy = url.match(new RegExp(/https?:\/\/media.giphy.com\/media/, 'gi'))
+                if (isGiphy) {
+                    const getGiphyCode = url.match(new RegExp(/(\/|\-)(?:.(?!(\/|\-)))+$/, 'gi'))
+                    if (!getGiphyCode) { return client.reply(from, '⚠️ Gagal mengambil kode giphy', id) }
+                    const giphyCode = getGiphyCode[0].replace(/[-\/]/gi, '')
+                    const smallGifUrl = 'https://media.giphy.com/media/' + giphyCode + '/giphy-downsized.gif'
+                    client.sendGiphyAsSticker(from, smallGifUrl)
+                    .then(() => {
+                        client.reply(from, 'Silakan', id)
+                        console.log(`Sticker Processed for ${processTime(t, moment())} Second`)
+                    })
+                    .catch((err) => console.error(err))
+                } else if (isMediaGiphy) {
+                    const gifUrl = url.match(new RegExp(/(giphy|source).(gif|mp4)/, 'gi'))
+                    if (!gifUrl) { return client.reply(from, '⚠️ Gagal mengambil kode giphy', id) }
+                    const smallGifUrl = url.replace(gifUrl[0], 'giphy-downsized.gif')
+                    client.sendGiphyAsSticker(from, smallGifUrl)
+                    .then(() => {
+                        client.reply(from, 'Silakan')
+                        console.log(`Sticker Processed for ${processTime(t, moment())} Second`)
+                    }) 
+                    .catch((err) => console.error(err))
+                } else {
+                    await client.reply(from, '⚠️ Format salah! Ketik *$menu3* untuk penggunaan.', id)
                 }
             break
 
@@ -424,7 +415,6 @@ module.exports = msgHandler = async (client = new Client(), message) => {
                     client.reply(from, '🙏 Maaf tag belum tersedia. Silakan request.')
                 }
             break
-
             case 'lewds':
             case 'lewd':
                 client.reply(from, '_Sedang mencari..._', id)

@@ -64,16 +64,6 @@ Penggunaan: *$instagram* <link postingan>
 Untuk megunduh foto atau video dari Twitter.
 Aliases: *twt*
 Penggunaan: *$twitter* <link tweet>
-
-4. *$ytmp3*
-Untuk mengunduh video YouTube ke dalam format MP3.
-Aliases: -
-Penggunaan: *$ytmp3* <link video>
-
-5. *$ytmp4*
-Untuk mengunduh video YouTube ke dalam format MP4.
-Aliases: -
-Penggunaan: *$ytmp4* <link video>
 `
 }
 
@@ -85,7 +75,12 @@ Sticker:
 1. *$sticker*
 Membuat custom sticker dari foto yang diberikan atau di-reply.
 Aliases: *stiker*
-Penggunaan: kirim gambar dengan caption *$sticker* atau balas gambar yang sudah dikirim dengan *$sticker*. Link juga bisa.
+Penggunaan: kirim gambar/link dengan caption *$sticker* atau balas gambar yang sudah dikirim dengan *$sticker*.
+
+2. *$stickergif*
+Membuat stiker dari link GIPHY.
+Aliases: *stikergif*
+Penggunaan: *$stickergif* <link giphy>
     `
 }
 

@@ -40,14 +40,15 @@ After that scan the QR code and wait until it authenticated.
 | Facebook video/image  |      ✔️      |
 | Instagram video/image |      ✔️      |
 | Twitter video/image   |      ✔️      |
-| YouTube               |      ✔️      |
-| YouTube to MP3        |      ✔️      |
+| YouTube               |    📝 Todo   |
+| YouTube to MP3        |    📝 Todo   |
 
 |  Sticker Maker  | Availability |
 | :-------------: | :----------: |
 | Send image      |      ✔️      |
 | Send image URL  |      ✔️      |
 | Reply to image  |      ✔️      |
+| GIPHY sticker   |      ✔️      |
 
 |     Fun     | Availability |
 | :---------: | :----------: |
