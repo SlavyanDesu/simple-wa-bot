@@ -294,7 +294,7 @@ module.exports = msgHandler = async (client = new Client(), message) => {
                 }
             break
             case 'waifu':
-                client.reply('_Sedang mencari..._')
+                client.reply(from, '_Sedang mencari..._', id)
                 waifu.random()
                     .then(({ url }) => {
                         client.sendFileFromUrl(from, url, 'waifu.jpg', null, null, true)
