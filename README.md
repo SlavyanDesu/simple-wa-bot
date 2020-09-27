@@ -94,9 +94,6 @@ After that scan the QR code and wait until it authenticated.
 ## 🙏 Special Thanks to
 * [`Open-Wa/wa-automate-nodejs`](https://github.com/open-wa/wa-automate-nodejs)
 * [`YogaSakti/imageToSticker`](https://github.com/YogaSakti/imageToSticker)
-* [`fdciabdul/InsideHeartz-WhatsApp-Bot` ](https://github.com/fdciabdul/InsideHeartz-WhatsApp-Bot)
-* [`onlyjasonhere/djs-selfbot-v9`](https://github.com/onlyjasonhere/djs-selfbot-v9)
-* [`MhankBarBar/whatsapp-bot`](https://github.com/MhankBarBar/whatsapp-bot)
 
 ## Author
 **simple-wa-bot** © [SlavyanDesu](https://github.com/SlavyanDesu), released under the MIT License.
