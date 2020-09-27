@@ -64,6 +64,16 @@ Penggunaan: *$instagram* <link postingan>
 Untuk megunduh foto atau video dari Twitter.
 Aliases: *twt*
 Penggunaan: *$twitter* <link tweet>
+
+4. *$ytmp3*
+Untuk mengunduh video YouTube ke dalam format MP3.
+Aliases: -
+Penggunaan: *$ytmp3* <link video>
+
+5. *$ytmp4*
+Untuk mengunduh video YouTube ke dalam format MP4.
+Aliases: -
+Penggunaan: *$ytmp4* <link video>
 `
 }
 

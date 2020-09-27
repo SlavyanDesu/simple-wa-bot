@@ -1,4 +1,3 @@
-require('dotenv').config()
 const { decryptMedia, Client } = require('@open-wa/wa-automate')
 const moment = require('moment-timezone')
 const os = require('os')
@@ -33,10 +32,14 @@ const responses = [
     'Y',
     'G',
     'Terserah',
-    'Terserah lu'
+    'Terserah lu',
+    'Tul',
+    'Hah?',
+    'Ngetik apaan? Burem'
 ]
 
 const { menuId } = require('./text') // For help command
+const { visible } = require('chalk')
 
 module.exports = msgHandler = async (client = new Client(), message) => {
     try {
@@ -52,26 +55,27 @@ module.exports = msgHandler = async (client = new Client(), message) => {
         const isGroupAdmins = groupAdmins.includes(sender.id) || false
         const isBotGroupAdmins = groupAdmins.includes(botNumber) || false
 
-        // Bot Prefix
+        // Bot prefix
         const prefix = '$'
         body = (type === 'chat' && body.startsWith(prefix)) ? body : ((type === 'image' && caption) && caption.startsWith(prefix)) ? caption : ''
         const command = body.slice(1).trim().split(/ +/).shift().toLowerCase()
         const args = body.trim().split(/ +/).slice(1)
         const isCmd = body.startsWith(prefix)
-        const uaOverride = process.env.UserAgent
+        const uaOverride = 'WhatsApp/2.2029.4 Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.121 Safari/537.36'
         const url = args.length !== 0 ? args[0] : ''
         const isQuotedImage = quotedMsg && quotedMsg.type === 'image'
 
-        // [BETA] Avoid Spam Message
+        // Avoid spam
         if (isCmd && msgFilter.isFiltered(from) && !isGroupMsg) { return console.log(color('[SPAM]', 'red'), color(moment(t * 1000).format('DD/MM/YY HH:mm:ss'), 'yellow'), color(`${command} [${args.length}]`), 'from', color(pushname)) }
         if (isCmd && msgFilter.isFiltered(from) && isGroupMsg) { return console.log(color('[SPAM]', 'red'), color(moment(t * 1000).format('DD/MM/YY HH:mm:ss'), 'yellow'), color(`${command} [${args.length}]`), 'from', color(pushname), 'in', color(name || formattedTitle)) }
-        //
+
+        // Message log
         if (!isCmd && !isGroupMsg) { return console.log('[RECV]', color(moment(t * 1000).format('DD/MM/YY HH:mm:ss'), 'yellow'), 'Message from', color(pushname)) }
         if (!isCmd && isGroupMsg) { return console.log('[RECV]', color(moment(t * 1000).format('DD/MM/YY HH:mm:ss'), 'yellow'), 'Message from', color(pushname), 'in', color(name || formattedTitle)) }
         if (isCmd && !isGroupMsg) { console.log(color('[EXEC]'), color(moment(t * 1000).format('DD/MM/YY HH:mm:ss'), 'yellow'), color(`${command} [${args.length}]`), 'from', color(pushname)) }
         if (isCmd && isGroupMsg) { console.log(color('[EXEC]'), color(moment(t * 1000).format('DD/MM/YY HH:mm:ss'), 'yellow'), color(`${command} [${args.length}]`), 'from', color(pushname), 'in', color(name || formattedTitle)) }
 
-        // [BETA] Avoid Spam Message
+        // Avoid spam
         msgFilter.addFilter(from)
 
         switch (command) {
@@ -81,31 +85,35 @@ module.exports = msgHandler = async (client = new Client(), message) => {
                 if (args.length !== 1) return client.reply(from, '⚠️ Format salah! Ketik *$menu* untuk penggunaan.', id)
                 if (!isUrl(url) && !url.includes('facebook.com')) return client.reply(from, '⚠️ Link tidak valid!', id)
                 await client.reply(from, '_Tunggu sebentar..._', id)
-                downloader.facebook(url).then(async (videoMeta) => {
-                    const title = videoMeta.response.title
-                    const thumbnail = videoMeta.response.thumbnail
-                    const links = videoMeta.response.links
-                    const shorts = []
-                    for (let i = 0; i < links.length; i++) {
-                        const shortener = await urlShortener(links[i].url)
-                        console.log('Shortlink: ' + shortener)
-                        links[i].short = shortener
-                        shorts.push(links[i])
-                    }
-                    const link = shorts.map((x) => `${x.resolution} Quality: ${x.short}`)
-                    const caption = `Teks: ${title} \n\nLink download: \n${link.join('\n')} \n\nBerhasil diproses selama ${processTime(t, moment())} detik`
-                    await client.sendFileFromUrl(from, thumbnail, 'videos.jpg', caption, null, null, true)
-                        .then((serialized) => console.log(`Sukses mengirm file dengan ID: ${serialized} diproses selama ${processTime(t, moment())}`))
-                        .catch((err) => console.error(err))
-                })
-                    .catch((err) => client.reply(from, `⚠️ Link tidak valid! \n\n${err}`, id))
+                downloader.facebook(url)
+                    .then(async (videoMeta) => {
+                        const title = videoMeta.response.title
+                        const thumbnail = videoMeta.response.thumbnail
+                        const links = videoMeta.response.links
+                        const shorts = []
+                        for (let i = 0; i < links.length; i++) {
+                            const shortener = await urlShortener(links[i].url)
+                            console.log('Shortlink: ' + shortener)
+                            links[i].short = shortener
+                            shorts.push(links[i])
+                        }
+                        const link = shorts.map((x) => `${x.resolution} Quality: ${x.short}`)
+                        const caption = `Teks: ${title} \n\nLink download: \n${link.join('\n')} \n\nBerhasil diproses selama ${processTime(t, moment())} detik`
+                        await client.sendFileFromUrl(from, thumbnail, 'videos.jpg', caption, null, null, true)
+                            .then((serialized) => console.log(`Sukses mengirm file dengan ID: ${serialized} diproses selama ${processTime(t, moment())}`))
+                            .catch((err) => console.error(err))
+                    })
+                    .catch((err) => {
+                        console.error(err)
+                        client.reply(from, `⚠️ Link tidak valid\n\n${err}`, id)
+                    })
             break
-
             case 'instagram':
             case 'ig':
                 if (args.length !== 1) return client.reply(from, '⚠️ Format salah! Ketik *$menu* untuk penggunaan.', id)
+                if (!isUrl(url) && !url.includes('instagram.com')) return client.reply(from, '⚠️ Link tidak valid!', id)
                 client.reply(from, '_Tunggu sebentar..._', id)
-                axios.get('https://villahollanda.com/api.php?url='+ args[0])
+                axios.get('https://villahollanda.com/api.php?url='+ url)
                     .then(function (response) {
                         console.log('IG: ' + args[0])
                         if (response.data.descriptionc == null) {
@@ -116,9 +124,9 @@ module.exports = msgHandler = async (client = new Client(), message) => {
                             client.sendFileFromUrl(from, response.data.descriptionc, 'video.mp4', `Berhasil diproses selama ${processTime(t, moment())} detik`, null, null, true)
                         }
                     })
-                    .catch(function(error) {
-                        console.log(error)
-                        client.reply(from, '🔒 Sepertinya akunnya di-private atau link tidak valid.', id)
+                    .catch((err) => {
+                        console.error(err)
+                        client.reply(from, `🔒 Sepertinya akunnya di-private atau link tidak valid.\n\n${err}`, id)
                     })
             break
             case 'twitter':
@@ -126,25 +134,68 @@ module.exports = msgHandler = async (client = new Client(), message) => {
                 if (args.length !== 1) return client.reply(from, '⚠️ Format salah! Ketik *$menu* untuk penggunaan.', id)
                 if (!isUrl(url) & !url.includes('twitter.com') || url.includes('t.co')) return client.reply(from, '⚠️ Link tidak valid!', id)
                 await client.reply(from, '_Tunggu sebentar..._', id)
-                downloader.tweet(url).then(async (data) => {
-                    if (data.type === 'video') {
-                        const content = data.variants.filter(x => x.content_type !== 'application/x-mpegURL').sort((a, b) => b.bitrate - a.bitrate)
-                        const result = await urlShortener(content[0].url)
-                        console.log('Shortlink: ' + result)
-                        await client.sendFileFromUrl(from, content[0].url, 'video.mp4', `Link download: ${result} \n\nBerhasil diproses selama ${processTime(t, moment())} detik`, null, null, true)
-                            .then((serialized) => console.log(`Sukses mengirim file dengan ID: ${serialized} diproses selama ${processTime(t, moment())}`))
-                            .catch((err) => console.error(err))
-                    } else if (data.type === 'photo') {
-                        for (let i = 0; i < data.variants.length; i++) {
-                             await client.sendFileFromUrl(from, data.variants[i], data.variants[i].split('/media/')[1], '', null, null, true)
+                downloader.tweet(url)
+                    .then(async (data) => {
+                        if (data.type === 'video') {
+                            const content = data.variants.filter(x => x.content_type !== 'application/x-mpegURL').sort((a, b) => b.bitrate - a.bitrate)
+                            const result = await urlShortener(content[0].url)
+                            console.log('Shortlink: ' + result)
+                            await client.sendFileFromUrl(from, content[0].url, 'video.mp4', `Link download: ${result} \n\nBerhasil diproses selama ${processTime(t, moment())} detik`, null, null, true)
                                 .then((serialized) => console.log(`Sukses mengirim file dengan ID: ${serialized} diproses selama ${processTime(t, moment())}`))
                                 .catch((err) => console.error(err))
+                        } else if (data.type === 'photo') {
+                            for (let i = 0; i < data.variants.length; i++) {
+                                await client.sendFileFromUrl(from, data.variants[i], data.variants[i].split('/media/')[1], '', null, null, true)
+                                    .then((serialized) => console.log(`Sukses mengirim file dengan ID: ${serialized} diproses selama ${processTime(t, moment())}`))
+                                    .catch((err) => console.error(err))
+                            }
                         }
-                    }
-                })
-                    .catch(() => client.sendText(from, `⚠️ Link tidak valid! \n\n${err}`, id))
+                    })
+                    .catch((err) => {
+                        console.error(err)
+                        client.reply(from, `⚠️ Link tidak valid\n\n${err}`, id)
+                    })
             break
-
+            case 'ytmp3':
+                if (args.length !== 1) return client.reply(from, '⚠️ Format salah! Ketik *$menu* untuk penggunaan.', id)
+                let link = url.match(/(?:https?:\/{2})?(?:w{3}\.)?youtu(?:be)?\.(?:com|be)(?:\/watch\?v=|\/)([^\s&]+)/)
+                if (!link) return client.reply(from, '⚠️ Link tidak valid!', id)
+                try {
+                    client.reply(from, '_Tunggu sebentar..._', id)
+                    const response = axios.get('https://slavyandesu.herokuapp.com/api/yta?url=' + link)
+                    if (response.error) {
+                        return await client.reply(from, response.error, id)
+                    } else {
+                        const { title, thumb, filesize, result } = await response
+                        if (Number(filesize.split(' MB')[0]) >= 30.00) return await client.reply(from, '🙏 Maaf durasi video tersebut telah melewati batas maksimal.', id)
+                        client.sendFileFromUrl(from, thumb, 'thumbnail.jpg', `Title: ${title}\nSize: ${filesize}\n\n_Tunggu sebentar..._`)
+                        await client.sendFileFromUrl(from, result, `${title}.mp3`, null, null, true)
+                    }
+                } catch (err) {
+                    console.error(err)
+                    client.reply(from, `Error: ${err}`, id)
+                }
+            break
+            case 'ytmp4':
+                if (args.length !== 1) return client.reply(from, '⚠️ Format salah! Ketik *$menu* untuk penggunaan.', id)
+                let link = url.match(/(?:https?:\/{2})?(?:w${3}\.)?youtu(?:be)?\.(?:com|be)(?:\/watch\?v=|\/)([^\s&]+)/)
+                if (!link) return client.reply(from, '⚠️ Link tidak valid!', id)
+                try {
+                    client.reply(from, '_Tunggu sebentar..._', id)
+                    const ytv = axios.get('https://slavyandesu.herokuapp.com/api/ytv?url=' + link)
+                    if (ytv.error) {
+                        return await client.reply(from, ytv.error, id)
+                    } else {
+                        const { title, thumb, filesize, result } = await ytv
+                        if (Number(ytv.filesize.split(' MB')[0]) >= 40.00) return await client.reply(from, '🙏 Maaf durasi video tersebut telah melewati batas maksimal.', id)
+                        client.sendFileFromUrl(from, thumb, `${title}`, `Title: ${title}\nSize: ${filesize}\n\n_Tunggu sebentar..._`)
+                        await client.sendFileFromUrl(from, result, `${title}.mp4`, null, null, true)
+                    }
+                } catch (err) {
+                    console.error(err)
+                    client.reply(from, `Error: ${err}`, id)
+                }
+                
             // Sticker
             case 'sticker':
             case 'stiker': 
