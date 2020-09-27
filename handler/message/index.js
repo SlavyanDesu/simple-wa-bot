@@ -158,11 +158,11 @@ module.exports = msgHandler = async (client = new Client(), message) => {
             break
             case 'ytmp3':
                 if (args.length !== 1) return client.reply(from, '⚠️ Format salah! Ketik *$menu* untuk penggunaan.', id)
-                let link = url.match(/(?:https?:\/{2})?(?:w{3}\.)?youtu(?:be)?\.(?:com|be)(?:\/watch\?v=|\/)([^\s&]+)/)
-                if (!link) return client.reply(from, '⚠️ Link tidak valid!', id)
+                let links = url.match(/(?:https?:\/{2})?(?:w{3}\.)?youtu(?:be)?\.(?:com|be)(?:\/watch\?v=|\/)([^\s&]+)/)
+                if (!links) return client.reply(from, '⚠️ Link tidak valid!', id)
                 try {
                     client.reply(from, '_Tunggu sebentar..._', id)
-                    const response = axios.get('https://slavyandesu.herokuapp.com/api/yta?url=' + link)
+                    const response = axios.get('https://slavyandesu.herokuapp.com/api/yta?url=' + links)
                     if (response.error) {
                         return await client.reply(from, response.error, id)
                     } else {
@@ -178,11 +178,11 @@ module.exports = msgHandler = async (client = new Client(), message) => {
             break
             case 'ytmp4':
                 if (args.length !== 1) return client.reply(from, '⚠️ Format salah! Ketik *$menu* untuk penggunaan.', id)
-                let link = url.match(/(?:https?:\/{2})?(?:w${3}\.)?youtu(?:be)?\.(?:com|be)(?:\/watch\?v=|\/)([^\s&]+)/)
-                if (!link) return client.reply(from, '⚠️ Link tidak valid!', id)
+                let links = url.match(/(?:https?:\/{2})?(?:w${3}\.)?youtu(?:be)?\.(?:com|be)(?:\/watch\?v=|\/)([^\s&]+)/)
+                if (!links) return client.reply(from, '⚠️ Link tidak valid!', id)
                 try {
                     client.reply(from, '_Tunggu sebentar..._', id)
-                    const ytv = axios.get('https://slavyandesu.herokuapp.com/api/ytv?url=' + link)
+                    const ytv = axios.get('https://slavyandesu.herokuapp.com/api/ytv?url=' + links)
                     if (ytv.error) {
                         return await client.reply(from, ytv.error, id)
                     } else {
@@ -195,7 +195,7 @@ module.exports = msgHandler = async (client = new Client(), message) => {
                     console.error(err)
                     client.reply(from, `Error: ${err}`, id)
                 }
-                
+
             // Sticker
             case 'sticker':
             case 'stiker': 
