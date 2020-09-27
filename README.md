@@ -37,9 +37,10 @@ After that scan the QR code and wait until it authenticated.
 ## ❓ Features
 |       Downloader      | Availability |
 | :-------------------: | :----------: |
-| Instagram video/image |      ✔️      |
 | Facebook video/image  |      ✔️      |
+| Instagram video/image |      ✔️      |
 | Twitter video/image   |      ✔️      |
+| YouTube               |    📝 Todo   |
 | YouTube to MP3        |    📝 Todo   |
 
 |  Sticker Maker  | Availability |
@@ -47,14 +48,6 @@ After that scan the QR code and wait until it authenticated.
 | Send image      |      ✔️      |
 | Send image URL  |      ✔️      |
 | Reply to image  |      ✔️      |
-
-|  Utilities  | Availability |
-| :---------: | :----------: |
-| Ping        |      ✔️      |
-| Help        |      ✔️      |
-| Server      |      ✔️      |
-| Readme      |      ✔️      |
-| Clock       |      ✔️      |
 
 |     Fun     | Availability |
 | :---------: | :----------: |
@@ -64,16 +57,23 @@ After that scan the QR code and wait until it authenticated.
 | Say         |      ✔️      |
 | Coin        |      ✔️      |
 | Reddit      |      ✔️      |
-| ASCII       |    📝 Todo   |
 | Lenny       |      ✔️      |
 
-|        Weeb        | Availability |
+|   Utility   | Availability |
+| :---------: | :----------: |
+| Ping        |      ✔️      |
+| Help        |      ✔️      |
+| Server      |      ✔️      |
+| Readme      |      ✔️      |
+| Clock       |      ✔️      |
+
+|      Weeb Zone     | Availability |
 | :----------------: | :----------: |
 | What Anime Is This |      ✔️      |
 | Random Waifu Image |    📝 Todo   |
 | Random Wallpaper   |    📝 Todo   |
 
-|     NSFW           | Availability |
+|        NSFW        | Availability |
 | :----------------: | :----------: |
 | Lewd               |      ✔️      |
 | Fetish             |      ✔️      |

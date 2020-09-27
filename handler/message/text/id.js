@@ -1,8 +1,8 @@
-exports.textTnC = () => {
+exports.textReadme = () => {
     return `
 MIT License
 
-Copyright (c) 2020 Heikal Syah Shiddiq
+Copyright (c) 2020 SlavyanDesu
     
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -21,166 +21,203 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-`
+    `
 }
 
 exports.textMenu = () => {
     return `
-⚠️ [ *ALL YOU CAN USE* ] ⚠️
-Berikut command yang tersedia:
+    ⚠️ *DILARANG SPAM* ⚠️
+
+            *LIST MENU*
+
+*$menu1* = Menu page 1 (Downloader)
+*$menu2* = Menu page 2 (Sticker)
+*$menu3* = Menu page 3 (Fun)
+*$menu4* = Menu page 4 (Utility)
+*$menu5* = Menu page 5 (Weeb Zone)
+*$admin* = Menu khusus admin
+
+Untuk request command, pertanyaan, kritik dan saran bisa chat owner:
+wa.me/6281294958473
+
+Beliin saya nasi buat makan hari ini:
+081294958473 (Telkomsel)
+    `
+}
+
+exports.textMenu1 = () => {
+    return `
+> _Menu Page 1_
 
 Downloader:
-1. *$instagram*
-Untuk megunduh foto atau video dari Instagram.
-Aliases: *ig*
-Penggunaan: *$instagram* <link postingan>
-
-2. *$facebook*
+1. *$facebook*
 Untuk megunduh foto atau video dari Facebook.
 Aliases: *fb*
 Penggunaan: *$facebook* <link postingan>
+
+2. *$instagram*
+Untuk megunduh foto atau video dari Instagram.
+Aliases: *ig*
+Penggunaan: *$instagram* <link postingan>
 
 3. *$twitter*
 Untuk megunduh foto atau video dari Twitter.
 Aliases: *twt*
 Penggunaan: *$twitter* <link tweet>
+`
+}
 
-Sticker maker:
+exports.textMenu2 = () => {
+    return `
+> _Menu Page 2_
+
+Sticker:
 1. *$sticker*
 Membuat custom sticker dari foto yang diberikan atau di-reply.
 Aliases: *stiker*
 Penggunaan: kirim gambar dengan caption *$sticker* atau balas gambar yang sudah dikirim dengan *$sticker*. Link juga bisa.
+    `
+}
+
+exports.textMenu3 = () => {
+    return `
+> _Menu Page 3_
 
 Fun:
-1. *$say*
-It's just a say command, whatd'ya expect?
-Aliases: *talk*
-Penggunaan: *$say* <teks>
-
-2. *$ask*
+1. *$ask*
 Tanya tentang apa saja dan saya akan menjawab secara random.
 Aliases: *8ball*
 Penggunaan:: *$ask* <pertanyaan>
 
-3. *$reverse*
-.nasilut nikilaB
-Aliases: - 
-Penggunaan: *$reverse* <teks>
-
-4. *$roll*
-Roll angka.
-Aliases: *dice*
-Penggunaan: *$roll*
-
-5. *$coinflip*
+2. *$coinflip*
 Lempar koin.
 Aliases: *coin* - *flip*
 Penggunaan: *$coinflip*
 
-~6. *$ascii*~
-~Buat teks mu menjadi ASCII art.~
-~Aliases: -~
-~Penggunaan: *$ascii* <teks>~
-*WIP*
-
-7. *$randmeme*
-Kirim random meme dari reddit.
-Aliases: *reddit*
-Penggunaan: *$randmeme*
-
-8. *$wait*
-What anime is this? Identifikasi anime via foto.
-Aliases: -
-Penggunaan: kirim foto lalu tambahkan caption *$wait*
-
-7. *$lenny*
+3. *$lenny*
 ( ͡° ͜ʖ ͡°)
 Aliases: -
 Penggunaan: *$lenny*
 
-Utilities:
-1. *$ping*
-Cek kecepatan respon bot.
-Alias: *speed*
-Penggunaan: *$ping*
+4. *$randomeme*
+Kirim random meme dari reddit.
+Aliases: *reddit*
+Penggunaan: *$randmeme*
 
-2. *$server*
-Cek spesifikasi server.
-Aliases: -
-Penggunaan: *$server*
+5. *$reverse*
+.nasilut nikilaB
+Aliases: - 
+Penggunaan: *$reverse* <teks>
 
-3. *$clock*
+6. *$roll*
+Roll angka.
+Aliases: *dice*
+Penggunaan: *$roll*
+
+7. *$say*
+It's just a say command, whatd'ya expect?
+Aliases: *talk*
+Penggunaan: *$say* <teks>
+    `
+}
+
+exports.textMenu4 = () => {
+    return `
+> _Menu Page 4_
+
+Utility:
+1. *$clock*
 Cek waktu Indonesia sekitar.
 Aliases: *waktu* - *jam*
 Penggunaan: *$clock*
 
-4. *$readme*
-Isinya copyright buat source code doang.
-Alias: *tnc*
-Penggunaan: *$readme*
-
-5. *$menu*
-List command.
-Aliases: *help* - *h*
-Penggunaan: *$menu*
-
-6. *$delete*
+2. *$delete*
 Hapus pesan yang saya kirim.
 Aliases: *del*
 Penggunaan: reply pesan yang mau dihapus lalu ketik command *$delete*
 
-7. *$linkgroup*
-Memberikan link group yang disinggahi.
-Aliases: *linkgrup*
-Penggunaan: *$linkgroup*
-`
+3. *$menu*
+Buka menu.
+Aliases: *help* - *h*
+Penggunaan: *$menu*
+
+4. *$ping*
+Cek kecepatan respon bot.
+Alias: *speed* - *p*
+Penggunaan: *$ping*
+
+5. *$readme*
+Isinya copyright buat source code doang.
+Alias: *tnc*
+Penggunaan: *$readme*
+
+6. *$server*
+Cek spesifikasi server.
+Aliases: -
+Penggunaan: *$server*
+    `
+}
+
+exports.textMenu5 = () => {
+    return `
+> _Menu Page 5_
+
+Weeb Zone:
+1. *$wait*
+What anime is this? Identifikasi anime via foto.
+Aliases: -
+Penggunaan: kirim foto lalu tambahkan caption *$wait*
+    `
 }
 
 exports.textAdmin = () => {
     return `
 ⚠️ [ *ADMIN ONLY* ] ⚠️
 Gunakan command ini jika admin terlalu malas:
+1. *$bye*
+Keluarkan saya dari grup.
+Aliases: *out*
+Penggunaan: *$bye*
 
-1. *$kick*
-Untuk kick member rese.
-Aliases: -
-Penggunaan: *$kick* @member
-
-2. *$promote*
-Naikin jabatan member ke admin.
-Aliases: -
-Penggunaan: *$promote* @member
-
-3. *$demote*
+2. *$demote*
 Lengserin admin.
 Aliases: -
 Penggunaan: *$demote* @member
 
-4. *$status*
+3. *$kick*
+Untuk kick member rese.
+Aliases: -
+Penggunaan: *$kick* @member
+
+4. *$linkgroup*
+Memberikan link group yang disinggahi.
+Aliases: *linkgrup*
+Penggunaan: *$linkgroup*
+
+5. *$promote*
+Naikin jabatan member ke admin.
+Aliases: -
+Penggunaan: *$promote* @member
+
+6. *$status*
 Untuk cek status bot.
 Aliases: *stats*
 Penggunaan: *$status*
-
-5. *$bye*
-Keluarkan saya dari grup.
-Aliases: *out*
-Penggunaan: *$bye*
-`
+    `
 }
 
 exports.hiddenMenu = () => {
     return `
 🔞 [ *NSFW* ] 🔞
 Command untuk ( ͡° ͜ʖ ͡°):
-
-1. *$lewd*
-Kirim foto lewd secara random.
-Aliases: -
-Penggunaan: *$lewd*
-
-2. *$fetish*
+1. *$fetish*
 Yang tersedia: *armpits*, *feets*, *thighs*, *booty*, *boobs*, *necks*, *belly*, *sideboobs*, dan *ahegao*.
 Aliases: -
 Penggunaan: *$fetish* <tag>
+
+2. *$lewds*
+Kirim foto lewd secara random.
+Aliases: *lewd*
+Penggunaan: *$lewds*
     `
 }
