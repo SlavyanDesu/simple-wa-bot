@@ -71,7 +71,7 @@ Untuk mengkonversi video YouTube ke MP3.
 Aliases: -
 Penggunaan: *$ytmp3* <link>
 
-. *$ytmp4*
+5. *$ytmp4*
 Untuk mengunduh video YouTube.
 Aliases: -
 Penggunaan: *$ytmp4* <link>
