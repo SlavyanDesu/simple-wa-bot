@@ -40,8 +40,8 @@ After that scan the QR code and wait until it authenticated.
 | Facebook video/image  |      ✔️      |
 | Instagram video/image |      ✔️      |
 | Twitter video/image   |      ✔️      |
-| YouTube               |    📝 Todo   |
-| YouTube to MP3        |    📝 Todo   |
+| YouTube               |      ✔️      |
+| YouTube to MP3        |      ✔️      |
 
 |  Sticker Maker  | Availability |
 | :-------------: | :----------: |
@@ -89,7 +89,7 @@ After that scan the QR code and wait until it authenticated.
 | Out Group    |      ✔️      |
 | Status       |      ✔️      |
 | Mention All  |    📝 Todo   |
-| Add User     |    📝 Todo   |
+| Add User     |      ✔️      |
 | Group Link   |      ✔️      |
 
 ## 🙏 Special Thanks to

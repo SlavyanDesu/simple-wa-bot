@@ -49,6 +49,7 @@ exports.textMenu1 = () => {
     return `
 > _Menu Page 1_
 
+*ABAIKAN TANDA <>*
 Downloader:
 1. *$facebook*
 Untuk megunduh foto atau video dari Facebook.
@@ -64,6 +65,16 @@ Penggunaan: *$instagram* <link postingan>
 Untuk megunduh foto atau video dari Twitter.
 Aliases: *twt*
 Penggunaan: *$twitter* <link tweet>
+
+4. *$ytmp3*
+Untuk mengkonversi video YouTube ke MP3.
+Aliases: -
+Penggunaan: *$ytmp3* <link>
+
+. *$ytmp4*
+Untuk mengunduh video YouTube.
+Aliases: -
+Penggunaan: *$ytmp4* <link>
 `
 }
 
@@ -71,6 +82,7 @@ exports.textMenu2 = () => {
     return `
 > _Menu Page 2_
 
+*ABAIKAN TANDA <>*
 Sticker:
 1. *$sticker*
 Membuat custom sticker dari foto yang diberikan atau di-reply.
@@ -88,6 +100,7 @@ exports.textMenu3 = () => {
     return `
 > _Menu Page 3_
 
+*ABAIKAN TANDA <>*
 Fun:
 1. *$ask*
 Tanya tentang apa saja dan saya akan menjawab secara random.
@@ -130,6 +143,7 @@ exports.textMenu4 = () => {
     return `
 > _Menu Page 4_
 
+*ABAIKAN TANDA <>*
 Utility:
 1. *$clock*
 Cek waktu Indonesia sekitar.
@@ -167,6 +181,7 @@ exports.textMenu5 = () => {
     return `
 > _Menu Page 5_
 
+*ABAIKAN TANDA <>*
 Weeb Zone:
 1. *$waifu*
 Kirim foto waifu random.
@@ -183,11 +198,13 @@ Penggunaan: kirim foto lalu tambahkan caption *$wait*
 exports.textAdmin = () => {
     return `
 ⚠️ [ *ADMIN ONLY* ] ⚠️
+
+*ABAIKAN TANDA <>*
 Gunakan command ini jika admin terlalu malas:
-1. *$bye*
+1. *$leave*
 Keluarkan saya dari grup.
-Aliases: *out*
-Penggunaan: *$bye*
+Aliases: *out* - *bye*
+Penggunaan: *$leave*
 
 2. *$demote*
 Lengserin admin.
@@ -219,6 +236,8 @@ Penggunaan: *$status*
 exports.hiddenMenu = () => {
     return `
 🔞 [ *NSFW* ] 🔞
+
+*ABAIKAN TANDA <>*
 Command untuk ( ͡° ͜ʖ ͡°):
 1. *$fetish*
 Yang tersedia: *armpits*, *feets*, *thighs*, *booty*, *boobs*, *necks*, *belly*, *sideboobs*, dan *ahegao*.
