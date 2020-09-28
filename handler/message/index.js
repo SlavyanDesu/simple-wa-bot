@@ -2,6 +2,8 @@ const { decryptMedia, Client } = require('@open-wa/wa-automate')
 const moment = require('moment-timezone')
 const os = require('os')
 const axios = require('axios')
+const sagiri = require('sagiri')
+const sauceNao = sagiri('4c92c7ce9d1b9d1ebc956e80907ba813c3d9879e')
 moment.tz.setDefault('Asia/Jakarta').locale('id')
 const { downloader, urlShortener, meme, fetish, lewd, waifu } = require('../../lib')
 const { msgFilter, color, processTime, isUrl } = require('../../utils')
@@ -303,10 +305,12 @@ module.exports = msgHandler = async (client = new Client(), message) => {
             
             // Weeb Zone
             case 'wait':
-                if (isMedia) {
+                if ((isMedia || isQuotedImage) && args.length === 0) {
                     const fetch = require('node-fetch')
-                    const mediaData = await decryptMedia(message, uaOverride)
-                    const imageBase64 = `data:${mimetype};base64,${mediaData.toString('base64')}`
+                    const encryptMedia = isQuotedImage ? quotedMsg : message
+                    const _mimetype = isQuotedImage ? quotedMsg.mimetype : mimetype
+                    const mediaData = await decryptMedia(encryptMedia, uaOverride)
+                    const imageBase64 = `data:${_mimetype};base64,${mediaData.toString('base64')}`
                     client.reply(from, '_Sedang mencari..._', id)
                     fetch('https://trace.moe/api/search', {
                         method: 'POST',
