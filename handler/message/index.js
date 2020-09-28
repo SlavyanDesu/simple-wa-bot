@@ -395,7 +395,7 @@ module.exports = msgHandler = async (client = new Client(), message) => {
 
             // NSFW
             case 'fetish':
-                let request = args[1]
+                let request = args.join(' ')
                 if (!request) {
                     client.reply(from, '⚠️ Silakan masukkan tag yang tersedia di *$hidden*! [WRONG FORMAT]')
                 }
