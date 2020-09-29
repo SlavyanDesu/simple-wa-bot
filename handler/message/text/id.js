@@ -24,6 +24,27 @@ SOFTWARE.
     `
 }
 
+exports.donate = () => {
+    return `
+    🎉 *TERIMA KASIH!* 🎉
+
+Merasa terbantu saat menggunakan bot ini? Atau sekedar kasihan sama owner yang jarang makan ini?
+Kamu bisa merealisasikan perasaan itu dengan cara donasi! Uang yang kalian pakai akan saya gunakan untuk memperpanjang masa aktif bot dan sisanya buat makan.
+Uang yang kalian pakai akan saya gunakan yang baik-baik kok.
+
+Metode pembayaran:
+081294958473 (Telkomsel)
+081294958473 (OVO)
+
+Untuk request command, pertanyaan, kritik dan saran bisa chat owner:
+wa.me/6281294958473
+
+Terima kasih! 🙏
+
+- Kal
+    `
+}
+
 exports.textMenu = () => {
     return `
     ⚠️ *DILARANG SPAM* ⚠️
@@ -42,6 +63,7 @@ wa.me/6281294958473
 
 Beliin saya nasi buat makan hari ini:
 081294958473 (Telkomsel)
+081294958473 (OVO)
     `
 }
 
@@ -71,7 +93,7 @@ Untuk mengkonversi video YouTube ke MP3.
 Aliases: -
 Penggunaan: *$ytmp3* <link>
 
-. *$ytmp4*
+5. *$ytmp4*
 Untuk mengunduh video YouTube.
 Aliases: -
 Penggunaan: *$ytmp4* <link>
@@ -201,10 +223,10 @@ exports.textAdmin = () => {
 
 *ABAIKAN TANDA <>*
 Gunakan command ini jika admin terlalu malas:
-1. *$leave*
-Keluarkan saya dari grup.
-Aliases: *out* - *bye*
-Penggunaan: *$leave*
+1. *$add*
+Tambahkan orang ke grup.
+Aliases:-
+Penggunaan: *$add* 62812xxxxxxxx
 
 2. *$demote*
 Lengserin admin.
@@ -216,17 +238,22 @@ Untuk kick member rese.
 Aliases: -
 Penggunaan: *$kick* @member
 
-4. *$linkgroup*
+4. *$leave*
+Keluarkan saya dari grup.
+Aliases: *out* - *bye*
+Penggunaan: *$leave*
+
+5. *$linkgroup*
 Memberikan link group yang disinggahi.
 Aliases: *linkgrup*
 Penggunaan: *$linkgroup*
 
-5. *$promote*
+6. *$promote*
 Naikin jabatan member ke admin.
 Aliases: -
 Penggunaan: *$promote* @member
 
-6. *$status*
+7. *$status*
 Untuk cek status bot.
 Aliases: *stats*
 Penggunaan: *$status*
@@ -241,6 +268,7 @@ exports.hiddenMenu = () => {
 Command untuk ( ͡° ͜ʖ ͡°):
 1. *$fetish*
 Yang tersedia: *armpits*, *feets*, *thighs*, *booty*, *boobs*, *necks*, *belly*, *sideboobs*, dan *ahegao*.
+Command ini bersifat _case-sensitive_, jadi pastikan tag harus sesuai huruf besar kecilnya dan pengejaannya!
 Aliases: -
 Penggunaan: *$fetish* <tag>
 
