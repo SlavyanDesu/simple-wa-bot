@@ -307,7 +307,7 @@ module.exports = msgHandler = async (client = new Client(), message) => {
                 client.deleteMessage(quotedMsgObj.chatId, quotedMsgObj.id, false)
             break
             case 'donate':
-            case 'donasi:
+            case 'donasi':
                 await client.sendText(from,menuId.donate())
             break
             case 'menu':
