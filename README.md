@@ -37,18 +37,19 @@ After that scan the QR code and wait until it authenticated.
 ## ❓ Features
 |       Downloader      | Availability |
 | :-------------------: | :----------: |
-| Facebook video/image  |      ✔️      |
+| Facebook video        |      ✔️      |
 | Instagram video/image |      ✔️      |
-| Twitter video/image   |      ✔️      |
-| YouTube               |      ✔️      |
-| YouTube to MP3        |      ✔️      |
+| TikTok                |      ✔️      |
+| Twitter video         |      ✔️      |
+| YouTube MP4           |      ✔️      |
+| YouTube MP3           |      ✔️      |
 
 |  Sticker Maker  | Availability |
 | :-------------: | :----------: |
 | Send image      |      ✔️      |
 | Send image URL  |      ✔️      |
 | Reply to image  |      ✔️      |
-| GIPHY sticker   |      ✔️      |
+| GIF sticker     |    📝 Todo   |
 
 |     Fun     | Availability |
 | :---------: | :----------: |

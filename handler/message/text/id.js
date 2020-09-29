@@ -51,12 +51,13 @@ exports.textMenu = () => {
 
             *LIST MENU*
 
-*$menu1* = Menu page 1 (Downloader)
+*$menu1* = Menu page 1 (Downloader) - UPDATED!
 *$menu2* = Menu page 2 (Sticker)
 *$menu3* = Menu page 3 (Fun)
 *$menu4* = Menu page 4 (Utility)
 *$menu5* = Menu page 5 (Weeb Zone)
-*$admin* = Menu khusus admin
+*$admin* = Menu khusus admin - UPDATED!
+*$donate* = Kasian bang ga ada duit
 
 Untuk request command, pertanyaan, kritik dan saran bisa chat owner:
 wa.me/6281294958473
@@ -71,32 +72,36 @@ exports.textMenu1 = () => {
     return `
 > _Menu Page 1_
 
-*ABAIKAN TANDA <>*
 Downloader:
 1. *$facebook*
 Untuk megunduh foto atau video dari Facebook.
 Aliases: *fb*
-Penggunaan: *$facebook* <link postingan>
+Penggunaan: *$facebook https://www.facebook.com/...*
 
-2. *$instagram*
+2. *$instagram* [ERROR]
 Untuk megunduh foto atau video dari Instagram.
 Aliases: *ig*
-Penggunaan: *$instagram* <link postingan>
+Penggunaan: *$instagram https://www.instagram.com/p/...*
 
-3. *$twitter*
+3. *$tiktok*
+Untuk mengunduh video dari TikTok.
+Aliases: -
+Penggunaan: *$tiktok https://www.tiktok.com/@xxxxx/video/...*
+
+4. *$twitter*
 Untuk megunduh foto atau video dari Twitter.
 Aliases: *twt*
-Penggunaan: *$twitter* <link tweet>
+Penggunaan: *$twitter https://www.twitter.com/xxxxx/status/...*
 
-4. *$ytmp3*
+5. *$ytmp3*
 Untuk mengkonversi video YouTube ke MP3.
 Aliases: -
-Penggunaan: *$ytmp3* <link>
+Penggunaan: *$ytmp3 https://youtu.be/9lBTqHdgerY*
 
-5. *$ytmp4*
+6. *$ytmp4*
 Untuk mengunduh video YouTube.
 Aliases: -
-Penggunaan: *$ytmp4* <link>
+Penggunaan: *$ytmp4 https://youtu.be/9lBTqHdgerY*
 `
 }
 
@@ -104,17 +109,11 @@ exports.textMenu2 = () => {
     return `
 > _Menu Page 2_
 
-*ABAIKAN TANDA <>*
 Sticker:
 1. *$sticker*
 Membuat custom sticker dari foto yang diberikan atau di-reply.
 Aliases: *stiker*
 Penggunaan: kirim gambar/link dengan caption *$sticker* atau balas gambar yang sudah dikirim dengan *$sticker*.
-
-2. *$stickergif*
-Membuat stiker dari link GIPHY.
-Aliases: *stikergif*
-Penggunaan: *$stickergif* <link giphy>
     `
 }
 
@@ -196,6 +195,11 @@ Penggunaan: *$readme*
 Cek spesifikasi server.
 Aliases: -
 Penggunaan: *$server*
+
+7. *$status*
+Untuk cek status bot.
+Aliases: *stats*
+Penggunaan: *$status*
     `
 }
 
@@ -252,11 +256,6 @@ Penggunaan: *$linkgroup*
 Naikin jabatan member ke admin.
 Aliases: -
 Penggunaan: *$promote* @member
-
-7. *$status*
-Untuk cek status bot.
-Aliases: *stats*
-Penggunaan: *$status*
     `
 }
 

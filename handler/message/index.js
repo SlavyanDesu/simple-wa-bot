@@ -4,7 +4,7 @@ const os = require('os')
 const axios = require('axios')
 moment.tz.setDefault('Asia/Jakarta').locale('id')
 const { downloader, urlShortener, meme, fetish, lewd, waifu } = require('../../lib')
-const { msgFilter, color, processTime, isUrl } = require('../../utils')
+const { msgFilter, color, processTime, isUrl, isYt } = require('../../utils')
 const responses = [
     'Adalah yoi',
     'True min',
@@ -44,14 +44,17 @@ module.exports = msgHandler = async (client = new Client(), message) => {
         const { type, id, from, t, sender, isGroupMsg, chat, caption, isMedia, mimetype, quotedMsg, quotedMsgObj, mentionedJidList } = message
         let { body } = message
         const { name, formattedTitle } = chat
-        let { pushname, verifiedName, formattedName } = sender
-        pushname = pushname || verifiedName || formattedName // verifiedName is the name of someone who uses a business account
+        let { pushname, verifiedName } = sender
+        pushname = pushname || verifiedName
         const botNumber = await client.getHostNumber() + '@c.us'
+        const blockNumber = await client.getBlockedIds()
         const groupId = isGroupMsg ? chat.groupMetadata.id : ''
         const groupAdmins = isGroupMsg ? await client.getGroupAdmins(groupId) : ''
-        const groupMembers = isGroupMsg ? await client.getGroupMembersId(groupId) : ''
         const isGroupAdmins = groupAdmins.includes(sender.id) || false
         const isBotGroupAdmins = groupAdmins.includes(botNumber) || false
+        const ownerNumber = '6281294958473@c.us'
+        const isOwner = sender.id === ownerNumber
+        const isBlocked = blockNumber.includes(sender.id) === true
 
         // Bot prefix
         const prefix = '$'
@@ -81,7 +84,7 @@ module.exports = msgHandler = async (client = new Client(), message) => {
             case 'facebook':
             case 'fb':
                 if (args.length !== 1) return client.reply(from, '⚠️ Format salah! Ketik *$menu* untuk penggunaan. [WRONG FORMAT]', id)
-                if (!isUrl(url) && !url.includes('facebook.com')) return client.reply(from, '⚠️ Link tidak valid! [UNVALID]', id)
+                if (!isUrl(url) && !url.includes('facebook.com')) return client.reply(from, '⚠️ Link tidak valid! [INVALID]', id)
                 await client.reply(from, '_Mohon tunggu sebentar, proses ini akan memakan waktu beberapa menit..._\n\nMerasa terbantu karena bot ini? Bantu saya dengan cara donasi melalui:\n081294958473 (Telkomsel)\n081294958473 (OVO)\n\nTerima kasih 🙏', id)
                 downloader.facebook(url)
                     .then(async (videoMeta) => {
@@ -109,13 +112,13 @@ module.exports = msgHandler = async (client = new Client(), message) => {
             case 'instagram':
             case 'ig':
                 if (args.length !== 1) return client.reply(from, '⚠️ Format salah! Ketik *$menu1* untuk penggunaan. [WRONG FORMAT]', id)
-                if (!isUrl(url) && !url.includes('instagram.com')) return client.reply(from, '⚠️ Link tidak valid! [UNVALID]', id)
+                if (!isUrl(url) && !url.includes('instagram.com')) return client.reply(from, '⚠️ Link tidak valid! [INVALID]', id)
                 client.reply(from, '_Mohon tunggu sebentar, proses ini akan memakan waktu beberapa menit..._\n\nMerasa terbantu karena bot ini? Bantu saya dengan cara donasi melalui:\n081294958473 (Telkomsel)\n081294958473 (OVO)\n\nTerima kasih 🙏', id)
                 axios.get('https://villahollanda.com/api.php?url='+ url)
                 .then(function (response) {
                     console.log('IG: ' + args[0])
                     if (response.data.descriptionc === null) {
-                        client.reply(from, '🔒 Sepertinya akunnya di-private atau link tidak valid. [PRIVATE OR UNVALID]', id)
+                        client.reply(from, '🔒 Sepertinya akunnya di-private atau link tidak valid. [PRIVATE OR INVALID]', id)
                     } else if (response.data.mediatype === 'photo') {
                         client.sendFileFromUrl(from, response.data.descriptionc)
                     } else if (response.data.mediatype === 'video') {
@@ -127,40 +130,52 @@ module.exports = msgHandler = async (client = new Client(), message) => {
                         client.reply(from, `⚠️ Terjadi kesalahan! [ERR]\n\n${err}`, id)
                 })
             break
+            case 'tiktok':
+                if (args.length !== 1) return client.reply(from, '⚠️ Format salah! Ketik *$menu1* untuk penggunaan. [WRONG FORMAT]', id)
+                if (!isUrl(url) && !url.includes('tiktok.com')) return client.reply(from, '⚠️ Link tidak valid! [INVALID]', id)
+                await client.reply(from, `_Mohon tunggu sebentar, proses ini akan memakan waktu beberapa menit..._\n\nMerasa terbantu karena bot ini? Bantu saya dengan cara donasi melalui:\n081294958473 (Telkomsel)\n081294958473 (OVO)\n\nTerima kasih 🙏`, id)
+                downloader.tiktok(url).then(async (videoMeta) => {
+                    const filename = videoMeta.authorMeta.name + '.mp4'
+                    const caps = `*Metadata:*\nUsername: ${videoMeta.authorMeta.name} \nMusic: ${videoMeta.musicMeta.musicName} \nView: ${videoMeta.playCount.toLocaleString()} \nLike: ${videoMeta.diggCount.toLocaleString()} \nComment: ${videoMeta.commentCount.toLocaleString()} \nShare: ${videoMeta.shareCount.toLocaleString()} \nCaption: ${videoMeta.text.trim() ? videoMeta.text : '-'}`
+                    await client.sendFileFromUrl(from, videoMeta.url, filename, videoMeta.NoWaterMark ? caps : `⚠ Video tanpa watermark tidak tersedia. \n\n${caps}`, '', { headers: { 'User-Agent': 'okhttp/4.5.0', referer: 'https://www.tiktok.com/' } }, true)
+                    .then((serialized) => console.log(`Sukses Mengirim file dengan ID: ${serialized} diproses selama ${processTime(t, moment())} detik`))
+                    .catch((err) => console.error(err))
+            }).catch(() => client.reply(from, 'Gagal mengambil metadata, link yang kamu kirim tidak valid. [Invalid Link]', id))
+            break
             case 'twitter':
             case 'twt':
                 if (args.length !== 1) return client.reply(from, '⚠️ Format salah! Ketik *$menu1* untuk penggunaan. [WRONG FORMAT]', id)
-                if (!isUrl(url) & !url.includes('twitter.com') || url.includes('t.co')) return client.reply(from, '⚠️ Link tidak valid! [UNVALID]', id)
+                if (!isUrl(url) && !url.includes('twitter.com') || url.includes('t.co')) return client.reply(from, '⚠️ Link tidak valid! [INVALID]', id)
                 await client.reply(from, '_Mohon tunggu sebentar, proses ini akan memakan waktu beberapa menit..._\n\nMerasa terbantu karena bot ini? Bantu saya dengan cara donasi melalui:\n081294958473 (Telkomsel)\n081294958473 (OVO)\n\nTerima kasih 🙏', id)
                 downloader.tweet(url)
-                    .then(async (data) => {
-                        if (data.type === 'video') {
-                            const content = data.variants.filter(x => x.content_type !== 'application/x-mpegURL').sort((a, b) => b.bitrate - a.bitrate)
-                            const result = await urlShortener(content[0].url)
-                            console.log('Shortlink: ' + result)
-                            await client.sendFileFromUrl(from, content[0].url, 'video.mp4', `Link download: ${result} \n\nBerhasil diproses selama ${processTime(t, moment())} detik`, null, null, true)
-                                .then((serialized) => console.log(`Sukses mengirim file dengan ID: ${serialized} diproses selama ${processTime(t, moment())} detik`))
-                                .catch((err) => console.error(err))
-                        } else if (data.type === 'photo') {
-                            for (let i = 0; i < data.variants.length; i++) {
-                                await client.sendFileFromUrl(from, data.variants[i], data.variants[i].split('/media/')[1], '', null, null, true)
-                                    .then((serialized) => console.log(`Sukses mengirim file dengan ID: ${serialized} diproses selama ${processTime(t, moment())} detik`))
-                                    .catch((err) => console.error(err))
-                            }
+                .then(async (data) => {
+                    if (data.type === 'video') {
+                        const content = data.variants.filter(x => x.content_type !== 'application/x-mpegURL').sort((a, b) => b.bitrate - a.bitrate)
+                        const result = await urlShortener(content[0].url)
+                        console.log('Shortlink: ' + result)
+                        await client.sendFileFromUrl(from, content[0].url, 'video.mp4', `Link download: ${result} \n\nBerhasil diproses selama ${processTime(t, moment())} detik`, null, null, true)
+                        .then((serialized) => console.log(`Sukses mengirim file dengan ID: ${serialized} diproses selama ${processTime(t, moment())} detik`))
+                        .catch((err) => console.error(err))
+                    } else if (data.type === 'photo') {
+                        for (let i = 0; i < data.variants.length; i++) {
+                            await client.sendFileFromUrl(from, data.variants[i], data.variants[i].split('/media/')[1], '', null, null, true)
+                            .then((serialized) => console.log(`Sukses mengirim file dengan ID: ${serialized} diproses selama ${processTime(t, moment())} detik`))
+                            .catch((err) => console.error(err))
                         }
-                    })
-                    .catch((err) => {
-                        console.error(err)
-                        client.reply(from, `⚠️ Terjadi kesalahan! [ERR]\n\n${err}`, id)
-                    })
+                    }
+                })
+                .catch((err) => {
+                    console.error(err)
+                    client.reply(from, `⚠️ Terjadi kesalahan! [ERR]\n\n${err}`, id)
+                })
             break
             case 'ytmp3':
                 if (args.length !== 1) return client.reply(from, '⚠️ Format salah! Ketik *$menu1* untuk penggunaan. [WRONG FORMAT]', id)
-                if (!isUrl(url) & !url.includes('youtube.com') || !url.includes('youtu.be')) return client.reply(from, '⚠️ Link tidak valid! [UNVALID]', id)
-                client.reply(from, '_Mohon tunggu sebentar, proses ini akan memakan waktu beberapa menit..._\n\nMerasa terbantu karena bot ini? Bantu saya dengan cara donasi melalui:\n081294958473 (Telkomsel)\n081294958473 (OVO)\n\nTerima kasih 🙏', id)
+                if (!isYt(url)) return client.reply(from, '⚠️ Link tidak valid! [INVALID]', id)
+                await client.reply(from, '_Mohon tunggu sebentar, proses ini akan memakan waktu beberapa menit..._\n\nMerasa terbantu karena bot ini? Bantu saya dengan cara donasi melalui:\n081294958473 (Telkomsel)\n081294958473 (OVO)\n\nTerima kasih 🙏', id)
                 axios.get('https://mhankbarbar.herokuapp.com/api/yta?url=' + url)
                 .then(async function (response) {
-                    console.log('Get metadata from => ' + args[0])
+                    console.log('Get metadata from => ' + url)
                     if (response.data.status === 200) {
                         await client.sendFileFromUrl(from, response.data.result, `${response.data.title}.mp3`, `Sukses mengirim file! Diproses selama ${processTime(t, moment())} detik`, null, null, true)
                         .then(() => console.log(`Sukses mengirim file! Diproses selama ${processTime(t, moment())} detik`))
@@ -174,11 +189,11 @@ module.exports = msgHandler = async (client = new Client(), message) => {
             break
             case 'ytmp4':
                 if (args.length !== 1) return client.reply(from, '⚠️ Format salah! Ketik *$menu1* untuk penggunaan. [WRONG FORMAT]', id)
-                if (!isUrl(url) & !url.includes('youtube.com') || !url.includes('youtu.be')) return client.reply(from, '⚠️ Link tidak valid! [UNVALID]', id)
-                client.reply(from, '_Mohon tunggu sebentar, proses ini akan memakan waktu beberapa menit..._\n\nMerasa terbantu karena bot ini? Bantu saya dengan cara donasi melalui:\n081294958473 (Telkomsel)\n081294958473 (OVO)\n\nTerima kasih 🙏', id)
+                if (!isYt(url)) return client.reply(from, '⚠️ Link tidak valid! [INVALID]', id)
+                await client.reply(from, '_Mohon tunggu sebentar, proses ini akan memakan waktu beberapa menit..._\n\nMerasa terbantu karena bot ini? Bantu saya dengan cara donasi melalui:\n081294958473 (Telkomsel)\n081294958473 (OVO)\n\nTerima kasih 🙏', id)
                 axios.get('https://mhankbarbar.herokuapp.com/api/ytv?url=' + url)
                 .then(async function (response) {
-                    console.log('Get metadata from => ' + args[0])
+                    console.log('Get metadata from => ' + url)
                     if (response.data.status === 200) {
                         await client.sendFileFromUrl(from, response.data.result, `${response.data.title}.mp4`, `Sukses mengirim file! Diproses selama ${processTime(t, moment())} detik`, null, null, true)
                         .then(() => console.log(`Sukses mengirim file! Diproses selama ${processTime(t, moment())}`))
@@ -195,53 +210,22 @@ module.exports = msgHandler = async (client = new Client(), message) => {
             case 'sticker':
             case 'stiker': 
                 if ((isMedia || isQuotedImage) && args.length === 0) {
-                    client.reply(from, '_Mohon tunggu sebentar, proses ini akan memakan waktu beberapa menit..._\n\nMerasa terbantu karena bot ini? Bantu saya dengan cara donasi melalui:\n081294958473 (Telkomsel)\n081294958473 (OVO)\n\nTerima kasih 🙏', id)
+                    await client.reply(from, '_Mohon tunggu sebentar, proses ini akan memakan waktu beberapa menit..._\n\nMerasa terbantu karena bot ini? Bantu saya dengan cara donasi melalui:\n081294958473 (Telkomsel)\n081294958473 (OVO)\n\nTerima kasih 🙏', id)
                     const encryptMedia = isQuotedImage ? quotedMsg : message
                     const _mimetype = isQuotedImage ? quotedMsg.mimetype : mimetype
                     const mediaData = await decryptMedia(encryptMedia, uaOverride)
                     const imageBase64 = `data:${_mimetype};base64,${mediaData.toString('base64')}`
-                    client.sendImageAsSticker(from, imageBase64).then(() => {
+                    await client.sendImageAsSticker(from, imageBase64).then(() => {
                         client.reply(from, 'Silakan')
                         console.log(`Sticker processed for ${processTime(t, moment())} second`)
                     })
                 } else if (args.length === 1) {
-                    if (!isUrl(url)) { await client.reply(from, '⚠️ Link tidak valid!', id) }
-                    client.sendStickerfromUrl(from, url).then((r) => (!r && r !== undefined)
+                    if (!isUrl(url)) { return await client.reply(from, '⚠️ Link tidak valid!', id) }
+                    await client.sendStickerfromUrl(from, url).then((r) => (!r && r !== undefined)
                         ? client.sendText(from, '⚠️ Link yang dikirim tidak dapat dimuat! [CANNOT LOAD]')
                         : client.reply(from, 'Silakan')).then(() => console.log(`Sticker processed for ${processTime(t, moment())} second`))
                 } else {
-                    await client.reply(from, '⚠️ Format salah! Ketik *$menu2* untuk penggunaan. [WRONG FORMAT]', id)
-                }
-            break
-            case 'stickergif':
-            case 'stikergif':
-                if (args.length !== 1) return client.reply(from, '⚠️ Format salah! Ketik *$menu2* untuk penggunaan. [WRONG FORMAT]', id)
-                client.reply(from, '_Mohon tunggu sebentar, proses ini akan memakan waktu beberapa menit..._\n\nMerasa terbantu karena bot ini? Bantu saya dengan cara donasi melalui:\n081294958473 (Telkomsel)\n081294958473 (OVO)\n\nTerima kasih 🙏', id)
-                const isGiphy = url.match(new RegExp(/https?:\/\/(www\.)?giphy.com/, 'gi'))
-                const isMediaGiphy = url.match(new RegExp(/https?:\/\/media.giphy.com\/media/, 'gi'))
-                if (isGiphy) {
-                    const getGiphyCode = url.match(new RegExp(/(\/|\-)(?:.(?!(\/|\-)))+$/, 'gi'))
-                    if (!getGiphyCode) { return client.reply(from, '⚠️ Gagal mengambil kode GIPHY [FAILED TO GET CODE]', id) }
-                    const giphyCode = getGiphyCode[0].replace(/[-\/]/gi, '')
-                    const smallGifUrl = 'https://media.giphy.com/media/' + giphyCode + '/giphy-downsized.gif'
-                    client.sendGiphyAsSticker(from, smallGifUrl)
-                    .then(() => {
-                        client.reply(from, 'Silakan', id)
-                        console.log(`Sticker processed for ${processTime(t, moment())} second`)
-                    })
-                    .catch((err) => console.error(err))
-                } else if (isMediaGiphy) {
-                    const gifUrl = url.match(new RegExp(/(giphy|source).(gif|mp4)/, 'gi'))
-                    if (!gifUrl) { return client.reply(from, '⚠️ Gagal mengambil kode GIPHY [FAILED TO GET CODE]', id) }
-                    const smallGifUrl = url.replace(gifUrl[0], 'giphy-downsized.gif')
-                    client.sendGiphyAsSticker(from, smallGifUrl)
-                    .then(() => {
-                        client.reply(from, 'Silakan')
-                        console.log(`Sticker processed for ${processTime(t, moment())} second`)
-                    }) 
-                    .catch((err) => console.error(err))
-                } else {
-                    await client.reply(from, '⚠️ Format salah! Ketik *$menu2* untuk penggunaan. [WRONG FORMAT]', id)
+                    client.reply(from, '⚠️ Format salah! Ketik *$menu2* untuk penggunaan. [WRONG FORMAT]', id)
                 }
             break
 
@@ -250,7 +234,7 @@ module.exports = msgHandler = async (client = new Client(), message) => {
             case '8ball':
                 const question = args.join(' ')
                 const answer = responses[Math.floor(Math.random() * (responses.length))]
-                if (!question) client.reply(from, '⚠️ Format salah! Ketik *$menu3* untuk penggunaan. [WRONG FORMAT]')
+                if (!question) return client.reply(from, '⚠️ Format salah! Ketik *$menu3* untuk penggunaan. [WRONG FORMAT]')
                 await client.sendText(from, `Pertanyaan: *${question}* \n\nJawaban: ${answer}`)
             break
             case 'coinflip':
@@ -264,7 +248,7 @@ module.exports = msgHandler = async (client = new Client(), message) => {
                 await client.reply(from, `Kamu mendapatkan bagian *${random}*`)
             break
             case 'lenny':
-                await client.reply(from, '( ͡° ͜ʖ ͡°)', id)
+                client.reply(from, '( ͡° ͜ʖ ͡°)', id)
             break
             case 'randomeme':
             case 'reddit':
@@ -304,7 +288,7 @@ module.exports = msgHandler = async (client = new Client(), message) => {
             case 'del':
                 if (!quotedMsg) return client.reply(from, '⚠️ Format salah! Ketik *$menu4* untuk penggunaan. [WRONG FORMAT]', id)
                 if (!quotedMsgObj.fromMe) return client.reply(from, '⚠️ Format salah! Ketik *$menu4* untuk penggunaan. [WRONG FORMAT]', id)
-                client.deleteMessage(quotedMsgObj.chatId, quotedMsgObj.id, false)
+                await client.deleteMessage(quotedMsgObj.chatId, quotedMsgObj.id, false)
             break
             case 'donate':
             case 'donasi':
@@ -340,9 +324,16 @@ module.exports = msgHandler = async (client = new Client(), message) => {
                 await client.sendText(from, menuId.textReadme())
             break
             case 'server':
-                await client.sendText(from,`Penggunaan RAM: *${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)}MB / ${Math.round(require('os').totalmem / 1024 / 1024)}MB*\nCPU: *${os.cpus().length}*`)
+                await client.sendText(from,`Penggunaan RAM: *${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)}MB / ${Math.round(require('os').totalmem / 1024 / 1024)}MB*\nCPU: *${os.cpus().length} Cores* *${os.cpus()[0].model}*`)
             break
-            
+            case 'status':
+            case 'stats':
+                const loadedMsg = await client.getAmountOfLoadedMessages()
+                const chatIds = await client.getAllChatIds()
+                const groups = await client.getAllGroups()
+                await client.sendText(from, `Status :\n- *${loadedMsg}* Message terload\n- *${groups.length}* Group\n- *${chatIds.length - groups.length}* Private chat\n- *${chatIds.length}* Total chat`)
+            break
+
             // Weeb Zone
             case 'wait':
                 if ((isMedia || isQuotedImage) && args.length === 0) {
@@ -351,7 +342,7 @@ module.exports = msgHandler = async (client = new Client(), message) => {
                     const _mimetype = isQuotedImage ? quotedMsg.mimetype : mimetype
                     const mediaData = await decryptMedia(encryptMedia, uaOverride)
                     const imageBase64 = `data:${_mimetype};base64,${mediaData.toString('base64')}`
-                    client.reply(from, '_Mohon tunggu sebentar, proses ini akan memakan waktu beberapa menit..._\n\nMerasa terbantu karena bot ini? Bantu saya dengan cara donasi melalui:\n081294958473 (Telkomsel)\n081294958473 (OVO)\n\nTerima kasih 🙏', id)
+                    await client.reply(from, '_Mohon tunggu sebentar, proses ini akan memakan waktu beberapa menit..._\n\nMerasa terbantu karena bot ini? Bantu saya dengan cara donasi melalui:\n081294958473 (Telkomsel)\n081294958473 (OVO)\n\nTerima kasih 🙏', id)
                     fetch('https://trace.moe/api/search', {
                         method: 'POST',
                         body: JSON.stringify({ image: imageBase64 }),
@@ -380,7 +371,7 @@ module.exports = msgHandler = async (client = new Client(), message) => {
                 }
             break
             case 'waifu':
-                client.reply(from, '_Mohon tunggu sebentar, proses ini akan memakan waktu beberapa menit..._\n\nMerasa terbantu karena bot ini? Bantu saya dengan cara donasi melalui:\n081294958473 (Telkomsel)\n081294958473 (OVO)\n\nTerima kasih 🙏', id)
+                await client.reply(from, '_Mohon tunggu sebentar, proses ini akan memakan waktu beberapa menit..._\n\nMerasa terbantu karena bot ini? Bantu saya dengan cara donasi melalui:\n081294958473 (Telkomsel)\n081294958473 (OVO)\n\nTerima kasih 🙏', id)
                 waifu.random()
                     .then(({ url }) => {
                         client.sendFileFromUrl(from, url, 'waifu.jpg', null, null, true)
@@ -476,13 +467,14 @@ module.exports = msgHandler = async (client = new Client(), message) => {
 
             // Group commands (admin only)
             case 'add':
-                const user = args[1]
+                const user = args.join(' ')
                 if (!isGroupMsg) return client.reply(from, '❌ Command ini hanya bisa digunakan di group saja! [GROUP ONLY]', id)
                 if (!isGroupAdmins) return client.reply(from, '❌ Hanya admin yang bisa menggunakan command ini! [ADMIN ONLY]', id)
                 if (!isBotGroupAdmins) return client.reply(from, '❌ Jadikan saya admin terlebih dahulu! [NOT ADMIN]', id)
-                if (!user && args.length === 1) return client.reply(from, '⚠️ Format salah! Ketik *$admin* untuk penggunaan. [WRONG FORMAT]', id)
+                if (!user || args.length > 1) return client.reply(from, '⚠️ Format salah! Ketik *$admin* untuk penggunaan. [WRONG FORMAT]', id)
                 try {
                     await client.addParticipant(from, `${user}@c.us`)
+                    .then(() => client.sendText(from, '🎉 Selamat datang! 🎉'))
                 } catch (err) {
                     console.error(err)
                     client.reply(from, `⚠️ Terjadi kesalahan saat menambah member! [ERR]\n\n${err}`)
@@ -521,7 +513,7 @@ module.exports = msgHandler = async (client = new Client(), message) => {
                     if (groupAdmins.includes(mentionedJidList[i])) return await client.sendText(from, '❌ Gak bisa kick admin gw bro [NOT ALLOWED]')
                     await client.removeParticipant(groupId, mentionedJidList[i])
                 }
-            break
+            break   
             case 'linkgrup':
             case 'linkgroup':
                 if (!isGroupMsg) return await client.reply(from, '❌ Command ini hanya bisa digunakan di group saja! [GROUP ONLY]', id)
@@ -542,13 +534,7 @@ module.exports = msgHandler = async (client = new Client(), message) => {
                 await client.promoteParticipant(groupId, mentionedJidList[0])
                 await client.sendTextWithMentions(from, `✅ Siap mint, anjay sekarang @${mentionedJidList[0].replace('@c.us', '')} jadi admin.`)
             break
-            case 'status':
-                if (!isGroupAdmins) return client.reply(from, '❌ Hanya admin yang bisa menggunakan command ini!', id)
-                const loadedMsg = await client.getAmountOfLoadedMessages()
-                const chatIds = await client.getAllChatIds()
-                const groups = await client.getAllGroups()
-                client.sendText(from, `Status :\n- *${loadedMsg}* Message terload\n- *${groups.length}* Group\n- *${chatIds.length - groups.length}* Private chat\n- *${chatIds.length}* Total chat`)
-            break
+            
             default:
                 console.log(color('[ERROR]', 'red'), color(moment(t * 1000).format('DD/MM/YY HH:mm:ss'), 'yellow'), 'Unregistered command from', color(pushname))
                 client.reply(from, '❓ Command tidak ditemukan, silakan cek kembali atau ketik *$menu* untuk melihat list command yang tersedia. [COMMAND NOT FOUND]')
