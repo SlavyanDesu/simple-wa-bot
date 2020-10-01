@@ -2,6 +2,7 @@ const { decryptMedia, Client } = require('@open-wa/wa-automate')
 const moment = require('moment-timezone')
 const os = require('os')
 const axios = require('axios')
+const igm = require('instagram-fetcher')
 moment.tz.setDefault('Asia/Jakarta').locale('id')
 const { downloader, urlShortener, meme, fetish, lewd, waifu } = require('../../lib')
 const { msgFilter, color, processTime, isUrl, isYt } = require('../../utils')
@@ -114,21 +115,16 @@ module.exports = msgHandler = async (client = new Client(), message) => {
                 if (args.length !== 1) return client.reply(from, '⚠️ Format salah! Ketik *$menu1* untuk penggunaan. [WRONG FORMAT]', id)
                 if (!isUrl(url) && !url.includes('instagram.com')) return client.reply(from, '⚠️ Link tidak valid! [INVALID]', id)
                 client.reply(from, '_Mohon tunggu sebentar, proses ini akan memakan waktu beberapa menit..._\n\nMerasa terbantu karena bot ini? Bantu saya dengan cara donasi melalui:\n081294958473 (Telkomsel)\n081294958473 (OVO)\n\nTerima kasih 🙏', id)
-                axios.get('https://villahollanda.com/api.php?url='+ url)
-                .then(function (response) {
-                    console.log('IG: ' + args[0])
-                    if (response.data.descriptionc === null) {
-                        client.reply(from, '🔒 Sepertinya akunnya di-private atau link tidak valid. [PRIVATE OR INVALID]', id)
-                    } else if (response.data.mediatype === 'photo') {
-                        client.sendFileFromUrl(from, response.data.descriptionc)
-                    } else if (response.data.mediatype === 'video') {
-                        client.sendFileFromUrl(from, response.data.descriptionc, 'video.mp4', `Berhasil diproses selama ${processTime(t, moment())} detik`, null, null, true)
-                    }
-                })
-                .catch((err) => {
+                const link = igm.download(url)
+                for (let i = 0; i < link.length; i++) {
+                    let loop = link[i]
+                    await client.sendFileFromUrl(from, loop, '', '', null, null, true)
+                    .then(() => console.log('Sukses mengirim file!'))
+                    .catch((err) => {
                         console.error(err)
-                        client.reply(from, `⚠️ Terjadi kesalahan! [ERR]\n\n${err}`, id)
-                })
+                        client.reply(from, `⚠️ Terjadi kesalahan!\n\n${err}`)
+                    })
+                }
             break
             case 'tiktok':
                 if (args.length !== 1) return client.reply(from, '⚠️ Format salah! Ketik *$menu1* untuk penggunaan. [WRONG FORMAT]', id)
@@ -254,13 +250,13 @@ module.exports = msgHandler = async (client = new Client(), message) => {
             case 'reddit':
                 await client.reply(from, '_Mohon tunggu sebentar, proses ini akan memakan waktu beberapa menit..._\n\nMerasa terbantu karena bot ini? Bantu saya dengan cara donasi melalui pulsa:\n081294958473 (Telkomsel)\n081294958473 (OVO)\n\nTerima kasih 🙏', id)
                 meme.random()
-                    .then(({ subreddit, title, url, author }) => {
-                        client.sendFileFromUrl(from, `${url}`, 'meme.jpg', `${title}\nTag: r/${subreddit}\nAuthor: u/${author}`, null, null, true)
-                    })
-                    .catch((err) => {
-                        console.error(err)
-                        client.reply(from, `⚠️ Terjadi kesalahan! [WRONG FORMAT]\n\n${err}`)
-                    })
+                .then(({ subreddit, title, url, author }) => {
+                    client.sendFileFromUrl(from, `${url}`, 'meme.jpg', `${title}\nTag: r/${subreddit}\nAuthor: u/${author}`, null, null, true)
+                })
+                .catch((err) => {
+                    console.error(err)
+                    client.reply(from, `⚠️ Terjadi kesalahan! [WRONG FORMAT]\n\n${err}`)
+                })
             break
             case 'reverse':
                 if (args.length < 1) return client.reply(from, '⚠️ Format salah! Ketik *$menu3* untuk penggunaan. [WRONG FORMAT]')
@@ -324,7 +320,7 @@ module.exports = msgHandler = async (client = new Client(), message) => {
                 await client.sendText(from, menuId.textReadme())
             break
             case 'server':
-                await client.sendText(from,`Penggunaan RAM: *${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)}MB / ${Math.round(require('os').totalmem / 1024 / 1024)}MB*\nCPU: *${os.cpus().length} Cores* *${os.cpus()[0].model}*`)
+                await client.sendText(from,`Penggunaan RAM: *${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)}MB / ${Math.round(require('os').totalmem / 1024 / 1024)}MB*\nCPU: ${os.cpus().length}@${os.cpus()[0].model}`)
             break
             case 'status':
             case 'stats':
@@ -458,6 +454,25 @@ module.exports = msgHandler = async (client = new Client(), message) => {
                 lewd.random()
                 .then(({ subreddit, title, url, author }) => {
                     client.sendFileFromUrl(from, `${url}`, 'lewd.jpg', `${title}\nTag: r/${subreddit}\nAuthor: u/${author}`, null, null, true)
+                    .then(() => console.log('Berhasil mengirim file!'))
+                    .catch((err) => console.log(err))
+                })
+                .catch((err) => {
+                    console.error(err)
+                    client.reply(from, `⚠️ Terjadi kesalahan! [ERR]\n\n${err}`)
+                })
+            break
+            case 'multilewds':
+            case 'multilewd':
+                client.reply(from, '_Mohon tunggu sebentar, proses ini akan memakan waktu beberapa menit..._\n\nMerasa terbantu karena bot ini? Bantu saya dengan cara donasi melalui:\n081294958473 (Telkomsel)\n081294958473 (OVO)\n\nTerima kasih 🙏', id)
+                lewd.random()
+                .then(({ memes }) => {
+                    for (i = 0; i < memes.length; i++) {
+                        let sauce = memes[i]
+                        client.sendFileFromUrl(from, sauce.url, 'lewd.jpg', '', null, null, true)
+                        .then(() => console.log('Berhasil mengirim file!'))
+                        .catch((err) => console.log(err))
+                    }
                 })
                 .catch((err) => {
                     console.error(err)
