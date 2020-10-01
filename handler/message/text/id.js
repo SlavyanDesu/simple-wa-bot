@@ -88,7 +88,6 @@ Aliases: *stiker*
 Penggunaan: kirim gambar/link dengan caption *$sticker* atau balas gambar yang sudah dikirim dengan *$sticker*.
 
 Fun:
-Fun:
 1. *$ask*
 Tanya tentang apa saja dan saya akan menjawab secara random.
 Aliases: *8ball*
