@@ -112,7 +112,7 @@ module.exports = msgHandler = async (client = new Client(), message) => {
                 if (!isUrl(url) && !url.includes('instagram.com')) return client.reply(from, '⚠️ Link tidak valid! [INVALID]', id)
                 client.reply(from, '_Mohon tunggu sebentar, proses ini akan memakan waktu beberapa menit..._\n\nMerasa terbantu karena bot ini? Bantu saya dengan cara donasi melalui:\n081294958473 (Telkomsel)\n081294958473 (OVO)\n\nTerima kasih 🙏', id)
                 const link = igm.download(url)
-                await client.sendFileFromUrl(from, link.length, '', '', null, null, true)
+                await client.sendFileFromUrl(from, link, '', '', null, null, true)
                 .then(() => console.log('Sukses mengirim file!'))
                 .catch((err) => {
                     console.error(err)
