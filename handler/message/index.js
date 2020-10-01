@@ -48,14 +48,10 @@ module.exports = msgHandler = async (client = new Client(), message) => {
         let { pushname, verifiedName } = sender
         pushname = pushname || verifiedName
         const botNumber = await client.getHostNumber() + '@c.us'
-        const blockNumber = await client.getBlockedIds()
         const groupId = isGroupMsg ? chat.groupMetadata.id : ''
         const groupAdmins = isGroupMsg ? await client.getGroupAdmins(groupId) : ''
         const isGroupAdmins = groupAdmins.includes(sender.id) || false
         const isBotGroupAdmins = groupAdmins.includes(botNumber) || false
-        const ownerNumber = '6281294958473@c.us'
-        const isOwner = sender.id === ownerNumber
-        const isBlocked = blockNumber.includes(sender.id) === true
 
         // Bot prefix
         const prefix = '$'
@@ -88,27 +84,27 @@ module.exports = msgHandler = async (client = new Client(), message) => {
                 if (!isUrl(url) && !url.includes('facebook.com')) return client.reply(from, '⚠️ Link tidak valid! [INVALID]', id)
                 await client.reply(from, '_Mohon tunggu sebentar, proses ini akan memakan waktu beberapa menit..._\n\nMerasa terbantu karena bot ini? Bantu saya dengan cara donasi melalui:\n081294958473 (Telkomsel)\n081294958473 (OVO)\n\nTerima kasih 🙏', id)
                 downloader.facebook(url)
-                    .then(async (videoMeta) => {
-                        const title = videoMeta.response.title
-                        const thumbnail = videoMeta.response.thumbnail
-                        const links = videoMeta.response.links
-                        const shorts = []
-                        for (let i = 0; i < links.length; i++) {
-                            const shortener = await urlShortener(links[i].url)
-                            console.log('Shortlink: ' + shortener)
-                            links[i].short = shortener
-                            shorts.push(links[i])
-                        }
-                        const link = shorts.map((x) => `${x.resolution} Quality: ${x.short}`)
-                        const caption = `Teks: ${title} \n\nLink download: \n${link.join('\n')} \n\nBerhasil diproses selama ${processTime(t, moment())} detik`
-                        await client.sendFileFromUrl(from, thumbnail, 'videos.jpg', caption, null, null, true)
-                            .then((serialized) => console.log(`Sukses mengirm file dengan ID: ${serialized} diproses selama ${processTime(t, moment())}`))
-                            .catch((err) => console.error(err))
-                    })
-                    .catch((err) => {
-                        console.error(err)
-                        client.reply(from, `⚠️ Terjadi kesalahan! [ERR]\n\n${err}`, id)
-                    })
+                .then(async (videoMeta) => {
+                    const title = videoMeta.response.title
+                    const thumbnail = videoMeta.response.thumbnail
+                    const links = videoMeta.response.links
+                    const shorts = []
+                    for (let i = 0; i < links.length; i++) {
+                        const shortener = await urlShortener(links[i].url)
+                        console.log('Shortlink: ' + shortener)
+                        links[i].short = shortener
+                        shorts.push(links[i])
+                    }
+                    const link = shorts.map((x) => `${x.resolution} Quality: ${x.short}`)
+                    const caption = `Teks: ${title} \n\nLink download: \n${link.join('\n')} \n\nBerhasil diproses selama ${processTime(t, moment())} detik`
+                    await client.sendFileFromUrl(from, thumbnail, 'videos.jpg', caption, null, null, true)
+                    .then((serialized) => console.log(`Sukses mengirm file dengan ID: ${serialized} diproses selama ${processTime(t, moment())}`))
+                    .catch((err) => console.error(err))
+                })
+                .catch((err) => {
+                    console.error(err)
+                    client.reply(from, `⚠️ Terjadi kesalahan! [ERR]\n\n${err}`, id)
+                })
             break
             case 'instagram':
             case 'ig':
@@ -116,27 +112,26 @@ module.exports = msgHandler = async (client = new Client(), message) => {
                 if (!isUrl(url) && !url.includes('instagram.com')) return client.reply(from, '⚠️ Link tidak valid! [INVALID]', id)
                 client.reply(from, '_Mohon tunggu sebentar, proses ini akan memakan waktu beberapa menit..._\n\nMerasa terbantu karena bot ini? Bantu saya dengan cara donasi melalui:\n081294958473 (Telkomsel)\n081294958473 (OVO)\n\nTerima kasih 🙏', id)
                 const link = igm.download(url)
-                for (let i = 0; i < link.length; i++) {
-                    let loop = link[i]
-                    await client.sendFileFromUrl(from, loop, '', '', null, null, true)
-                    .then(() => console.log('Sukses mengirim file!'))
-                    .catch((err) => {
-                        console.error(err)
-                        client.reply(from, `⚠️ Terjadi kesalahan!\n\n${err}`)
-                    })
-                }
+                await client.sendFileFromUrl(from, link.length, '', '', null, null, true)
+                .then(() => console.log('Sukses mengirim file!'))
+                .catch((err) => {
+                    console.error(err)
+                    client.reply(from, `⚠️ Terjadi kesalahan!\n\n${err}`)
+                })
             break
             case 'tiktok':
                 if (args.length !== 1) return client.reply(from, '⚠️ Format salah! Ketik *$menu1* untuk penggunaan. [WRONG FORMAT]', id)
                 if (!isUrl(url) && !url.includes('tiktok.com')) return client.reply(from, '⚠️ Link tidak valid! [INVALID]', id)
                 await client.reply(from, `_Mohon tunggu sebentar, proses ini akan memakan waktu beberapa menit..._\n\nMerasa terbantu karena bot ini? Bantu saya dengan cara donasi melalui:\n081294958473 (Telkomsel)\n081294958473 (OVO)\n\nTerima kasih 🙏`, id)
-                downloader.tiktok(url).then(async (videoMeta) => {
-                    const filename = videoMeta.authorMeta.name + '.mp4'
-                    const caps = `*Metadata:*\nUsername: ${videoMeta.authorMeta.name} \nMusic: ${videoMeta.musicMeta.musicName} \nView: ${videoMeta.playCount.toLocaleString()} \nLike: ${videoMeta.diggCount.toLocaleString()} \nComment: ${videoMeta.commentCount.toLocaleString()} \nShare: ${videoMeta.shareCount.toLocaleString()} \nCaption: ${videoMeta.text.trim() ? videoMeta.text : '-'}`
-                    await client.sendFileFromUrl(from, videoMeta.url, filename, videoMeta.NoWaterMark ? caps : `⚠ Video tanpa watermark tidak tersedia. \n\n${caps}`, '', { headers: { 'User-Agent': 'okhttp/4.5.0', referer: 'https://www.tiktok.com/' } }, true)
-                    .then((serialized) => console.log(`Sukses Mengirim file dengan ID: ${serialized} diproses selama ${processTime(t, moment())} detik`))
-                    .catch((err) => console.error(err))
-            }).catch(() => client.reply(from, 'Gagal mengambil metadata, link yang kamu kirim tidak valid. [Invalid Link]', id))
+                downloader.tiktok(url)
+                .then(async (videoMeta) => {
+                        const filename = videoMeta.authorMeta.name + '.mp4'
+                        const caps = `*\nUsername: ${videoMeta.authorMeta.name} \nMusic: ${videoMeta.musicMeta.musicName} \nView: ${videoMeta.playCount.toLocaleString()} \nLike: ${videoMeta.diggCount.toLocaleString()} \nComment: ${videoMeta.commentCount.toLocaleString()} \nShare: ${videoMeta.shareCount.toLocaleString()} \nCaption: ${videoMeta.text.trim() ? videoMeta.text : '-'}`
+                        await client.sendFileFromUrl(from, videoMeta.url, filename, videoMeta.NoWaterMark ? caps : `⚠ Video tanpa watermark tidak tersedia. \n\n${caps}`, '', { headers: { 'User-Agent': 'okhttp/4.5.0', referer: 'https://www.tiktok.com/' } }, true)
+                        .then((serialized) => console.log(`Sukses Mengirim file dengan ID: ${serialized} diproses selama ${processTime(t, moment())} detik`))
+                        .catch((err) => console.error(err))
+                })
+                .catch(() => client.reply(from, '⚠️ Link tidak valid! [INVALID]', id))
             break
             case 'twitter':
             case 'twt':
@@ -309,6 +304,9 @@ module.exports = msgHandler = async (client = new Client(), message) => {
             break
             case 'menu5':
                 await client.sendText(from, menuId.textMenu5())
+            break
+            case 'menuall':
+                await client.sendText(from, menuId.textMenuAll())
             break
             case 'speed':
             case 'ping':

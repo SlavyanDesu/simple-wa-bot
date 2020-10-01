@@ -45,6 +45,133 @@ Terima kasih! 🙏
     `
 }
 
+exports.textMenuAll = () => {
+    return `
+    ⚠️ *ALL COMMANDS* ⚠️
+
+*ABAIKAN TANDA <>*
+Downloader:
+1. *$facebook*
+Untuk megunduh foto atau video dari Facebook.
+Aliases: *fb*
+Penggunaan: *$facebook https://www.facebook.com/...*
+
+2. *$instagram* [ERROR]
+Untuk megunduh foto atau video dari Instagram.
+Aliases: *ig*
+Penggunaan: *$instagram https://www.instagram.com/p/...*
+
+3. *$tiktok*
+Untuk mengunduh video dari TikTok.
+Aliases: -
+Penggunaan: *$tiktok https://www.tiktok.com/@xxxxx/video/...*
+
+4. *$twitter*
+Untuk megunduh foto atau video dari Twitter.
+Aliases: *twt*
+Penggunaan: *$twitter https://www.twitter.com/xxxxx/status/...*
+
+5. *$ytmp3*
+Untuk mengkonversi video YouTube ke MP3. Maksimal 10 menit.
+Aliases: -
+Penggunaan: *$ytmp3 https://youtu.be/9lBTqHdgerY*
+
+6. *$ytmp4*
+Untuk mengunduh video YouTube. Maksimal 10 menit.
+Aliases: -
+Penggunaan: *$ytmp4 https://youtu.be/9lBTqHdgerY*
+
+Sticker:
+1. *$sticker*
+Membuat custom sticker dari foto yang diberikan atau di-reply.
+Aliases: *stiker*
+Penggunaan: kirim gambar/link dengan caption *$sticker* atau balas gambar yang sudah dikirim dengan *$sticker*.
+
+Fun:
+1. *$ask*
+Tanya tentang apa saja dan saya akan menjawab secara random.
+Aliases: *8ball*
+Penggunaan:: *$ask* <pertanyaan>
+
+2. *$coinflip*
+Lempar koin.
+Aliases: *coin* - *flip*
+Penggunaan: *$coinflip*
+
+3. *$lenny*
+( ͡° ͜ʖ ͡°)
+Aliases: -
+Penggunaan: *$lenny*
+
+4. *$randomeme*
+Kirim random meme dari reddit.
+Aliases: *reddit*
+Penggunaan: *$randmeme*
+
+5. *$reverse*
+.nasilut nikilaB
+Aliases: - 
+Penggunaan: *$reverse* <teks>
+
+6. *$roll*
+Roll angka.
+Aliases: *dice*
+Penggunaan: *$roll*
+
+7. *$say*
+It's just a say command, whatd'ya expect?
+Aliases: *talk*
+Penggunaan: *$say* <teks>
+
+Utility:
+1. *$clock*
+Cek waktu Indonesia sekitar.
+Aliases: *waktu* - *jam*
+Penggunaan: *$clock*
+
+2. *$delete*
+Hapus pesan yang saya kirim.
+Aliases: *del*
+Penggunaan: reply pesan yang mau dihapus lalu ketik command *$delete*
+
+3. *$menu*
+Buka menu.
+Aliases: *help* - *h*
+Penggunaan: *$menu*
+
+4. *$ping*
+Cek kecepatan respon bot.
+Alias: *speed* - *p*
+Penggunaan: *$ping*
+
+5. *$readme*
+Isinya copyright buat source code doang.
+Alias: *tnc*
+Penggunaan: *$readme*
+
+6. *$server*
+Cek spesifikasi server.
+Aliases: -
+Penggunaan: *$server*
+
+7. *$status*
+Untuk cek status bot.
+Aliases: *stats*
+Penggunaan: *$status*
+
+Weeb Zone:
+1. *$waifu*
+Kirim foto waifu random.
+Aliases: -
+Penggunaan: *$waifu*
+
+2. *$wait*
+What anime is this? Identifikasi anime via foto.
+Aliases: -
+Penggunaan: kirim foto lalu tambahkan caption *$wait*
+    `
+}
+
 exports.textMenu = () => {
     return `
     ⚠️ *DILARANG SPAM* ⚠️
@@ -56,6 +183,7 @@ exports.textMenu = () => {
 *$menu3* = Menu page 3 (Fun)
 *$menu4* = Menu page 4 (Utility)
 *$menu5* = Menu page 5 (Weeb Zone)
+*$menuall* = Tampilkan semua command
 *$admin* = Menu khusus admin - UPDATED!
 *$donate* = Kasian bang ga ada duit
 
@@ -94,12 +222,12 @@ Aliases: *twt*
 Penggunaan: *$twitter https://www.twitter.com/xxxxx/status/...*
 
 5. *$ytmp3*
-Untuk mengkonversi video YouTube ke MP3.
+Untuk mengkonversi video YouTube ke MP3. Maksimal 10 menit.
 Aliases: -
 Penggunaan: *$ytmp3 https://youtu.be/9lBTqHdgerY*
 
 6. *$ytmp4*
-Untuk mengunduh video YouTube.
+Untuk mengunduh video YouTube. Maksimal 10 menit.
 Aliases: -
 Penggunaan: *$ytmp4 https://youtu.be/9lBTqHdgerY*
 `
