@@ -412,60 +412,60 @@ module.exports = msgHandler = async (client = new Client(), message) => {
 
             // NSFW
             case 'fetish':
-                const request = args.join(' ')
+                let lust = args.join(' ')
                 client.reply(from, '_Mohon tunggu sebentar, proses ini akan memakan waktu beberapa menit..._\n\nMerasa terbantu karena bot ini? Bantu saya dengan cara donasi melalui:\n081294958473 (Telkomsel)\n081294958473 (OVO)\n\nTerima kasih 🙏', id)
 
                 if (args.length !== 1) {
                     return client.reply(from, '⚠️ Silakan masukkan tag yang tersedia di *$hidden*! [WRONG FORMAT]')
-                } else if (request === 'armpits') {
+                } else if (lust === 'armpits') {
                     fetish.armpits()
                         .then(({subreddit, title, url, author}) => {
                             client.sendFileFromUrl(from, `${url}`, 'fetish.jpg', `${title}\nTag: r/${subreddit}\nAuthor: u/${author}`, null, null, true)
                         })
                         .catch((err) => console.error(err))
-                } else if (request === 'feets') {
+                } else if (lust === 'feets') {
                     fetish.feets()
                         .then(({subreddit, title, url, author}) => {
                             client.sendFileFromUrl(from, `${url}`, 'fetish.jpg', `${title}\nTag: r/${subreddit}\nAuthor: u/${author}`, null, null, true)
                         })
                         .catch((err) => console.error(err))
-                } else if (request === 'thighs') {
+                } else if (lust === 'thighs') {
                     fetish.thighs()
                         .then(({subreddit, title, url, author}) => {
                             client.sendFileFromUrl(from, `${url}`, 'fetish.jpg', `${title}\nTag: r/${subreddit}\nAuthor: u/${author}`, null, null, true)
                         })
                         .catch((err) => console.error(err))
-                } else if (request === 'booty') {
+                } else if (lust === 'booty') {
                     fetish.booty()
                         .then(({subreddit, title, url, author}) => {
                             client.sendFileFromUrl(from, `${url}`, 'fetish.jpg', `${title}\nTag: r/${subreddit}\nAuthor: u/${author}`, null, null, true)
                         })
                         .catch((err) => console.error(err))
-                } else if (request === 'boobs') {
+                } else if (lust === 'boobs') {
                     fetish.boobs()
                         .then(({subreddit, title, url, author}) => {
                             client.sendFileFromUrl(from, `${url}`, 'fetish.jpg', `${title}\nTag: r/${subreddit}\nAuthor: u/${author}`, null, null, true)
                         })
                         .catch((err) => console.error(err))
-                } else if (request === 'necks') {
+                } else if (lust === 'necks') {
                     fetish.necks()
                         .then(({subreddit, title, url, author}) => {
                             client.sendFileFromUrl(from, `${url}`, 'fetish.jpg', `${title}\nTag: r/${subreddit}\nAuthor: u/${author}`, null, null, true)
                         })
                         .catch((err) => console.error(err))
-                } else if (request === 'belly') {
+                } else if (lust === 'belly') {
                     fetish.belly()
                         .then(({subreddit, title, url, author}) => {
                             client.sendFileFromUrl(from, `${url}`, 'fetish.jpg', `${title}\nTag: r/${subreddit}\nAuthor: u/${author}`, null, null, true)
                         })
                         .catch((err) => console.error(err))
-                } else if (request === 'sideboobs') {
+                } else if (lust === 'sideboobs') {
                     fetish.sideboobs()
                         .then(({subreddit, title, url, author}) => {
                             client.sendFileFromUrl(from, `${url}`, 'fetish.jpg', `${title}\nTag: r/${subreddit}\nAuthor: u/${author}`, null, null, true)
                         })
                         .catch((err) => console.error(err))
-                } else if (request === 'ahegao') {
+                } else if (lust === 'ahegao') {
                     fetish.ahegao()
                         .then(({subreddit, title, url, author}) => {
                             client.sendFileFromUrl(from, `${url}`, 'fetish.jpg', `${title}\nTag: r/${subreddit}\nAuthor: u/${author}`, null, null, true)
@@ -491,7 +491,7 @@ module.exports = msgHandler = async (client = new Client(), message) => {
             break
             case 'multifetish':
             case 'mfetish':
-                const request = args.join(' ')
+                let request = args.join(' ')
                 client.reply(from, '_Mohon tunggu sebentar, proses ini akan memakan waktu beberapa menit..._\n\nMerasa terbantu karena bot ini? Bantu saya dengan cara donasi melalui:\n081294958473 (Telkomsel)\n081294958473 (OVO)\n\nTerima kasih 🙏', id)
 
                 if (args.length !== 1) {
