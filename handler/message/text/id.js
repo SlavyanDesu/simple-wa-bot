@@ -256,32 +256,37 @@ Tanya tentang apa saja dan saya akan menjawab secara random.
 Aliases: *8ball*
 Penggunaan:: *$ask* <pertanyaan>
 
-2. *$coinflip*
+2. *$binary*
+Ubah input teks mu ke dalam kode biner.
+Aliases: *biner* - *bin*
+Penggunaan: *$binary* <encodeText|decodeText|decToBin|binToDec> <input>
+
+3. *$coinflip*
 Lempar koin.
 Aliases: *coin* - *flip*
 Penggunaan: *$coinflip*
 
-3. *$lenny*
+4. *$lenny*
 ( ͡° ͜ʖ ͡°)
 Aliases: -
 Penggunaan: *$lenny*
 
-4. *$randomeme*
+5. *$randomeme*
 Kirim random meme dari reddit.
 Aliases: *reddit*
 Penggunaan: *$randmeme*
 
-5. *$reverse*
+6. *$reverse*
 .nasilut nikilaB
 Aliases: - 
 Penggunaan: *$reverse* <teks>
 
-6. *$roll*
+7. *$roll*
 Roll angka.
 Aliases: *dice*
 Penggunaan: *$roll*
 
-7. *$say*
+8. *$say*
 It's just a say command, whatd'ya expect?
 Aliases: *talk*
 Penggunaan: *$say* <teks>
@@ -403,5 +408,17 @@ Penggunaan: *$fetish* <tag>
 Kirim foto lewd secara random.
 Aliases: *lewd*
 Penggunaan: *$lewds*
+
+3. *$multifetish*
+Kirim foto fetish sebanyak 5 foto dalam 1 request.
+Yang tersedia: *armpits*, *feets*, *thighs*, *booty*, *boobs*, *necks*, *belly*, *sideboobs*, dan *ahegao*.
+Command ini bersifat _case-sensitive_, jadi pastikan tag harus sesuai huruf besar kecilnya dan pengejaannya!
+Aliases: *mfetish*
+Penggunaan: *$multifetish <tag>*
+
+4. *$multilewds*
+Kirim random foto lewd sebanyak 5 foto dalam 1 request.
+Aliases: *mlewds* - *mlewd*
+Penggunaan: *$multifetish*
     `
 }

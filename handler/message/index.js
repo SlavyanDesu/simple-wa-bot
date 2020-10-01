@@ -39,6 +39,7 @@ const responses = [
 ]
 
 const { menuId } = require('./text') // For help command
+const { ClientRequest } = require('http')
 
 module.exports = msgHandler = async (client = new Client(), message) => {
     try {
@@ -111,13 +112,16 @@ module.exports = msgHandler = async (client = new Client(), message) => {
                 if (args.length !== 1) return client.reply(from, '⚠️ Format salah! Ketik *$menu1* untuk penggunaan. [WRONG FORMAT]', id)
                 if (!isUrl(url) && !url.includes('instagram.com')) return client.reply(from, '⚠️ Link tidak valid! [INVALID]', id)
                 client.reply(from, '_Mohon tunggu sebentar, proses ini akan memakan waktu beberapa menit..._\n\nMerasa terbantu karena bot ini? Bantu saya dengan cara donasi melalui:\n081294958473 (Telkomsel)\n081294958473 (OVO)\n\nTerima kasih 🙏', id)
-                const link = igm.download(url)
-                await client.sendFileFromUrl(from, link, '', '', null, null, true)
-                .then(() => console.log('Sukses mengirim file!'))
-                .catch((err) => {
-                    console.error(err)
-                    client.reply(from, `⚠️ Terjadi kesalahan!\n\n${err}`)
-                })
+                let link = igm.download(url)
+                for (let i = 0; i < link.length; i++) {
+                    let source = link[i]
+                    client.sendFileFromUrl(from, source, 'ig.jpg', 'Silakan', null, null, true)
+                    .then(() => console.log('Sukses mengirim file!'))
+                    .catch((err) => {
+                        console.error(err)
+                        client.reply(from `⚠️ Terjadi kesalahan! [ERR]\n\n${err}`)
+                    })
+                }
             break
             case 'tiktok':
                 if (args.length !== 1) return client.reply(from, '⚠️ Format salah! Ketik *$menu1* untuk penggunaan. [WRONG FORMAT]', id)
@@ -225,8 +229,34 @@ module.exports = msgHandler = async (client = new Client(), message) => {
             case '8ball':
                 const question = args.join(' ')
                 const answer = responses[Math.floor(Math.random() * (responses.length))]
-                if (!question) return client.reply(from, '⚠️ Format salah! Ketik *$menu3* untuk penggunaan. [WRONG FORMAT]')
+                if (!question) return client.reply(from, '⚠️ Format salah! Ketik *$menu3* untuk penggunaan. [WRONG FORMAT]', id)
                 await client.sendText(from, `Pertanyaan: *${question}* \n\nJawaban: ${answer}`)
+            break
+            case 'binary':
+            case 'bin':
+            case 'biner':
+                exports.method = {
+                    encode: input => {
+                        return input.toString().split('').map(c => c.charCodeAt(0).toString(2))
+                    },
+                    decode: input => {
+                        let _input = typeof input === 'string' ? input.split(' ') : input
+                        return _input.map(c => parseInt(c, 2)).map(c => String.fromCharCode(c)).join('')
+                    }
+                }
+                if (args.length < 2) return client.reply(from, '⚠️ Format salah! Ketik *$menu3* untuk penggunaan. [WRONG FORMAT]', id)
+                let input = args.slice(1).join(' ')
+
+                if (args[0].match(/^enc(ode(Text)?)?$/i)) {
+                    client.sendText(from, this.method.encode(input).join(' '))
+                } else if (args[0].match(/^dec(ode(Text)?)?$/i)) {
+                    client.sendText(from, this.methods.decode(input))
+                } else if (args[0].match(/^decToBin$/i)) {
+                    if (isNaN(input)) return client.reply(from, '⚠️ Input harus angka!', id)
+                    client.sendText(from, parseInt(input, 2))
+                } else {
+                    throw `Unknown sub command: \`${args[0]}\``
+                }
             break
             case 'coinflip':
             case 'coin':
@@ -460,15 +490,154 @@ module.exports = msgHandler = async (client = new Client(), message) => {
                     client.reply(from, `⚠️ Terjadi kesalahan! [ERR]\n\n${err}`)
                 })
             break
+            case 'multifetish':
+            case 'mfetish':
+                let request = args.join(' ')
+                client.reply(from, '_Mohon tunggu sebentar, proses ini akan memakan waktu beberapa menit..._\n\nMerasa terbantu karena bot ini? Bantu saya dengan cara donasi melalui:\n081294958473 (Telkomsel)\n081294958473 (OVO)\n\nTerima kasih 🙏', id)
+
+                if (args.length !== 1) {
+                    return client.reply(from, '⚠️ Silakan masukkan tag yang tersedia di *$hidden*! [WRONG FORMAT]', id)
+                } else if (request === 'armpits') {
+                    fetish.armpits()
+                    .then(({ memes }) => {
+                        for (i = 0; i < memes.length; i++) {
+                            let sauce = memes[i]
+                            client.sendFileFromUrl(from, sauce.url, 'lewd.jpg', '', null, null, true)
+                            .then(() => console.log('Sukses mengirim file!'))
+                            .catch((err) => console.error(err))
+                        }
+                    })
+                    .catch((err) => {
+                        console.error(err)
+                        client.reply(from, `⚠️ Terjadi kesalahan! [ERR]\n\n${err}`)
+                    })
+                } else if (request === 'feets') {
+                    fetish.feets()
+                    .then(({ memes }) => {
+                        for (i = 0; i < memes.length; i++) {
+                            let sauce = memes[i]
+                            client.sendFileFromUrl(from, sauce.url, 'lewd.jpg', '', null, null, true)
+                            .then(() => console.log('Sukses mengirim file!'))
+                            .catch((err) => console.error(err))
+                        }
+                    })
+                    .catch((err) => {
+                        console.error(err)
+                        client.reply(from, `⚠️ Terjadi kesalahan! [ERR]\n\n${err}`)
+                    })
+                } else if (request === 'thighs') {
+                    fetish.thighs()
+                    .then(({ memes }) => {
+                        for (i = 0; i < memes.length; i++) {
+                            let sauce = memes[i]
+                            client.sendFileFromUrl(from, sauce.url, 'lewd.jpg', '', null, null, true)
+                            .then(() => console.log('Sukses mengirim file!'))
+                            .catch((err) => console.error(err))
+                        }
+                    })
+                    .catch((err) => {
+                        console.error(err)
+                        client.reply(from, `⚠️ Terjadi kesalahan! [ERR]\n\n${err}`)
+                    })
+                } else if (request === 'booty') {
+                    fetish.booty()
+                    .then(({ memes }) => {
+                        for (i = 0; i < memes.length; i++) {
+                            let sauce = memes[i]
+                            client.sendFileFromUrl(from, sauce.url, 'lewd.jpg', '', null, null, true)
+                            .then(() => console.log('Sukses mengirim file!'))
+                            .catch((err) => console.error(err))
+                        }
+                    })
+                    .catch((err) => {
+                        console.error(err)
+                        client.reply(from, `⚠️ Terjadi kesalahan! [ERR]\n\n${err}`)
+                    })
+                } else if (request === 'boobs') {
+                    fetish.boobs()
+                    .then(({ memes }) => {
+                        for (i = 0; i < memes.length; i++) {
+                            let sauce = memes[i]
+                            client.sendFileFromUrl(from, sauce.url, 'lewd.jpg', '', null, null, true)
+                            .then(() => console.log('Sukses mengirim file!'))
+                            .catch((err) => console.error(err))
+                        }
+                    })
+                    .catch((err) => {
+                        console.error(err)
+                        client.reply(from, `⚠️ Terjadi kesalahan! [ERR]\n\n${err}`)
+                    })
+                } else if (request === 'necks') {
+                    fetish.necks()
+                    .then(({ memes }) => {
+                        for (i = 0; i < memes.length; i++) {
+                            let sauce = memes[i]
+                            client.sendFileFromUrl(from, sauce.url, 'lewd.jpg', '', null, null, true)
+                            .then(() => console.log('Sukses mengirim file!'))
+                            .catch((err) => console.error(err))
+                        }
+                    })
+                    .catch((err) => {
+                        console.error(err)
+                        client.reply(from, `⚠️ Terjadi kesalahan! [ERR]\n\n${err}`)
+                    })
+                } else if (request === 'belly') {
+                    fetish.belly()
+                    .then(({ memes }) => {
+                        for (i = 0; i < memes.length; i++) {
+                            let sauce = memes[i]
+                            client.sendFileFromUrl(from, sauce.url, 'lewd.jpg', '', null, null, true)
+                            .then(() => console.log('Sukses mengirim file!'))
+                            .catch((err) => console.error(err))
+                        }
+                    })
+                    .catch((err) => {
+                        console.error(err)
+                        client.reply(from, `⚠️ Terjadi kesalahan! [ERR]\n\n${err}`)
+                    })
+                } else if (request === 'sideboobs') {
+                    fetish.sideboobs()
+                    .then(({ memes }) => {
+                        for (i = 0; i < memes.length; i++) {
+                            let sauce = memes[i]
+                            client.sendFileFromUrl(from, sauce.url, 'lewd.jpg', '', null, null, true)
+                            .then(() => console.log('Sukses mengirim file!'))
+                            .catch((err) => console.error(err))
+                        }
+                    })
+                    .catch((err) => {
+                        console.error(err)
+                        client.reply(from, `⚠️ Terjadi kesalahan! [ERR]\n\n${err}`)
+                    })
+                } else if (request === 'ahegao') {
+                    fetish.ahegao()
+                    .then(({ memes }) => {
+                        for (i = 0; i < memes.length; i++) {
+                            let sauce = memes[i]
+                            client.sendFileFromUrl(from, sauce.url, 'lewd.jpg', '', null, null, true)
+                            .then(() => console.log('Sukses mengirim file!'))
+                            .catch((err) => console.error(err))
+                        }
+                    })
+                    .catch((err) => {
+                        console.error(err)
+                        client.reply(from, `⚠️ Terjadi kesalahan! [ERR]\n\n${err}`)
+                    })
+                } else {
+                    client.reply(from, '🙏 Maaf tag belum tersedia. Silakan request. [TAG NOT FOUND]')
+                }
+            break
             case 'multilewds':
             case 'multilewd':
+            case 'mlewds':
+            case 'mlewd':
                 client.reply(from, '_Mohon tunggu sebentar, proses ini akan memakan waktu beberapa menit..._\n\nMerasa terbantu karena bot ini? Bantu saya dengan cara donasi melalui:\n081294958473 (Telkomsel)\n081294958473 (OVO)\n\nTerima kasih 🙏', id)
                 lewd.random()
                 .then(({ memes }) => {
                     for (i = 0; i < memes.length; i++) {
                         let sauce = memes[i]
                         client.sendFileFromUrl(from, sauce.url, 'lewd.jpg', '', null, null, true)
-                        .then(() => console.log('Berhasil mengirim file!'))
+                        .then(() => console.log('Sukses mengirim file!'))
                         .catch((err) => console.log(err))
                     }
                 })

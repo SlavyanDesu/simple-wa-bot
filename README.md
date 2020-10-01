@@ -60,6 +60,7 @@ After that scan the QR code and wait until it authenticated.
 | Coin        |      ✔️      |
 | Reddit      |      ✔️      |
 | Lenny       |      ✔️      |
+| Binary      |      ✔️      |
 
 |   Utility   | Availability |
 | :---------: | :----------: |
