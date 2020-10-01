@@ -239,12 +239,9 @@ module.exports = msgHandler = async (client = new Client(), message) => {
                         return input.toString().split('').map(c => c.charCodeAt(0).toString(2))
                     }
                 }
-                if (args.length < 1) return client.reply(from, '⚠️ Format salah! Ketik *$menu3* untuk penggunaan. [WRONG FORMAT]', id)
                 let input = args.join(' ')
-                let regex = /^[a-zA-Z\s]*$/
-
-                if (!input.match(regex)) {
-                    client.reply(from, '⚠️ Hanya bisa mendukung teks saja! [WRONG FORMAT]', id)
+                if (!input) {
+                    return client.reply(from, '⚠️ Harap masukan teks! [WRONG FORMAT]', id)
                 } else {
                     client.sendText(from, this.method.encode(input).join(' '))
                 }
