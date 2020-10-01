@@ -88,37 +88,43 @@ Aliases: *stiker*
 Penggunaan: kirim gambar/link dengan caption *$sticker* atau balas gambar yang sudah dikirim dengan *$sticker*.
 
 Fun:
+Fun:
 1. *$ask*
 Tanya tentang apa saja dan saya akan menjawab secara random.
 Aliases: *8ball*
 Penggunaan:: *$ask* <pertanyaan>
 
-2. *$coinflip*
+2. *$binary*
+Ubah input teks mu ke dalam kode biner.
+Aliases: *biner* - *bin*
+Penggunaan: *$binary* <encodeText|decodeText|decToBin|binToDec> <input>
+
+3. *$coinflip*
 Lempar koin.
 Aliases: *coin* - *flip*
 Penggunaan: *$coinflip*
 
-3. *$lenny*
+4. *$lenny*
 ( ͡° ͜ʖ ͡°)
 Aliases: -
 Penggunaan: *$lenny*
 
-4. *$randomeme*
+5. *$randomeme*
 Kirim random meme dari reddit.
 Aliases: *reddit*
 Penggunaan: *$randmeme*
 
-5. *$reverse*
+6. *$reverse*
 .nasilut nikilaB
 Aliases: - 
 Penggunaan: *$reverse* <teks>
 
-6. *$roll*
+7. *$roll*
 Roll angka.
 Aliases: *dice*
 Penggunaan: *$roll*
 
-7. *$say*
+8. *$say*
 It's just a say command, whatd'ya expect?
 Aliases: *talk*
 Penggunaan: *$say* <teks>
