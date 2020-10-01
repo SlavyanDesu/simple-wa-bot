@@ -96,7 +96,7 @@ Penggunaan:: *$ask* <pertanyaan>
 2. *$binary*
 Ubah input teks mu ke dalam kode biner.
 Aliases: *biner* - *bin*
-Penggunaan: *$binary* <encodeText|decodeText|decToBin|binToDec> <input>
+Penggunaan: *$binary* <teks>
 
 3. *$coinflip*
 Lempar koin.
@@ -264,7 +264,7 @@ Penggunaan:: *$ask* <pertanyaan>
 2. *$binary*
 Ubah input teks mu ke dalam kode biner.
 Aliases: *biner* - *bin*
-Penggunaan: *$binary* <encodeText|decodeText|decToBin|binToDec> <input>
+Penggunaan: *$binary* <input>
 
 3. *$coinflip*
 Lempar koin.
