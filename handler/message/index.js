@@ -39,7 +39,6 @@ const responses = [
 ]
 
 const { menuId } = require('./text') // For help command
-const { ClientRequest } = require('http')
 
 module.exports = msgHandler = async (client = new Client(), message) => {
     try {
@@ -413,7 +412,7 @@ module.exports = msgHandler = async (client = new Client(), message) => {
 
             // NSFW
             case 'fetish':
-                let request = args.join(' ')
+                const request = args.join(' ')
                 client.reply(from, '_Mohon tunggu sebentar, proses ini akan memakan waktu beberapa menit..._\n\nMerasa terbantu karena bot ini? Bantu saya dengan cara donasi melalui:\n081294958473 (Telkomsel)\n081294958473 (OVO)\n\nTerima kasih 🙏', id)
 
                 if (args.length !== 1) {
@@ -492,7 +491,7 @@ module.exports = msgHandler = async (client = new Client(), message) => {
             break
             case 'multifetish':
             case 'mfetish':
-                let request = args.join(' ')
+                const request = args.join(' ')
                 client.reply(from, '_Mohon tunggu sebentar, proses ini akan memakan waktu beberapa menit..._\n\nMerasa terbantu karena bot ini? Bantu saya dengan cara donasi melalui:\n081294958473 (Telkomsel)\n081294958473 (OVO)\n\nTerima kasih 🙏', id)
 
                 if (args.length !== 1) {
