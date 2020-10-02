@@ -413,27 +413,16 @@ exports.hiddenMenu = () => {
 
 *ABAIKAN TANDA <>*
 Command untuk ( ͡° ͜ʖ ͡°):
-1. *$fetish*
-Yang tersedia: *armpits*, *feets*, *thighs*, *booty*, *boobs*, *necks*, *belly*, *sideboobs*, dan *ahegao*.
-Command ini bersifat _case-sensitive_, jadi pastikan tag harus sesuai huruf besar kecilnya dan pengejaannya!
-Aliases: -
-Penggunaan: *$fetish* <tag>
-
-2. *$lewds*
-Kirim foto lewd secara random.
-Aliases: *lewd*
-Penggunaan: *$lewds*
-
-3. *$multifetish*
+1. *$multifetish*
 Kirim foto fetish sebanyak 5 foto dalam 1 request.
 Yang tersedia: *armpits*, *feets*, *thighs*, *booty*, *boobs*, *necks*, *belly*, *sideboobs*, dan *ahegao*.
 Command ini bersifat _case-sensitive_, jadi pastikan tag harus sesuai huruf besar kecilnya dan pengejaannya!
 Aliases: *mfetish*
 Penggunaan: *$multifetish <tag>*
 
-4. *$multilewds*
+2. *$multilewds*
 Kirim random foto lewd sebanyak 5 foto dalam 1 request.
 Aliases: *mlewds* - *mlewd*
-Penggunaan: *$multifetish*
+Penggunaan: *$multilewds*
     `
 }

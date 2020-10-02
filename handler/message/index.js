@@ -1,46 +1,16 @@
 const { decryptMedia, Client } = require('@open-wa/wa-automate')
 const moment = require('moment-timezone')
 const os = require('os')
-const curse = require('zalgo-js')
+const zalgo = require('zalgo-js')
 const axios = require('axios')
 const igm = require('instagram-fetcher')
+const md5 = require('md5')
+const reversemd5 = require('reverse-md5')
 moment.tz.setDefault('Asia/Jakarta').locale('id')
 const { downloader, urlShortener, meme, fetish, lewd, waifu } = require('../../lib')
 const { msgFilter, color, processTime, isUrl, isYt } = require('../../utils')
-const responses = [
-    'Adalah yoi',
-    'True min',
-    'Mana gw tau, emang gw bapaknya?',
-    'Se7',
-    'Jangan tanya gw lah',
-    'Gak',
-    'Ya',
-    'Adalah false',
-    'Adalah true',
-    'Puguh',
-    'G u bau',
-    'Cari tau sendiri lah',
-    'Keknya sih iya',
-    'Keknya sih nggak',
-    'Lah serius?',
-    'Anjir',
-    'Gak tau',
-    'Pukimak',
-    'Meureun, gw juga gak tau sih',
-    'Kagak',
-    'Setelah gw pikir sih gak mungkin',
-    'Setelah gw pikir sih mungkin aja',
-    'Y',
-    'G',
-    'Terserah',
-    'Terserah lu',
-    'Tul',
-    'Hah?',
-    'Ngetik apaan? Burem'
-]
-
-const { menuId } = require('./text') // For help command
-const { default: zalgo } = require('zalgo-js')
+const textResponse = require('./text')
+const menuId  = require('./text') // For help command
 
 module.exports = msgHandler = async (client = new Client(), message) => {
     try {
@@ -229,7 +199,7 @@ module.exports = msgHandler = async (client = new Client(), message) => {
             case 'ask':
             case '8ball':
                 let question = args.join(' ')
-                let answer = responses[Math.floor(Math.random() * (responses.length))]
+                let answer = textResponse.respon[Math.floor(Math.random() * (textResponse.respon.length))]
                 if (!question) return client.reply(from, '⚠️ Format salah! Ketik *$menu3* untuk penggunaan. [WRONG FORMAT]', id)
                 await client.sendText(from, `Pertanyaan: *${question}* \n\nJawaban: ${answer}`)
             break
@@ -260,11 +230,22 @@ module.exports = msgHandler = async (client = new Client(), message) => {
             break
             case 'curse':
                 let userText = args.join(' ')
-                if (!userText) return client.reply(from, '⚠️ Harap masukkan teks! [WRONG FORMAT]', id)
+                if (!userText) {
+                    return client.reply(from, '⚠️ Harap masukkan teks! [WRONG FORMAT]', id)
+                } else {
                 client.sendText(from, zalgo(userText))
+                }
             break
             case 'lenny':
                 client.reply(from, '( ͡° ͜ʖ ͡°)', id)
+            break
+            case 'md5':
+                let yourText = args.join(' ')
+                if (!yourText) {
+                    return client.reply(from, '⚠️ Harap masukkan teks! [WRONG FORMAT]', id)
+                } else {
+                    client.sendText(md5(yourText))
+                }
             break
             case 'randomeme':
             case 'reddit':
@@ -278,6 +259,16 @@ module.exports = msgHandler = async (client = new Client(), message) => {
                     client.reply(from, `⚠️ Terjadi kesalahan! [WRONG FORMAT]\n\n${err}`)
                 })
             break
+            case 'remd5':
+                let yourHash = args.join(' ')
+                const isHash = /^[a-f0-9]{32}$/gm
+                if (!yourHash) {
+                    return client.reply(from, '⚠️ Harap masukkan hash! [WRONG FORMAT]', id)
+                } else if (yourHash === isHash) {
+                    return client.reply(from, '⚠️ Harap masukkan hash MD5! [WRONG FORMAT]', id)
+                } else {
+                    client.sendText(from, reversemd5(yourHash))
+                }
             case 'reverse':
                 if (args.length < 1) return client.reply(from, '⚠️ Format salah! Ketik *$menu3* untuk penggunaan. [WRONG FORMAT]')
                 client.sendText(from, args.join(' ').split('').reverse().join(''))
@@ -290,7 +281,7 @@ module.exports = msgHandler = async (client = new Client(), message) => {
             case 'say':
             case 'talk':
                 let sayMessage = args.join(' ')
-                if (!sayMessage) return client.reply(from, '⚠️ Format salah! Ketik *$menu3* untuk penggunaan. [WRONG FORMAT]')
+                if (!sayMessage) return client.reply(from, '⚠️ Harap masukkan teks! [WRONG FORMAT]')
                 client.sendText(from, sayMessage)
             break
         
@@ -407,84 +398,6 @@ module.exports = msgHandler = async (client = new Client(), message) => {
             break
 
             // NSFW
-            case 'fetish':
-                let lust = args.join(' ')
-                client.reply(from, '_Mohon tunggu sebentar, proses ini akan memakan waktu beberapa menit..._\n\nMerasa terbantu karena bot ini? Bantu saya dengan cara donasi melalui:\n081294958473 (Telkomsel)\n081294958473 (OVO)\n\nTerima kasih 🙏', id)
-
-                if (args.length !== 1) {
-                    return client.reply(from, '⚠️ Silakan masukkan tag yang tersedia di *$hidden*! [WRONG FORMAT]')
-                } else if (lust === 'armpits') {
-                    fetish.armpits()
-                        .then(({subreddit, title, url, author}) => {
-                            client.sendFileFromUrl(from, `${url}`, 'fetish.jpg', `${title}\nTag: r/${subreddit}\nAuthor: u/${author}`, null, null, true)
-                        })
-                        .catch((err) => console.error(err))
-                } else if (lust === 'feets') {
-                    fetish.feets()
-                        .then(({subreddit, title, url, author}) => {
-                            client.sendFileFromUrl(from, `${url}`, 'fetish.jpg', `${title}\nTag: r/${subreddit}\nAuthor: u/${author}`, null, null, true)
-                        })
-                        .catch((err) => console.error(err))
-                } else if (lust === 'thighs') {
-                    fetish.thighs()
-                        .then(({subreddit, title, url, author}) => {
-                            client.sendFileFromUrl(from, `${url}`, 'fetish.jpg', `${title}\nTag: r/${subreddit}\nAuthor: u/${author}`, null, null, true)
-                        })
-                        .catch((err) => console.error(err))
-                } else if (lust === 'booty') {
-                    fetish.booty()
-                        .then(({subreddit, title, url, author}) => {
-                            client.sendFileFromUrl(from, `${url}`, 'fetish.jpg', `${title}\nTag: r/${subreddit}\nAuthor: u/${author}`, null, null, true)
-                        })
-                        .catch((err) => console.error(err))
-                } else if (lust === 'boobs') {
-                    fetish.boobs()
-                        .then(({subreddit, title, url, author}) => {
-                            client.sendFileFromUrl(from, `${url}`, 'fetish.jpg', `${title}\nTag: r/${subreddit}\nAuthor: u/${author}`, null, null, true)
-                        })
-                        .catch((err) => console.error(err))
-                } else if (lust === 'necks') {
-                    fetish.necks()
-                        .then(({subreddit, title, url, author}) => {
-                            client.sendFileFromUrl(from, `${url}`, 'fetish.jpg', `${title}\nTag: r/${subreddit}\nAuthor: u/${author}`, null, null, true)
-                        })
-                        .catch((err) => console.error(err))
-                } else if (lust === 'belly') {
-                    fetish.belly()
-                        .then(({subreddit, title, url, author}) => {
-                            client.sendFileFromUrl(from, `${url}`, 'fetish.jpg', `${title}\nTag: r/${subreddit}\nAuthor: u/${author}`, null, null, true)
-                        })
-                        .catch((err) => console.error(err))
-                } else if (lust === 'sideboobs') {
-                    fetish.sideboobs()
-                        .then(({subreddit, title, url, author}) => {
-                            client.sendFileFromUrl(from, `${url}`, 'fetish.jpg', `${title}\nTag: r/${subreddit}\nAuthor: u/${author}`, null, null, true)
-                        })
-                        .catch((err) => console.error(err))
-                } else if (lust === 'ahegao') {
-                    fetish.ahegao()
-                        .then(({subreddit, title, url, author}) => {
-                            client.sendFileFromUrl(from, `${url}`, 'fetish.jpg', `${title}\nTag: r/${subreddit}\nAuthor: u/${author}`, null, null, true)
-                        })
-                        .catch((err) => console.error(err))
-                } else {
-                    client.reply(from, '🙏 Maaf tag belum tersedia. Silakan request. [TAG NOT FOUND]')
-                }
-            break
-            case 'lewds':
-            case 'lewd':
-                client.reply(from, '_Mohon tunggu sebentar, proses ini akan memakan waktu beberapa menit..._\n\nMerasa terbantu karena bot ini? Bantu saya dengan cara donasi melalui:\n081294958473 (Telkomsel)\n081294958473 (OVO)\n\nTerima kasih 🙏', id)
-                lewd.random()
-                .then(({ subreddit, title, url, author }) => {
-                    client.sendFileFromUrl(from, `${url}`, 'lewd.jpg', `${title}\nTag: r/${subreddit}\nAuthor: u/${author}`, null, null, true)
-                    .then(() => console.log('Berhasil mengirim file!'))
-                    .catch((err) => console.log(err))
-                })
-                .catch((err) => {
-                    console.error(err)
-                    client.reply(from, `⚠️ Terjadi kesalahan! [ERR]\n\n${err}`)
-                })
-            break
             case 'multifetish':
             case 'mfetish':
                 let request = args.join(' ')
