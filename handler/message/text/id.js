@@ -32,9 +32,10 @@ Merasa terbantu saat menggunakan bot ini? Atau sekedar kasihan sama owner yang j
 Kamu bisa merealisasikan perasaan itu dengan cara donasi! Uang yang kalian pakai akan saya gunakan untuk memperpanjang masa aktif bot dan sisanya buat makan.
 Uang yang kalian pakai akan saya gunakan yang baik-baik kok.
 
-Metode pembayaran:
+Donasi yang didukung:
 081294958473 (Telkomsel)
 081294958473 (OVO)
+081294958473 (GoPay)
 
 Untuk request command, pertanyaan, kritik dan saran bisa chat owner:
 wa.me/6281294958473
@@ -371,7 +372,7 @@ Penggunaan: kirim foto lalu tambahkan caption *$wait*
 
 exports.textAdmin = () => {
     return `
-⚠️ [ *ADMIN ONLY* ] ⚠️
+    ⚠️ *ADMIN ONLY* ⚠️
 
 *ABAIKAN TANDA <>*
 Gunakan command ini jika admin terlalu malas:
@@ -409,7 +410,7 @@ Penggunaan: *$promote* @member
 
 exports.hiddenMenu = () => {
     return `
-🔞 [ *NSFW* ] 🔞
+    🔞 *NSFW* 🔞
 
 *ABAIKAN TANDA <>*
 Command untuk ( ͡° ͜ʖ ͡°):
