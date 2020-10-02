@@ -261,13 +261,16 @@ module.exports = msgHandler = async (client = new Client(), message) => {
             break
             case 'remd5':
                 let yourHash = args.join(' ')
+                let reverseMd5 = reversemd5({
+                    maxLen: 12
+                })
                 const isHash = /^[a-f0-9]{32}$/gm
                 if (!yourHash) {
                     return client.reply(from, '⚠️ Harap masukkan hash! [WRONG FORMAT]', id)
                 } else if (yourHash === isHash) {
                     return client.reply(from, '⚠️ Harap masukkan hash MD5! [WRONG FORMAT]', id)
                 } else {
-                    client.sendText(from, reversemd5(yourHash))
+                    client.sendText(from, reverseMd5(yourHash))
                 }
             break
             case 'reverse':
