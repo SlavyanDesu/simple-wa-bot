@@ -239,24 +239,13 @@ module.exports = msgHandler = async (client = new Client(), message) => {
                 exports.method = {
                     encode: input => {
                         return input.toString().split('').map(c => c.charCodeAt(0).toString(2))
-                    },
-                    decode: input => {
-                        let _input = typeof input === 'string' ? input.split(' ') : input
-                        return _input.map(c => parseInt(c, 2)).map(c => String.fromCharCode(c)).join('')
                     }
                 }
-                if (args.length < 2) return client.reply(from, '⚠️ Format salah! Ketik *$menu3* untuk penggunaan. [WRONG FORMAT]', id)
-                let input = args.slice(1).join(' ')
-
-                if (args[0].match(/^enc(ode(Text)?)?$/i)) {
-                    client.sendText(from, this.method.encode(input).join(' '))
-                } else if (args[0].match(/^dec(ode(Text)?)?$/i)) {
-                    client.sendText(from, this.methods.decode(input))
-                } else if (args[0].match(/^decToBin$/i)) {
-                    if (isNaN(input)) return client.reply(from, '⚠️ Input harus angka!', id)
-                    client.sendText(from, parseInt(input, 2))
+                let input = args.join(' ')
+                if (!input) {
+                    return client.reply(from, '⚠️ Harap masukan teks! [WRONG FORMAT]', id)
                 } else {
-                    throw `Unknown sub command: \`${args[0]}\``
+                    client.sendText(from, this.method.encode(input).join(' '))
                 }
             break
             case 'coinflip':

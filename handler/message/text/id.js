@@ -51,12 +51,12 @@ exports.textMenuAll = () => {
 
 *ABAIKAN TANDA <>*
 Downloader:
-1. *$facebook*
+1. *$facebook* [SEDANG ERROR]
 Untuk megunduh foto atau video dari Facebook.
 Aliases: *fb*
 Penggunaan: *$facebook https://www.facebook.com/...*
 
-2. *$instagram* [ERROR]
+2. *$instagram* [SEDANG ERROR]
 Untuk megunduh foto atau video dari Instagram.
 Aliases: *ig*
 Penggunaan: *$instagram https://www.instagram.com/p/...*
@@ -96,7 +96,7 @@ Penggunaan:: *$ask* <pertanyaan>
 2. *$binary*
 Ubah input teks mu ke dalam kode biner.
 Aliases: *biner* - *bin*
-Penggunaan: *$binary* <encodeText|decodeText|decToBin|binToDec> <input>
+Penggunaan: *$binary* <teks>
 
 3. *$coinflip*
 Lempar koin.
@@ -211,12 +211,12 @@ exports.textMenu1 = () => {
 > _Menu Page 1_
 
 Downloader:
-1. *$facebook*
+1. *$facebook* [SEDANG ERROR]
 Untuk megunduh foto atau video dari Facebook.
 Aliases: *fb*
 Penggunaan: *$facebook https://www.facebook.com/...*
 
-2. *$instagram* [ERROR]
+2. *$instagram* [SEDANG ERROR]
 Untuk megunduh foto atau video dari Instagram.
 Aliases: *ig*
 Penggunaan: *$instagram https://www.instagram.com/p/...*
@@ -269,7 +269,7 @@ Penggunaan:: *$ask* <pertanyaan>
 2. *$binary*
 Ubah input teks mu ke dalam kode biner.
 Aliases: *biner* - *bin*
-Penggunaan: *$binary* <encodeText|decodeText|decToBin|binToDec> <input>
+Penggunaan: *$binary* <input>
 
 3. *$coinflip*
 Lempar koin.
