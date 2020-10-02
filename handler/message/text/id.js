@@ -72,12 +72,12 @@ Aliases: *twt*
 Penggunaan: *$twitter https://www.twitter.com/xxxxx/status/...*
 
 5. *$ytmp3*
-Untuk mengkonversi video YouTube ke MP3. Maksimal 10 menit.
+Untuk mengkonversi video YouTube ke MP3.
 Aliases: -
 Penggunaan: *$ytmp3 https://youtu.be/9lBTqHdgerY*
 
 6. *$ytmp4*
-Untuk mengunduh video YouTube. Maksimal 10 menit.
+Untuk mengunduh video YouTube.
 Aliases: -
 Penggunaan: *$ytmp4 https://youtu.be/9lBTqHdgerY*
 
@@ -116,7 +116,7 @@ Penggunaan: *$lenny*
 6. *$randomeme*
 Kirim random meme dari reddit.
 Aliases: *reddit*
-Penggunaan: *$randmeme*
+Penggunaan: *$randomeme*
 
 7. *$reverse*
 .nasilut nikilaB
@@ -232,12 +232,12 @@ Aliases: *twt*
 Penggunaan: *$twitter https://www.twitter.com/xxxxx/status/...*
 
 5. *$ytmp3*
-Untuk mengkonversi video YouTube ke MP3. Maksimal 10 menit.
+Untuk mengkonversi video YouTube ke MP3.
 Aliases: -
 Penggunaan: *$ytmp3 https://youtu.be/9lBTqHdgerY*
 
 6. *$ytmp4*
-Untuk mengunduh video YouTube. Maksimal 10 menit.
+Untuk mengunduh video YouTube.
 Aliases: -
 Penggunaan: *$ytmp4 https://youtu.be/9lBTqHdgerY*
 `
@@ -289,7 +289,7 @@ Penggunaan: *$lenny*
 6. *$randomeme*
 Kirim random meme dari reddit.
 Aliases: *reddit*
-Penggunaan: *$randmeme*
+Penggunaan: *$randomeme*
 
 7. *$reverse*
 .nasilut nikilaB

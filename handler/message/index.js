@@ -1,11 +1,13 @@
 const { decryptMedia, Client } = require('@open-wa/wa-automate')
 const moment = require('moment-timezone')
 const os = require('os')
-const zalgo = require('zalgo-js')
 const md5 = require('md5')
+const curse = require('curse-text')
 moment.tz.setDefault('Asia/Jakarta').locale('id')
 const { downloader, urlShortener, meme, fetish, lewd, waifu } = require('../../lib')
 const { msgFilter, color, processTime, isUrl, isYt } = require('../../utils')
+
+const { textResponse } = require('./text')
 const { menuId } = require('./text') // For help command
 
 module.exports = msgHandler = async (client = new Client(), message) => {
@@ -156,6 +158,27 @@ module.exports = msgHandler = async (client = new Client(), message) => {
                     client.reply(from, `⚠️ Terjadi kesalahan! [ERR]\n\n${err}`, id)
                 })
             break
+            case 'ytmp4':
+                if (args.length !== 1) return client.reply(from, '⚠️ Format salah! Ketik *$menu1* untuk penggunaan. [WRONG FORMAT]', id)
+                if (!isYt(url)) return client.reply(from, '⚠️ Link tidak valid! [INVALID]', id)
+                await client.reply(from, '_Mohon tunggu sebentar, proses ini akan memakan waktu beberapa menit..._\n\nMerasa terbantu karena bot ini? Bantu saya dengan cara donasi melalui:\n081294958473 (Telkomsel)\n081294958473 (OVO)\n\nTerima kasih 🙏', id)
+                downloader.ytmp4(url)
+                .then(async (response) => {
+                    if (response.status !== 200) {
+                        return client.reply('⚠️ Link tidak valid! [INVALID]', id)
+                    } else if (Number(response.filesize.split(' MB')[0]) > 50.00) {
+                        return client.reply(from, '🙏 Maaf durasi video telah melewati batas.', id)
+                    } else {
+                        await client.sendFileFromUrl(from, response.result, `${response.title}.mp4`, '', null, null, true)
+                        .then(() => console.log(`Sukses mengirim file! Diproses selama: ${processTime(t, moment())}`))
+                        .catch((err) => console.error(err))
+                    }
+                })
+                .catch((err) => {
+                    console.error(err)
+                    client.reply(from, `⚠️ Terjadi kesalahan! [ERR]\n\n${err}`, id)
+                })
+            break
 
             // Sticker
             case 'sticker':
@@ -221,7 +244,7 @@ module.exports = msgHandler = async (client = new Client(), message) => {
                 if (!userText) {
                     return client.reply(from, '⚠️ Harap masukkan teks! [WRONG FORMAT]', id)
                 } else {
-                client.sendText(from, zalgo(userText))
+                client.sendText(from, curse(userText))
                 }
             break
             case 'lenny':
@@ -324,12 +347,14 @@ module.exports = msgHandler = async (client = new Client(), message) => {
 
             // Weeb Zone
             case 'wait':
-                if ((isMedia || isQuotedImage) && args.length === 0) {
+                if (isMedia && type === 'image' || quotedMsg && quotedMsg.type === 'image') {
+                    if (isMedia) {
+                        var mediaData = await decryptMedia(message, uaOverride)
+                    } else {
+                        var mediaData = await decryptMedia(quotedMsg, uaOverride)
+                    }
                     const fetch = require('node-fetch')
-                    const encryptMedia = isQuotedImage ? quotedMsg : message
-                    const _mimetype = isQuotedImage ? quotedMsg.mimetype : mimetype
-                    const mediaData = await decryptMedia(encryptMedia, uaOverride)
-                    const imageBase64 = `data:${_mimetype};base64,${mediaData.toString('base64')}`
+                    const imageBase64 = `data:${mimetype};base64,${mediaData.toString('base64')}`
                     await client.reply(from, '_Mohon tunggu sebentar, proses ini akan memakan waktu beberapa menit..._\n\nMerasa terbantu karena bot ini? Bantu saya dengan cara donasi melalui:\n081294958473 (Telkomsel)\n081294958473 (OVO)\n\nTerima kasih 🙏', id)
                     fetch('https://trace.moe/api/search', {
                         method: 'POST',
@@ -339,25 +364,30 @@ module.exports = msgHandler = async (client = new Client(), message) => {
                     .then(respon => respon.json())
                     .then(resolt => {
                         if (resolt.docs && resolt.docs.length <= 0) {
-                            client.reply(from, '😔 Maaf, saya tidak tau anime ini.', id)
+                            client.reply(from, '🙏 Maaf, saya tidak tau anime ini.', id)
                         }
-                        const { title, title_chinese, title_romaji, title_english, episode, similarity, filename, at, tokenthumb, anilist_id } = resolt.docs[0]
+                        const { title, title_romaji, title_english, episode, similarity, filename, at, tokenthumb, anilist_id } = resolt.docs[0]
                         teks = ''
                         if (similarity < 0.92) {
-                            teks = '🤨 Tingkat kesamaan rendah:\n'
+                            teks = '🤔 Saya kurang yakin dengan hasilnya:\n\n'
                         }
-                        teks += `Title: ${title}\nTitle Chinese: ${title_chinese}\nTitle Romaji: ${title_romaji}\nTitle English: ${title_english}\n`
+                        teks += `Judul: ${title}\nRomaji: ${title_romaji}\nEnglish : ${title_english}\n`
                         teks += `Episode: ${episode.toString()}\n`
-                        teks += `Tingkat Kesamaan: ${(similarity * 100).toFixed(1)}%\n`
+                        teks += `Kesamaan: ${(similarity * 100).toFixed(1)}%`
                         var video = `https://media.trace.moe/video/${anilist_id}/${encodeURIComponent(filename)}?t=${at}&token=${tokenthumb}`;
-                            client.sendFileFromUrl(from, video, 'anime.mp4', teks, id)
+                        client.sendFileFromUrl(from, video, 'anime.mp4', teks, null, null, true)
+                        .catch(() => {
+                            client.reply(from, teks, id)
                         })
+                    })
                     .catch((err) => {
                         console.error(err)
-                        client.reply(from, `⚠️ Terjadi kesalahan! [WRONG FORMAT]\n\n${err}`)
+                        client.reply(from, `⚠️ Terjadi kesalahan! [ERR]\n\n${err}`, id)
                     })
+                } else {
+                    client.reply(from, '⚠️ Harap lampirkan foto! Ketik *$menu5* untuk penggunaan.', id)
                 }
-            break
+                break
             case 'waifu':
                 await client.reply(from, '_Mohon tunggu sebentar, proses ini akan memakan waktu beberapa menit..._\n\nMerasa terbantu karena bot ini? Bantu saya dengan cara donasi melalui:\n081294958473 (Telkomsel)\n081294958473 (OVO)\n\nTerima kasih 🙏', id)
                 waifu.random()
@@ -366,7 +396,7 @@ module.exports = msgHandler = async (client = new Client(), message) => {
                     })
                     .catch((err) => {
                         console.error(err)
-                        client.reply(from, `⚠️ Terjadi kesalahan! [ERR]\n\n${err}`)
+                        client.reply(from, `⚠️ Terjadi kesalahan! [ERR]\n\n${err}`, id)
                     })
                 break
 
