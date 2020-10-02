@@ -2,15 +2,11 @@ const { decryptMedia, Client } = require('@open-wa/wa-automate')
 const moment = require('moment-timezone')
 const os = require('os')
 const zalgo = require('zalgo-js')
-const axios = require('axios')
-const igm = require('instagram-fetcher')
 const md5 = require('md5')
-const reversemd5 = require('reverse-md5')
 moment.tz.setDefault('Asia/Jakarta').locale('id')
 const { downloader, urlShortener, meme, fetish, lewd, waifu } = require('../../lib')
 const { msgFilter, color, processTime, isUrl, isYt } = require('../../utils')
-const textResponse = require('./text')
-const menuId  = require('./text') // For help command
+const { menuId } = require('./text') // For help command
 
 module.exports = msgHandler = async (client = new Client(), message) => {
     try {
@@ -70,7 +66,7 @@ module.exports = msgHandler = async (client = new Client(), message) => {
                     const link = shorts.map((x) => `${x.resolution} Quality: ${x.short}`)
                     const caption = `Teks: ${title} \n\nLink download: \n${link.join('\n')} \n\nBerhasil diproses selama ${processTime(t, moment())} detik`
                     await client.sendFileFromUrl(from, thumbnail, 'videos.jpg', caption, null, null, true)
-                    .then((serialized) => console.log(`Sukses mengirm file dengan ID: ${serialized} diproses selama ${processTime(t, moment())}`))
+                    .then((serialized) => console.log(`Sukses mengirm file dengan ID: ${serialized} diproses selama ${processTime(t, moment())} detik`))
                     .catch((err) => console.error(err))
                 })
                 .catch((err) => {
@@ -83,16 +79,20 @@ module.exports = msgHandler = async (client = new Client(), message) => {
                 if (args.length !== 1) return client.reply(from, '⚠️ Format salah! Ketik *$menu1* untuk penggunaan. [WRONG FORMAT]', id)
                 if (!isUrl(url) && !url.includes('instagram.com')) return client.reply(from, '⚠️ Link tidak valid! [INVALID]', id)
                 client.reply(from, '_Mohon tunggu sebentar, proses ini akan memakan waktu beberapa menit..._\n\nMerasa terbantu karena bot ini? Bantu saya dengan cara donasi melalui:\n081294958473 (Telkomsel)\n081294958473 (OVO)\n\nTerima kasih 🙏', id)
-                let link = igm.download(url)
-                for (let i = 0; i < link.length; i++) {
-                    let source = link[i]
-                    client.sendFileFromUrl(from, source, 'ig.jpg', 'Silakan', null, null, true)
-                    .then(() => console.log('Sukses mengirim file!'))
-                    .catch((err) => {
-                        console.error(err)
-                        client.reply(from `⚠️ Terjadi kesalahan! [ERR]\n\n${err}`)
-                    })
-                }
+                downloader.insta(url)
+                .then(async (data) => {
+                    if (data.descriptionc === null) {
+                        return client.reply(from, '⚠️ Link tidak valid atau user private! [INVALID]', id)
+                    } else if (data.mediatype === 'photo') {
+                        await client.sendFileFromUrl(from, data.descriptionc, 'photo.jpg', '', null, null, true)
+                    } else if (data.mediatype === 'video') {
+                        await client.sendFileFromUrl(from, data.descriptionc, 'video.mp4', `Berhasil diproses selama: ${processTime(t, moment())} detik`, null, null, true)
+                    }
+                })
+                .catch((err) => {
+                    console.error(err)
+                    client.reply(from, `⚠️ Terjadi kesalahan!\n\n${err}`)
+                })
             break
             case 'tiktok':
                 if (args.length !== 1) return client.reply(from, '⚠️ Format salah! Ketik *$menu1* untuk penggunaan. [WRONG FORMAT]', id)
@@ -103,7 +103,7 @@ module.exports = msgHandler = async (client = new Client(), message) => {
                         const filename = videoMeta.authorMeta.name + '.mp4'
                         const caps = `*\nUsername: ${videoMeta.authorMeta.name} \nMusic: ${videoMeta.musicMeta.musicName} \nView: ${videoMeta.playCount.toLocaleString()} \nLike: ${videoMeta.diggCount.toLocaleString()} \nComment: ${videoMeta.commentCount.toLocaleString()} \nShare: ${videoMeta.shareCount.toLocaleString()} \nCaption: ${videoMeta.text.trim() ? videoMeta.text : '-'}`
                         await client.sendFileFromUrl(from, videoMeta.url, filename, videoMeta.NoWaterMark ? caps : `⚠ Video tanpa watermark tidak tersedia. \n\n${caps}`, '', { headers: { 'User-Agent': 'okhttp/4.5.0', referer: 'https://www.tiktok.com/' } }, true)
-                        .then((serialized) => console.log(`Sukses Mengirim file dengan ID: ${serialized} diproses selama ${processTime(t, moment())} detik`))
+                        .then((serialized) => console.log(`Sukses mengirim file dengan ID: ${serialized} diproses selama ${processTime(t, moment())} detik`))
                         .catch((err) => console.error(err))
                 })
                 .catch(() => client.reply(from, '⚠️ Link tidak valid! [INVALID]', id))
@@ -139,36 +139,21 @@ module.exports = msgHandler = async (client = new Client(), message) => {
                 if (args.length !== 1) return client.reply(from, '⚠️ Format salah! Ketik *$menu1* untuk penggunaan. [WRONG FORMAT]', id)
                 if (!isYt(url)) return client.reply(from, '⚠️ Link tidak valid! [INVALID]', id)
                 await client.reply(from, '_Mohon tunggu sebentar, proses ini akan memakan waktu beberapa menit..._\n\nMerasa terbantu karena bot ini? Bantu saya dengan cara donasi melalui:\n081294958473 (Telkomsel)\n081294958473 (OVO)\n\nTerima kasih 🙏', id)
-                axios.get('https://mhankbarbar.herokuapp.com/api/yta?url=' + url)
-                .then(async function (response) {
-                    console.log('Get metadata from => ' + url)
-                    if (response.data.status === 200) {
-                        await client.sendFileFromUrl(from, response.data.result, `${response.data.title}.mp3`, `Sukses mengirim file! Diproses selama ${processTime(t, moment())} detik`, null, null, true)
-                        .then(() => console.log(`Sukses mengirim file! Diproses selama ${processTime(t, moment())} detik`))
+                downloader.ytmp3(url)
+                .then(async (response) => {
+                    if (response.status !== 200) {
+                        return client.reply('⚠️ Link tidak valid! [INVALID]', id)
+                    } else if (Number(response.filesize.split(' MB')[0]) > 50.00) {
+                        return client.reply(from, '🙏 Maaf durasi video telah melewati batas.', id)
+                    } else {
+                        await client.sendFileFromUrl(from, response.result, `${response.title}.mp3`, '', null, null, true)
+                        .then(() => console.log(`Sukses mengirim file! Diproses selama: ${processTime(t, moment())}`))
                         .catch((err) => console.error(err))
                     }
                 })
                 .catch((err) => {
                     console.error(err)
-                    client.reply(from, `⚠️ Terjadi kesalahan! [ERR]\n\n${err}`)
-                })
-            break
-            case 'ytmp4':
-                if (args.length !== 1) return client.reply(from, '⚠️ Format salah! Ketik *$menu1* untuk penggunaan. [WRONG FORMAT]', id)
-                if (!isYt(url)) return client.reply(from, '⚠️ Link tidak valid! [INVALID]', id)
-                await client.reply(from, '_Mohon tunggu sebentar, proses ini akan memakan waktu beberapa menit..._\n\nMerasa terbantu karena bot ini? Bantu saya dengan cara donasi melalui:\n081294958473 (Telkomsel)\n081294958473 (OVO)\n\nTerima kasih 🙏', id)
-                axios.get('https://mhankbarbar.herokuapp.com/api/ytv?url=' + url)
-                .then(async function (response) {
-                    console.log('Get metadata from => ' + url)
-                    if (response.data.status === 200) {
-                        await client.sendFileFromUrl(from, response.data.result, `${response.data.title}.mp4`, `Sukses mengirim file! Diproses selama ${processTime(t, moment())} detik`, null, null, true)
-                        .then(() => console.log(`Sukses mengirim file! Diproses selama ${processTime(t, moment())}`))
-                        .catch((err) => console.error(err))
-                    }
-                })
-                .catch((err) => {
-                    console.error(err)
-                    client.reply(from, `⚠️ Terjadi kesalahan! [ERR]\n\n${err}`)
+                    client.reply(from, `⚠️ Terjadi kesalahan! [ERR]\n\n${err}`, id)
                 })
             break
 
@@ -199,9 +184,12 @@ module.exports = msgHandler = async (client = new Client(), message) => {
             case 'ask':
             case '8ball':
                 let question = args.join(' ')
-                let answer = textResponse.respon[Math.floor(Math.random() * (textResponse.respon.length))]
-                if (!question) return client.reply(from, '⚠️ Format salah! Ketik *$menu3* untuk penggunaan. [WRONG FORMAT]', id)
-                await client.sendText(from, `Pertanyaan: *${question}* \n\nJawaban: ${answer}`)
+                let answer = textResponse[Math.floor(Math.random() * (textResponse.length))]
+                if (!question) {
+                    return client.reply(from, '⚠️ Harap masukkan teks! [WRONG FORMAT]', id)
+                } else {
+                    client.sendText(from, `Pertanyaan: *${question}* \n\nJawaban: ${answer}`)
+                }
             break
             case 'binary':
             case 'bin':
@@ -258,20 +246,6 @@ module.exports = msgHandler = async (client = new Client(), message) => {
                     console.error(err)
                     client.reply(from, `⚠️ Terjadi kesalahan! [WRONG FORMAT]\n\n${err}`)
                 })
-            break
-            case 'remd5':
-                let yourHash = args.join(' ')
-                let reverseMd5 = reversemd5({
-                    maxLen: 12
-                })
-                const isHash = /^[a-f0-9]{32}$/gm
-                if (!yourHash) {
-                    return client.reply(from, '⚠️ Harap masukkan hash! [WRONG FORMAT]', id)
-                } else if (yourHash === isHash) {
-                    return client.reply(from, '⚠️ Harap masukkan hash MD5! [WRONG FORMAT]', id)
-                } else {
-                    client.sendText(from, reverseMd5(yourHash))
-                }
             break
             case 'reverse':
                 if (args.length < 1) return client.reply(from, '⚠️ Format salah! Ketik *$menu3* untuk penggunaan. [WRONG FORMAT]')
