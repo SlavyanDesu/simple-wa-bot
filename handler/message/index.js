@@ -244,7 +244,7 @@ module.exports = msgHandler = async (client = new Client(), message) => {
                 if (!yourText) {
                     return client.reply(from, '⚠️ Harap masukkan teks! [WRONG FORMAT]', id)
                 } else {
-                    client.sendText(md5(yourText))
+                    client.sendText(from, md5(yourText))
                 }
             break
             case 'randomeme':
