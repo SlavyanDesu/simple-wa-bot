@@ -269,6 +269,7 @@ module.exports = msgHandler = async (client = new Client(), message) => {
                 } else {
                     client.sendText(from, reversemd5(yourHash))
                 }
+            break
             case 'reverse':
                 if (args.length < 1) return client.reply(from, '⚠️ Format salah! Ketik *$menu3* untuk penggunaan. [WRONG FORMAT]')
                 client.sendText(from, args.join(' ').split('').reverse().join(''))
