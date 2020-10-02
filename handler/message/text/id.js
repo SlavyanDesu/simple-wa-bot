@@ -88,7 +88,6 @@ Aliases: *stiker*
 Penggunaan: kirim gambar/link dengan caption *$sticker* atau balas gambar yang sudah dikirim dengan *$sticker*.
 
 Fun:
-Fun:
 1. *$ask*
 Tanya tentang apa saja dan saya akan menjawab secara random.
 Aliases: *8ball*
@@ -104,27 +103,32 @@ Lempar koin.
 Aliases: *coin* - *flip*
 Penggunaan: *$coinflip*
 
-4. *$lenny*
+4. *$curse*
+Bikin teks menjadi demonic style.
+Aliases: -
+Penggunaan: *$curse* <teks>
+
+5. *$lenny*
 ( ͡° ͜ʖ ͡°)
 Aliases: -
 Penggunaan: *$lenny*
 
-5. *$randomeme*
+6. *$randomeme*
 Kirim random meme dari reddit.
 Aliases: *reddit*
 Penggunaan: *$randmeme*
 
-6. *$reverse*
+7. *$reverse*
 .nasilut nikilaB
 Aliases: - 
 Penggunaan: *$reverse* <teks>
 
-7. *$roll*
+8. *$roll*
 Roll angka.
 Aliases: *dice*
 Penggunaan: *$roll*
 
-8. *$say*
+9. *$say*
 It's just a say command, whatd'ya expect?
 Aliases: *talk*
 Penggunaan: *$say* <teks>
@@ -272,27 +276,32 @@ Lempar koin.
 Aliases: *coin* - *flip*
 Penggunaan: *$coinflip*
 
-4. *$lenny*
+4. *$curse*
+Bikin teks menjadi demonic style.
+Aliases: -
+Penggunaan: *$curse* <teks>
+
+5. *$lenny*
 ( ͡° ͜ʖ ͡°)
 Aliases: -
 Penggunaan: *$lenny*
 
-5. *$randomeme*
+6. *$randomeme*
 Kirim random meme dari reddit.
 Aliases: *reddit*
 Penggunaan: *$randmeme*
 
-6. *$reverse*
+7. *$reverse*
 .nasilut nikilaB
 Aliases: - 
 Penggunaan: *$reverse* <teks>
 
-7. *$roll*
+8. *$roll*
 Roll angka.
 Aliases: *dice*
 Penggunaan: *$roll*
 
-8. *$say*
+9. *$say*
 It's just a say command, whatd'ya expect?
 Aliases: *talk*
 Penggunaan: *$say* <teks>

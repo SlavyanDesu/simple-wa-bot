@@ -1,6 +1,7 @@
 const { decryptMedia, Client } = require('@open-wa/wa-automate')
 const moment = require('moment-timezone')
 const os = require('os')
+const curse = require('zalgo-js')
 const axios = require('axios')
 const igm = require('instagram-fetcher')
 moment.tz.setDefault('Asia/Jakarta').locale('id')
@@ -39,6 +40,7 @@ const responses = [
 ]
 
 const { menuId } = require('./text') // For help command
+const { default: zalgo } = require('zalgo-js')
 
 module.exports = msgHandler = async (client = new Client(), message) => {
     try {
@@ -226,8 +228,8 @@ module.exports = msgHandler = async (client = new Client(), message) => {
             // Fun
             case 'ask':
             case '8ball':
-                const question = args.join(' ')
-                const answer = responses[Math.floor(Math.random() * (responses.length))]
+                let question = args.join(' ')
+                let answer = responses[Math.floor(Math.random() * (responses.length))]
                 if (!question) return client.reply(from, '⚠️ Format salah! Ketik *$menu3* untuk penggunaan. [WRONG FORMAT]', id)
                 await client.sendText(from, `Pertanyaan: *${question}* \n\nJawaban: ${answer}`)
             break
@@ -267,6 +269,11 @@ module.exports = msgHandler = async (client = new Client(), message) => {
                 const random = coin[Math.floor(Math.random() * (coin.length))]
                 await client.reply(from, `Kamu mendapatkan bagian *${random}*`)
             break
+            case 'curse':
+                let userText = args.join(' ')
+                if (!userText) return client.reply(from, '⚠️ Harap masukkan teks! [WRONG FORMAT]', id)
+                client.sendText(from, zalgo(userText))
+            break
             case 'lenny':
                 client.reply(from, '( ͡° ͜ʖ ͡°)', id)
             break
@@ -284,18 +291,18 @@ module.exports = msgHandler = async (client = new Client(), message) => {
             break
             case 'reverse':
                 if (args.length < 1) return client.reply(from, '⚠️ Format salah! Ketik *$menu3* untuk penggunaan. [WRONG FORMAT]')
-                await client.sendText(from, args.join(' ').split('').reverse().join(''))
+                client.sendText(from, args.join(' ').split('').reverse().join(''))
             break
             case 'roll':
             case 'dice':
                 let roll = Math.floor(Math.random() * 6) + 1
-                await client.reply(from, `Kamu mendapatkan angka *${roll}*.`)
+                client.reply(from, `Kamu mendapatkan angka *${roll}*.`)
             break
             case 'say':
             case 'talk':
-                const sayMessage = args.join(' ')
+                let sayMessage = args.join(' ')
                 if (!sayMessage) return client.reply(from, '⚠️ Format salah! Ketik *$menu3* untuk penggunaan. [WRONG FORMAT]')
-                await client.sendText(from, sayMessage)
+                client.sendText(from, sayMessage)
             break
         
             // Utility

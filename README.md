@@ -61,6 +61,7 @@ After that scan the QR code and wait until it authenticated.
 | Reddit      |      ✔️      |
 | Lenny       |      ✔️      |
 | Binary      |      ✔️      |
+| Curse       |      ✔️      |
 
 |   Utility   | Availability |
 | :---------: | :----------: |

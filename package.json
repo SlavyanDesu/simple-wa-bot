@@ -44,7 +44,8 @@
     "sagiri": "^3.1.0",
     "sharp": "^0.26.1",
     "tiktok-scraper": "^1.3.3",
-    "video-url-link": "git+https://github.com/YogaSakti/video-url-link.git"
+    "video-url-link": "git+https://github.com/YogaSakti/video-url-link.git",
+    "zalgo-js": "^1.0.0"
   },
   "devDependencies": {
     "babel-eslint": "^10.1.0",
