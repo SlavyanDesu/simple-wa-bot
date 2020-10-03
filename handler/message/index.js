@@ -208,7 +208,7 @@ module.exports = msgHandler = async (client = new Client(), message) => {
                     .then((r) => (!r && r !== undefined)
                         ? client.sendText(from, '⚠️ Link yang dikirim tidak dapat dimuat! [CANNOT LOAD]', id)
                         : client.reply(from, 'Silakan', id))
-                            .then(() => console.log(`Stiker diproses selama: ${processTime(t, moment())} detik`)
+                            .then(() => console.log(`Stiker diproses selama: ${processTime(t, moment())} detik`))
                 } else {
                     client.reply(from, '⚠️ Format salah! Ketik *$menu2* untuk penggunaan. [WRONG FORMAT]', id)
                 }
