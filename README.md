@@ -49,7 +49,6 @@ After that scan the QR code and wait until it authenticated.
 | Send image      |      ✔️      |
 | Send image URL  |      ✔️      |
 | Reply to image  |      ✔️      |
-| GIF sticker     |    📝 Todo   |
 
 |     Fun     | Availability |
 | :---------: | :----------: |
@@ -62,6 +61,8 @@ After that scan the QR code and wait until it authenticated.
 | Lenny       |      ✔️      |
 | Binary      |      ✔️      |
 | Curse       |      ✔️      |
+| Hash MD5    |      ✔️      |
+| Mocking     |      ✔️      |
 
 |   Utility   | Availability |
 | :---------: | :----------: |
@@ -75,13 +76,11 @@ After that scan the QR code and wait until it authenticated.
 | :----------------: | :----------: |
 | What Anime Is This |      ✔️      |
 | Random Waifu Image |      ✔️      |
-| Random Wallpaper   |    📝 Todo   |
 
 |        NSFW        | Availability |
 | :----------------: | :----------: |
 | Lewd               |      ✔️      |
 | Fetish             |      ✔️      |
-| nHentai Downloader |    📝 Todo   |
 
 |  Moderation  | Availability |
 | :----------: | :----------: |
@@ -91,7 +90,6 @@ After that scan the QR code and wait until it authenticated.
 | Demote       |      ✔️      |
 | Out Group    |      ✔️      |
 | Status       |      ✔️      |
-| Mention All  |    📝 Todo   |
 | Add User     |      ✔️      |
 | Group Link   |      ✔️      |
 
