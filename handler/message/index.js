@@ -52,7 +52,7 @@ module.exports = msgHandler = async (client = new Client(), message) => {
             case 'fb':
                 if (args.length !== 1) return client.reply(from, '⚠️ Format salah! Ketik *$menu* untuk penggunaan. [WRONG FORMAT]', id)
                 if (!isUrl(url) && !url.includes('facebook.com')) return client.reply(from, '⚠️ Link tidak valid! [INVALID]', id)
-                await client.reply(from, '_Mohon tunggu sebentar, proses ini akan memakan waktu beberapa menit..._\n\nMerasa terbantu karena bot ini? Bantu saya dengan cara donasi melalui:\n081294958473 (Telkomsel)\n081294958473 (OVO)\n\nTerima kasih 🙏', id)
+                await client.reply(from, '_Mohon tunggu sebentar, proses ini akan memakan waktu beberapa menit..._\n\nMerasa terbantu karena bot ini? Bantu saya dengan cara donasi melalui:\n081294958473 (Telkomsel/OVO/GoPay)\n\nTerima kasih 🙏', id)
                 downloader.facebook(url)
                 .then(async (videoMeta) => {
                     const title = videoMeta.response.title
@@ -66,9 +66,9 @@ module.exports = msgHandler = async (client = new Client(), message) => {
                         shorts.push(links[i])
                     }
                     const link = shorts.map((x) => `${x.resolution} Quality: ${x.short}`)
-                    const caption = `Teks: ${title} \n\nLink download: \n${link.join('\n')} \n\nBerhasil diproses selama ${processTime(t, moment())} detik`
+                    const caption = `Teks: ${title}\n\nLink download:\n${link.join('\n')}\n\nBerhasil diproses selama ${processTime(t, moment())} detik`
                     await client.sendFileFromUrl(from, thumbnail, 'videos.jpg', caption, null, null, true)
-                    .then((serialized) => console.log(`Sukses mengirm file dengan ID: ${serialized} diproses selama ${processTime(t, moment())} detik`))
+                    .then((serialized) => console.log(`Sukses mengirim file dengan ID: ${serialized} Diproses selama ${processTime(t, moment())} detik`))
                     .catch((err) => console.error(err))
                 })
                 .catch((err) => {
@@ -80,32 +80,36 @@ module.exports = msgHandler = async (client = new Client(), message) => {
             case 'ig':
                 if (args.length !== 1) return client.reply(from, '⚠️ Format salah! Ketik *$menu1* untuk penggunaan. [WRONG FORMAT]', id)
                 if (!isUrl(url) && !url.includes('instagram.com')) return client.reply(from, '⚠️ Link tidak valid! [INVALID]', id)
-                client.reply(from, '_Mohon tunggu sebentar, proses ini akan memakan waktu beberapa menit..._\n\nMerasa terbantu karena bot ini? Bantu saya dengan cara donasi melalui:\n081294958473 (Telkomsel)\n081294958473 (OVO)\n\nTerima kasih 🙏', id)
+                await client.reply(from, '_Mohon tunggu sebentar, proses ini akan memakan waktu beberapa menit..._\n\nMerasa terbantu karena bot ini? Bantu saya dengan cara donasi melalui:\n081294958473 (Telkomsel/OVO/GoPay)\n\nTerima kasih 🙏', id)
                 downloader.insta(url)
                 .then(async (data) => {
                     if (data.descriptionc === null) {
                         return client.reply(from, '⚠️ Link tidak valid atau user private! [INVALID]', id)
                     } else if (data.mediatype === 'photo') {
                         await client.sendFileFromUrl(from, data.descriptionc, 'photo.jpg', '', null, null, true)
+                        .then((serialized) => console.log(`Sukses mengirim file dengan ID: ${serialized} Diproses selama: ${processTime(t, moment())} detik`))
+                        .catch((err) => console.error(err))
                     } else if (data.mediatype === 'video') {
                         await client.sendFileFromUrl(from, data.descriptionc, 'video.mp4', `Berhasil diproses selama: ${processTime(t, moment())} detik`, null, null, true)
+                        .then((serialized) => console.log(`Sukses mengirim file dengan ID: ${serialized} Diproses selama: ${processTime(t, moment())} detik`))
+                        .catch((err) => console.error(err))
                     }
                 })
                 .catch((err) => {
                     console.error(err)
-                    client.reply(from, `⚠️ Terjadi kesalahan!\n\n${err}`)
+                    client.reply(from, `⚠️ Terjadi kesalahan!\n\n${err}`, id)
                 })
             break
             case 'tiktok':
                 if (args.length !== 1) return client.reply(from, '⚠️ Format salah! Ketik *$menu1* untuk penggunaan. [WRONG FORMAT]', id)
                 if (!isUrl(url) && !url.includes('tiktok.com')) return client.reply(from, '⚠️ Link tidak valid! [INVALID]', id)
-                await client.reply(from, `_Mohon tunggu sebentar, proses ini akan memakan waktu beberapa menit..._\n\nMerasa terbantu karena bot ini? Bantu saya dengan cara donasi melalui:\n081294958473 (Telkomsel)\n081294958473 (OVO)\n\nTerima kasih 🙏`, id)
+                await client.reply(from, `_Mohon tunggu sebentar, proses ini akan memakan waktu beberapa menit..._\n\nMerasa terbantu karena bot ini? Bantu saya dengan cara donasi melalui:\n081294958473 (Telkomsel/OVO/GoPay)\n\nTerima kasih 🙏`, id)
                 downloader.tiktok(url)
                 .then(async (videoMeta) => {
                         const filename = videoMeta.authorMeta.name + '.mp4'
                         const caps = `*\nUsername: ${videoMeta.authorMeta.name} \nMusic: ${videoMeta.musicMeta.musicName} \nView: ${videoMeta.playCount.toLocaleString()} \nLike: ${videoMeta.diggCount.toLocaleString()} \nComment: ${videoMeta.commentCount.toLocaleString()} \nShare: ${videoMeta.shareCount.toLocaleString()} \nCaption: ${videoMeta.text.trim() ? videoMeta.text : '-'}`
                         await client.sendFileFromUrl(from, videoMeta.url, filename, videoMeta.NoWaterMark ? caps : `⚠ Video tanpa watermark tidak tersedia. \n\n${caps}`, '', { headers: { 'User-Agent': 'okhttp/4.5.0', referer: 'https://www.tiktok.com/' } }, true)
-                        .then((serialized) => console.log(`Sukses mengirim file dengan ID: ${serialized} diproses selama ${processTime(t, moment())} detik`))
+                        .then((serialized) => console.log(`Sukses mengirim file dengan ID: ${serialized} Diproses selama ${processTime(t, moment())} detik`))
                         .catch((err) => console.error(err))
                 })
                 .catch(() => client.reply(from, '⚠️ Link tidak valid! [INVALID]', id))
@@ -114,7 +118,7 @@ module.exports = msgHandler = async (client = new Client(), message) => {
             case 'twt':
                 if (args.length !== 1) return client.reply(from, '⚠️ Format salah! Ketik *$menu1* untuk penggunaan. [WRONG FORMAT]', id)
                 if (!isUrl(url) && !url.includes('twitter.com') || url.includes('t.co')) return client.reply(from, '⚠️ Link tidak valid! [INVALID]', id)
-                await client.reply(from, '_Mohon tunggu sebentar, proses ini akan memakan waktu beberapa menit..._\n\nMerasa terbantu karena bot ini? Bantu saya dengan cara donasi melalui:\n081294958473 (Telkomsel)\n081294958473 (OVO)\n\nTerima kasih 🙏', id)
+                await client.reply(from, '_Mohon tunggu sebentar, proses ini akan memakan waktu beberapa menit..._\n\nMerasa terbantu karena bot ini? Bantu saya dengan cara donasi melalui:\n081294958473 (Telkomsel/OVO/GoPay)\n\nTerima kasih 🙏', id)
                 downloader.tweet(url)
                 .then(async (data) => {
                     if (data.type === 'video') {
@@ -139,8 +143,8 @@ module.exports = msgHandler = async (client = new Client(), message) => {
             break
             case 'ytmp3':
                 if (args.length !== 1) return client.reply(from, '⚠️ Format salah! Ketik *$menu1* untuk penggunaan. [WRONG FORMAT]', id)
-                if (!isYt(url) && !url.includes('youtu.be')) return client.reply(from, '⚠️ Link tidak valid! [INVALID]', id)
-                await client.reply(from, '_Mohon tunggu sebentar, proses ini akan memakan waktu beberapa menit..._\n\nMerasa terbantu karena bot ini? Bantu saya dengan cara donasi melalui:\n081294958473 (Telkomsel)\n081294958473 (OVO)\n\nTerima kasih 🙏', id)
+                if (!isYt(url) && !url.includes('youtu.be') || url.includes('youtube.com')) return client.reply(from, '⚠️ Link tidak valid! [INVALID]', id)
+                await client.reply(from, '_Mohon tunggu sebentar, proses ini akan memakan waktu beberapa menit..._\n\nMerasa terbantu karena bot ini? Bantu saya dengan cara donasi melalui:\n081294958473 (Telkomsel/OVO/GoPay)\n\nTerima kasih 🙏', id)
                 downloader.ytmp3(url)
                 .then(async (response) => {
                     if (response.status !== 200) {
@@ -149,7 +153,7 @@ module.exports = msgHandler = async (client = new Client(), message) => {
                         return client.reply(from, '🙏 Maaf durasi video telah melewati batas.', id)
                     } else {
                         await client.sendFileFromUrl(from, response.result, `${response.title}.mp3`, '', null, null, true)
-                        .then(() => console.log(`Sukses mengirim file! Diproses selama: ${processTime(t, moment())}`))
+                        .then((serialized) => console.log(`Sukses mengirim file dengan ID: ${serialized} Diproses selama: ${processTime(t, moment())} detik`))
                         .catch((err) => console.error(err))
                     }
                 })
@@ -160,8 +164,8 @@ module.exports = msgHandler = async (client = new Client(), message) => {
             break
             case 'ytmp4':
                 if (args.length !== 1) return client.reply(from, '⚠️ Format salah! Ketik *$menu1* untuk penggunaan. [WRONG FORMAT]', id)
-                if (!isYt(url) && !url.includes('youtu.be')) return client.reply(from, '⚠️ Link tidak valid! [INVALID]', id)
-                await client.reply(from, '_Mohon tunggu sebentar, proses ini akan memakan waktu beberapa menit..._\n\nMerasa terbantu karena bot ini? Bantu saya dengan cara donasi melalui:\n081294958473 (Telkomsel)\n081294958473 (OVO)\n\nTerima kasih 🙏', id)
+                if (!isYt(url) && !url.includes('youtu.be') || ('youtube.com')) return client.reply(from, '⚠️ Link tidak valid! [INVALID]', id)
+                await client.reply(from, '_Mohon tunggu sebentar, proses ini akan memakan waktu beberapa menit..._\n\nMerasa terbantu karena bot ini? Bantu saya dengan cara donasi melalui:\n081294958473 (Telkomsel/OVO/GoPay)\n\nTerima kasih 🙏', id)
                 downloader.ytmp4(url)
                 .then(async (response) => {
                     if (response.status !== 200) {
@@ -170,7 +174,7 @@ module.exports = msgHandler = async (client = new Client(), message) => {
                         return client.reply(from, '🙏 Maaf durasi video telah melewati batas.', id)
                     } else {
                         await client.sendFileFromUrl(from, response.result, `${response.title}.mp4`, '', null, null, true)
-                        .then(() => console.log(`Sukses mengirim file! Diproses selama: ${processTime(t, moment())}`))
+                        .then((serialized) => console.log(`Sukses mengirim file dengan ID: ${serialized} Diproses selama: ${processTime(t, moment())} detik`))
                         .catch((err) => console.error(err))
                     }
                 })
@@ -184,20 +188,27 @@ module.exports = msgHandler = async (client = new Client(), message) => {
             case 'sticker':
             case 'stiker': 
                 if ((isMedia || isQuotedImage) && args.length === 0) {
-                    await client.reply(from, '_Mohon tunggu sebentar, proses ini akan memakan waktu beberapa menit..._\n\nMerasa terbantu karena bot ini? Bantu saya dengan cara donasi melalui:\n081294958473 (Telkomsel)\n081294958473 (OVO)\n\nTerima kasih 🙏', id)
+                    await client.reply(from, '_Mohon tunggu sebentar, proses ini akan memakan waktu beberapa menit..._\n\nMerasa terbantu karena bot ini? Bantu saya dengan cara donasi melalui:\n081294958473 (Telkomsel/OVO/GoPay)\n\nTerima kasih 🙏', id)
                     const encryptMedia = isQuotedImage ? quotedMsg : message
                     const _mimetype = isQuotedImage ? quotedMsg.mimetype : mimetype
                     const mediaData = await decryptMedia(encryptMedia, uaOverride)
                     const imageBase64 = `data:${_mimetype};base64,${mediaData.toString('base64')}`
-                    await client.sendImageAsSticker(from, imageBase64).then(() => {
-                        client.reply(from, 'Silakan')
-                        console.log(`Sticker processed for ${processTime(t, moment())} second`)
+                    await client.sendImageAsSticker(from, imageBase64)
+                    .then(() => {
+                        client.reply(from, 'Silakan', id)
+                        console.log(`Stiker diproses selama: ${processTime(t, moment())} detik`)
+                    })
+                    .catch((err) => {
+                        console.error(err)
+                        client.reply(from, `⚠️ Terjadi kesalahan!\n\n${err}`, id)
                     })
                 } else if (args.length === 1) {
-                    if (!isUrl(url)) { return await client.reply(from, '⚠️ Link tidak valid!', id) }
-                    await client.sendStickerfromUrl(from, url).then((r) => (!r && r !== undefined)
-                        ? client.sendText(from, '⚠️ Link yang dikirim tidak dapat dimuat! [CANNOT LOAD]')
-                        : client.reply(from, 'Silakan')).then(() => console.log(`Sticker processed for ${processTime(t, moment())} second`))
+                    if (!isUrl(url)) return client.reply(from, '⚠️ Link tidak valid!', id)
+                    await client.sendStickerfromUrl(from, url)
+                    .then((r) => (!r && r !== undefined)
+                        ? client.sendText(from, '⚠️ Link yang dikirim tidak dapat dimuat! [CANNOT LOAD]', id)
+                        : client.reply(from, 'Silakan', id))
+                            .then(() => console.log(`Stiker diproses selama: ${processTime(t, moment())} detik`)
                 } else {
                     client.reply(from, '⚠️ Format salah! Ketik *$menu2* untuk penggunaan. [WRONG FORMAT]', id)
                 }
@@ -260,7 +271,7 @@ module.exports = msgHandler = async (client = new Client(), message) => {
             break
             case 'randomeme':
             case 'reddit':
-                await client.reply(from, '_Mohon tunggu sebentar, proses ini akan memakan waktu beberapa menit..._\n\nMerasa terbantu karena bot ini? Bantu saya dengan cara donasi melalui pulsa:\n081294958473 (Telkomsel)\n081294958473 (OVO)\n\nTerima kasih 🙏', id)
+                await client.reply(from, '_Mohon tunggu sebentar, proses ini akan memakan waktu beberapa menit..._\n\nMerasa terbantu karena bot ini? Bantu saya dengan cara donasi melalui pulsa:\n081294958473 (Telkomsel/OVO/GoPay)\n\nTerima kasih 🙏', id)
                 meme.random()
                 .then(({ subreddit, title, url, author }) => {
                     client.sendFileFromUrl(from, `${url}`, 'meme.jpg', `${title}\nTag: r/${subreddit}\nAuthor: u/${author}`, null, null, true)
@@ -355,7 +366,7 @@ module.exports = msgHandler = async (client = new Client(), message) => {
                     }
                     const fetch = require('node-fetch')
                     const imageBase64 = `data:${mimetype};base64,${mediaData.toString('base64')}`
-                    await client.reply(from, '_Mohon tunggu sebentar, proses ini akan memakan waktu beberapa menit..._\n\nMerasa terbantu karena bot ini? Bantu saya dengan cara donasi melalui:\n081294958473 (Telkomsel)\n081294958473 (OVO)\n\nTerima kasih 🙏', id)
+                    await client.reply(from, '_Mohon tunggu sebentar, proses ini akan memakan waktu beberapa menit..._\n\nMerasa terbantu karena bot ini? Bantu saya dengan cara donasi melalui:\n081294958473 (Telkomsel/OVO/GoPay)\n\nTerima kasih 🙏', id)
                     fetch('https://trace.moe/api/search', {
                         method: 'POST',
                         body: JSON.stringify({ image: imageBase64 }),
@@ -389,7 +400,7 @@ module.exports = msgHandler = async (client = new Client(), message) => {
                 }
                 break
             case 'waifu':
-                await client.reply(from, '_Mohon tunggu sebentar, proses ini akan memakan waktu beberapa menit..._\n\nMerasa terbantu karena bot ini? Bantu saya dengan cara donasi melalui:\n081294958473 (Telkomsel)\n081294958473 (OVO)\n\nTerima kasih 🙏', id)
+                await client.reply(from, '_Mohon tunggu sebentar, proses ini akan memakan waktu beberapa menit..._\n\nMerasa terbantu karena bot ini? Bantu saya dengan cara donasi melalui:\n081294958473 (Telkomsel/OVO/GoPay)\n\nTerima kasih 🙏', id)
                 waifu.random()
                     .then(({ url }) => {
                         client.sendFileFromUrl(from, url, 'waifu.jpg', null, null, true)
@@ -409,7 +420,7 @@ module.exports = msgHandler = async (client = new Client(), message) => {
             case 'multifetish':
             case 'mfetish':
                 let request = args.join(' ')
-                client.reply(from, '_Mohon tunggu sebentar, proses ini akan memakan waktu beberapa menit..._\n\nMerasa terbantu karena bot ini? Bantu saya dengan cara donasi melalui:\n081294958473 (Telkomsel)\n081294958473 (OVO)\n\nTerima kasih 🙏', id)
+                client.reply(from, '_Mohon tunggu sebentar, proses ini akan memakan waktu beberapa menit..._\n\nMerasa terbantu karena bot ini? Bantu saya dengan cara donasi melalui:\n081294958473 (Telkomsel/OVO/GoPay)\n\nTerima kasih 🙏', id)
 
                 if (args.length !== 1) {
                     return client.reply(from, '⚠️ Silakan masukkan tag yang tersedia di *$hidden*! [WRONG FORMAT]', id)
@@ -547,7 +558,7 @@ module.exports = msgHandler = async (client = new Client(), message) => {
             case 'multilewd':
             case 'mlewds':
             case 'mlewd':
-                client.reply(from, '_Mohon tunggu sebentar, proses ini akan memakan waktu beberapa menit..._\n\nMerasa terbantu karena bot ini? Bantu saya dengan cara donasi melalui:\n081294958473 (Telkomsel)\n081294958473 (OVO)\n\nTerima kasih 🙏', id)
+                client.reply(from, '_Mohon tunggu sebentar, proses ini akan memakan waktu beberapa menit..._\n\nMerasa terbantu karena bot ini? Bantu saya dengan cara donasi melalui:\n081294958473 (Telkomsel/OVO/GoPay)\n\nTerima kasih 🙏', id)
                 lewd.random()
                 .then(({ memes }) => {
                     for (i = 0; i < memes.length; i++) {
