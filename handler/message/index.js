@@ -264,9 +264,18 @@ module.exports = msgHandler = async (client = new Client(), message) => {
             case 'md5':
                 let yourText = args.join(' ')
                 if (!yourText) {
-                    return client.reply(from, '⚠️ Harap masukkan teks! [WRONG FORMAT]', id)
+                    return client.reply(from, '⚠️ Harap masukkan teks! Ketik *$menu3* untuk penggunaan. [WRONG FORMAT]', id)
                 } else {
                     client.sendText(from, md5(yourText))
+                }
+            break
+            case 'mocking':
+            case 'mock':
+                const textMock = word => word.split('').map(c => Math.random() > 0.5 ? c.toUpperCase() : c.toLowerCase()).join('')
+                if (args.length < 1) {
+                    return client.reply(from, '⚠️ Harap masukkan teks! Ketik *$menu3* untuk penggunaan. [WRONG FORMAT]', id)
+                } else {
+                    client.sendText(from, args.map(textMock).join(' '))
                 }
             break
             case 'randomeme':
@@ -278,7 +287,7 @@ module.exports = msgHandler = async (client = new Client(), message) => {
                 })
                 .catch((err) => {
                     console.error(err)
-                    client.reply(from, `⚠️ Terjadi kesalahan! [WRONG FORMAT]\n\n${err}`)
+                    client.reply(from, `⚠️ Terjadi kesalahan! [ERR]\n\n${err}`)
                 })
             break
             case 'reverse':
