@@ -4,12 +4,12 @@ const options = require('./utils/options')
 const msgHandler = require('./handler/message')
 
 const start = (client = new Client()) => {
-    console.log('[DEV]', color('Slavyan', 'orange')) // Change your name and color here
-    console.log('[CLIENT] Bot is now online!')
+    console.log('[DEV]', color('Slavyan', 'orange'))
+    console.log('[CLIENT] Bot is online!')
 
     // Force it to keep the current session
     client.onStateChanged((state) => {
-        console.log('[Client State]', state)
+        console.log('[CLIENT STATE]', state)
         if (state === 'UNPAIRED') client.forceRefocus()
         if (state === 'CONFLICT') client.forceRefocus()
     })
@@ -22,7 +22,7 @@ const start = (client = new Client()) => {
 
     // Listening on message
     client.onMessage((message) => {
-        client.getAmountOfLoadedMessages() // Cut message cache if it reach more than 3K
+        client.getAmountOfLoadedMessages()
             .then((msg) => {
                 if (msg >= 3000) {
                     console.log('[CLIENT]', color(`Loaded message reach ${msg}, cuting message cache...`, 'yellow'))
@@ -33,7 +33,7 @@ const start = (client = new Client()) => {
     })
 }
 
-// Creating Slavyan.data.json
-create('Slavyan', options(true, start)) // Change your session name here
+// Creating *.data.json
+create('Slavyan', options(true, start))
     .then((client) => start(client))
     .catch((err) => new Error(err))

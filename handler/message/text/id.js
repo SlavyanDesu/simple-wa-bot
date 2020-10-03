@@ -33,9 +33,7 @@ Kamu bisa merealisasikan perasaan itu dengan cara donasi! Uang yang kalian pakai
 Uang yang kalian pakai akan saya gunakan yang baik-baik kok.
 
 Donasi yang didukung:
-081294958473 (Telkomsel)
-081294958473 (OVO)
-081294958473 (GoPay)
+081294958473 (Telkomsel/OVO/GoPay)
 
 Untuk request command, pertanyaan, kritik dan saran bisa chat owner:
 wa.me/6281294958473
@@ -73,12 +71,12 @@ Aliases: *twt*
 Penggunaan: *$twitter https://www.twitter.com/xxxxx/status/...*
 
 5. *$ytmp3*
-Untuk mengkonversi video YouTube ke MP3.
+Untuk mengkonversi video YouTube ke MP3. 50 MB limit.
 Aliases: -
 Penggunaan: *$ytmp3 https://youtu.be/9lBTqHdgerY*
 
 6. *$ytmp4*
-Untuk mengunduh video YouTube.
+Untuk mengunduh video YouTube. 50 MB limit.
 Aliases: -
 Penggunaan: *$ytmp4 https://youtu.be/9lBTqHdgerY*
 
@@ -199,21 +197,20 @@ exports.textMenu = () => {
 
             *LIST MENU*
 
-*$menu1* = Menu page 1 (Downloader) - UPDATED!
+*$menu1* = Menu page 1 (Downloader) - NEW
 *$menu2* = Menu page 2 (Sticker)
-*$menu3* = Menu page 3 (Fun)
-*$menu4* = Menu page 4 (Utility)
-*$menu5* = Menu page 5 (Weeb Zone)
+*$menu3* = Menu page 3 (Fun) - NEW
+*$menu4* = Menu page 4 (Utility) - NEW
+*$menu5* = Menu page 5 (Weeb Zone) - NEW
 *$menuall* = Tampilkan semua command
-*$admin* = Menu khusus admin - UPDATED!
+*$admin* = Menu khusus grup
 *$donate* = Kasian bang ga ada duit
 
 Untuk request command, pertanyaan, kritik dan saran bisa chat owner:
 wa.me/6281294958473
 
 Beliin saya nasi buat makan hari ini:
-081294958473 (Telkomsel)
-081294958473 (OVO)
+081294958473 (Telkomsel/OVO/GoPay)
     `
 }
 
@@ -243,12 +240,12 @@ Aliases: *twt*
 Penggunaan: *$twitter https://www.twitter.com/xxxxx/status/...*
 
 5. *$ytmp3*
-Untuk mengkonversi video YouTube ke MP3.
+Untuk mengkonversi video YouTube ke MP3. 50 MB limit.
 Aliases: -
 Penggunaan: *$ytmp3 https://youtu.be/9lBTqHdgerY*
 
 6. *$ytmp4*
-Untuk mengunduh video YouTube.
+Untuk mengunduh video YouTube. 50 MB limit.
 Aliases: -
 Penggunaan: *$ytmp4 https://youtu.be/9lBTqHdgerY*
 `

@@ -6,16 +6,18 @@ const fetch = require('node-fetch')
  *@param {String} url
  *@param {Object} options
  */
-const fetchJson = (url, options) =>
-    new Promise((resolve, reject) =>
-        fetch(url, options)
+const fetchJson = (url, options) => {
+    return new Promise((resolve, reject) => {
+        console.log('Get json from:', url)
+        return fetch(url, options)
             .then(response => response.json())
             .then(json => resolve(json))
             .catch(err => {
                 console.error(err)
                 reject(err)
             })
-    )
+    })
+}
 
 /**
  * Fetch Text from Url
@@ -25,6 +27,7 @@ const fetchJson = (url, options) =>
  */
 const fetchText = (url, options) => {
     return new Promise((resolve, reject) => {
+        console.log('Get text from:', url)
         return fetch(url, options)
             .then(response => response.text())
             .then(text => resolve(text))

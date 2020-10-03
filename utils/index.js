@@ -30,14 +30,6 @@ const isUrl = (url) => {
     return url.match(new RegExp(/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&/=]*)/gi))
 }
 
-/**
- * Is it YouToube?
- * @param  {String} url
- */
-const isYt = (url) => {
-    return url.match(new RegExp(/(?:https?:\/{2})?(?:w{3}\.)?youtu(?:be)?\.(?:com|be)(?:\/watch\?v=|\/)([^\s&]+)/))
-}
-
 const usedCommandRecently = new Set()
 
 /**
@@ -66,6 +58,5 @@ module.exports = {
     },
     processTime,
     isUrl,
-    isYt,
     color
 }
