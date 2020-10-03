@@ -114,22 +114,32 @@ Penggunaan: *$curse* <teks>
 Aliases: -
 Penggunaan: *$lenny*
 
-6. *$randomeme*
+6. *$md5*
+Enkripsi/hash teks mu ke MD5.
+Aliases: -
+Penggunaan: *$md5* <teks>
+
+7. *$mocking*
+iNi AdAlAh SeBuAh CoNtOh.
+Aliases: *mock*
+Penggunaan: *$mocking* <teks>
+
+8. *$randomeme*
 Kirim random meme dari reddit.
 Aliases: *reddit*
 Penggunaan: *$randomeme*
 
-7. *$reverse*
+9. *$reverse*
 .nasilut nikilaB
 Aliases: - 
 Penggunaan: *$reverse* <teks>
 
-8. *$roll*
+10. *$roll*
 Roll angka.
 Aliases: *dice*
 Penggunaan: *$roll*
 
-9. *$say*
+11. *$say*
 It's just a say command, whatd'ya expect?
 Aliases: *talk*
 Penggunaan: *$say* <teks>
@@ -287,22 +297,32 @@ Penggunaan: *$curse* <teks>
 Aliases: -
 Penggunaan: *$lenny*
 
-6. *$randomeme*
+6. *$md5*
+Enkripsi/hash teks mu ke MD5.
+Aliases: -
+Penggunaan: *$md5* <teks>
+
+7. *$mocking*
+iNi AdAlAh SeBuAh CoNtOh.
+Aliases: *mock*
+Penggunaan: *$mocking* <teks>
+
+8. *$randomeme*
 Kirim random meme dari reddit.
 Aliases: *reddit*
 Penggunaan: *$randomeme*
 
-7. *$reverse*
+9. *$reverse*
 .nasilut nikilaB
 Aliases: - 
 Penggunaan: *$reverse* <teks>
 
-8. *$roll*
+10. *$roll*
 Roll angka.
 Aliases: *dice*
 Penggunaan: *$roll*
 
-9. *$say*
+11. *$say*
 It's just a say command, whatd'ya expect?
 Aliases: *talk*
 Penggunaan: *$say* <teks>
