@@ -69,7 +69,6 @@ After that scan the QR code and wait until it authenticated.
 | Ping        |      ✔️      |
 | Help        |      ✔️      |
 | Server      |      ✔️      |
-| Readme      |      ✔️      |
 | Clock       |      ✔️      |
 
 |      Weeb Zone     | Availability |
@@ -84,13 +83,12 @@ After that scan the QR code and wait until it authenticated.
 
 |  Moderation  | Availability |
 | :----------: | :----------: |
-| Admin        |      ✔️      |
+| Add          |      ✔️      |
 | Kick         |      ✔️      |
 | Promote      |      ✔️      |
 | Demote       |      ✔️      |
-| Out Group    |      ✔️      |
+| Leave        |      ✔️      |
 | Status       |      ✔️      |
-| Add User     |      ✔️      |
 | Group Link   |      ✔️      |
 
 ## 🙏 Special Thanks to
