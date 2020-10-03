@@ -143,7 +143,7 @@ module.exports = msgHandler = async (client = new Client(), message) => {
             break
             case 'ytmp3':
                 if (args.length !== 1) return client.reply(from, '⚠️ Format salah! Ketik *$menu1* untuk penggunaan. [WRONG FORMAT]', id)
-                if (!isYt(url) && !url.includes('youtu.be') || url.includes('youtube.com')) return client.reply(from, '⚠️ Link tidak valid! [INVALID]', id)
+                if (!isYt(url) && !url.includes('youtu.be')) return client.reply(from, '⚠️ Link tidak valid! [INVALID]', id)
                 await client.reply(from, '_Mohon tunggu sebentar, proses ini akan memakan waktu beberapa menit..._\n\nMerasa terbantu karena bot ini? Bantu saya dengan cara donasi melalui:\n081294958473 (Telkomsel/OVO/GoPay)\n\nTerima kasih 🙏', id)
                 downloader.ytmp3(url)
                 .then(async (response) => {
@@ -164,7 +164,7 @@ module.exports = msgHandler = async (client = new Client(), message) => {
             break
             case 'ytmp4':
                 if (args.length !== 1) return client.reply(from, '⚠️ Format salah! Ketik *$menu1* untuk penggunaan. [WRONG FORMAT]', id)
-                if (!isYt(url) && !url.includes('youtu.be') || ('youtube.com')) return client.reply(from, '⚠️ Link tidak valid! [INVALID]', id)
+                if (!isYt(url) && !url.includes('youtu.be')) return client.reply(from, '⚠️ Link tidak valid! [INVALID]', id)
                 await client.reply(from, '_Mohon tunggu sebentar, proses ini akan memakan waktu beberapa menit..._\n\nMerasa terbantu karena bot ini? Bantu saya dengan cara donasi melalui:\n081294958473 (Telkomsel/OVO/GoPay)\n\nTerima kasih 🙏', id)
                 downloader.ytmp4(url)
                 .then(async (response) => {
