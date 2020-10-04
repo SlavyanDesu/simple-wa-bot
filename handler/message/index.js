@@ -430,7 +430,7 @@ module.exports = msgHandler = async (client = new Client(), message) => {
 
                 if (args.length !== 1) {
                     return client.reply(from, '⚠️ Silakan masukkan tag yang tersedia di *$hidden*! [WRONG FORMAT]', id)
-                } else if (request === 'armpits') {
+                } else if (request === 'armpits' || 'armpit') {
                     fetish.armpits()
                         .then(({ memes }) => {
                             for (i = 0; i < memes.length; i++) {
@@ -444,7 +444,7 @@ module.exports = msgHandler = async (client = new Client(), message) => {
                             console.error(err)
                             client.reply(from, `⚠️ Terjadi kesalahan! [ERR]\n\n${err}`)
                         })
-                } else if (request === 'feets') {
+                } else if (request === 'feets' || 'feet') {
                     fetish.feets()
                         .then(({ memes }) => {
                             for (i = 0; i < memes.length; i++) {
@@ -458,7 +458,7 @@ module.exports = msgHandler = async (client = new Client(), message) => {
                             console.error(err)
                             client.reply(from, `⚠️ Terjadi kesalahan! [ERR]\n\n${err}`)
                         })
-                } else if (request === 'thighs') {
+                } else if (request === 'thighs' || 'thigh') {
                     fetish.thighs()
                         .then(({ memes }) => {
                             for (i = 0; i < memes.length; i++) {
@@ -472,7 +472,7 @@ module.exports = msgHandler = async (client = new Client(), message) => {
                             console.error(err)
                             client.reply(from, `⚠️ Terjadi kesalahan! [ERR]\n\n${err}`)
                         })
-                } else if (request === 'booty') {
+                } else if (request === 'booty' || 'ass') {
                     fetish.booty()
                         .then(({ memes }) => {
                             for (i = 0; i < memes.length; i++) {
@@ -486,7 +486,7 @@ module.exports = msgHandler = async (client = new Client(), message) => {
                             console.error(err)
                             client.reply(from, `⚠️ Terjadi kesalahan! [ERR]\n\n${err}`)
                         })
-                } else if (request === 'boobs') {
+                } else if (request === 'boobs' || 'boob') {
                     fetish.boobs()
                         .then(({ memes }) => {
                             for (i = 0; i < memes.length; i++) {
@@ -500,7 +500,7 @@ module.exports = msgHandler = async (client = new Client(), message) => {
                             console.error(err)
                             client.reply(from, `⚠️ Terjadi kesalahan! [ERR]\n\n${err}`)
                         })
-                } else if (request === 'necks') {
+                } else if (request === 'necks' || 'neck') {
                     fetish.necks()
                         .then(({ memes }) => {
                             for (i = 0; i < memes.length; i++) {
@@ -528,7 +528,7 @@ module.exports = msgHandler = async (client = new Client(), message) => {
                             console.error(err)
                             client.reply(from, `⚠️ Terjadi kesalahan! [ERR]\n\n${err}`)
                         })
-                } else if (request === 'sideboobs') {
+                } else if (request === 'sideboobs' || 'sideboob') {
                     fetish.sideboobs()
                         .then(({ memes }) => {
                             for (i = 0; i < memes.length; i++) {
@@ -568,8 +568,8 @@ module.exports = msgHandler = async (client = new Client(), message) => {
                 lewd.random()
                     .then(({ memes }) => {
                         for (i = 0; i < memes.length; i++) {
-                            let sauce = memes[i]
-                            client.sendFileFromUrl(from, sauce.url, 'lewd.jpg', '', null, null, true)
+                            let sange = memes[i]
+                            client.sendFileFromUrl(from, sange.url, 'lewd.jpg', '', null, null, true)
                                 .then(() => console.log('Sukses mengirim file!'))
                                 .catch((err) => console.log(err))
                         }
