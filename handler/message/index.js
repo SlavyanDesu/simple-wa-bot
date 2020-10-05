@@ -67,8 +67,8 @@ module.exports = msgHandler = async (client = new Client(), message) => {
                         const link = shorts.map((x) => `${x.resolution} Quality: ${x.short}`)
                         const caption = `Teks: ${title}\n\nLink download:\n${link.join('\n')}\n\nBerhasil diproses selama ${processTime(t, moment())} detik`
                         await client.sendFileFromUrl(from, thumbnail, 'videos.jpg', caption, null, null, true)
-                        .then((serialized) => console.log(`Sukses mengirim file dengan ID: ${serialized} Diproses selama ${processTime(t, moment())} detik`))
-                        .catch((err) => console.error(err))
+                            .then((serialized) => console.log(`Sukses mengirim file dengan ID: ${serialized} Diproses selama ${processTime(t, moment())} detik`))
+                            .catch((err) => console.error(err))
                     })
                     .catch((err) => {
                         console.error(err)
@@ -86,12 +86,12 @@ module.exports = msgHandler = async (client = new Client(), message) => {
                             return client.reply(from, '⚠️ Link tidak valid atau user private! [INVALID]', id)
                         } else if (data.mediatype === 'photo') {
                             await client.sendFileFromUrl(from, data.descriptionc, 'photo.jpg', '', null, null, true)
-                            .then((serialized) => console.log(`Sukses mengirim file dengan ID: ${serialized} Diproses selama: ${processTime(t, moment())} detik`))
-                            .catch((err) => console.error(err))
+                                .then((serialized) => console.log(`Sukses mengirim file dengan ID: ${serialized} Diproses selama: ${processTime(t, moment())} detik`))
+                                .catch((err) => console.error(err))
                         } else if (data.mediatype === 'video') {
                             await client.sendFileFromUrl(from, data.descriptionc, 'video.mp4', `Berhasil diproses selama: ${processTime(t, moment())} detik`, null, null, true)
-                            .then((serialized) => console.log(`Sukses mengirim file dengan ID: ${serialized} Diproses selama: ${processTime(t, moment())} detik`))
-                            .catch((err) => console.error(err))
+                                .then((serialized) => console.log(`Sukses mengirim file dengan ID: ${serialized} Diproses selama: ${processTime(t, moment())} detik`))
+                                .catch((err) => console.error(err))
                         }
                     })
                     .catch((err) => {
@@ -130,8 +130,8 @@ module.exports = msgHandler = async (client = new Client(), message) => {
                         } else if (data.type === 'photo') {
                             for (let i = 0; i < data.variants.length; i++) {
                             await client.sendFileFromUrl(from, data.variants[i], data.variants[i].split('/media/')[1], '', null, null, true)
-                            .then((serialized) => console.log(`Sukses mengirim file dengan ID: ${serialized} diproses selama ${processTime(t, moment())} detik`))
-                            .catch((err) => console.error(err))
+                                .then((serialized) => console.log(`Sukses mengirim file dengan ID: ${serialized} diproses selama ${processTime(t, moment())} detik`))
+                                .catch((err) => console.error(err))
                         }
                         }
                     })
@@ -277,7 +277,7 @@ module.exports = msgHandler = async (client = new Client(), message) => {
             break
             case 'randomeme':
             case 'reddit':
-                await client.reply(from, '_Mohon tunggu sebentar, proses ini akan memakan waktu beberapa menit..._\n\nMerasa terbantu karena bot ini? Bantu saya dengan cara donasi melalui pulsa:\n081294958473 (Telkomsel/OVO/GoPay)\n\nTerima kasih 🙏', id)
+                await client.reply(from, '_Mohon tunggu sebentar, proses ini akan memakan waktu beberapa menit..._\n\nMerasa terbantu karena bot ini? Bantu saya dengan cara donasi melalui:\n081294958473 (Telkomsel/OVO/GoPay)\n\nTerima kasih 🙏', id)
                 meme.random()
                     .then(({ subreddit, title, url, author }) => {
                         client.sendFileFromUrl(from, `${url}`, 'meme.jpg', `${title}\nTag: r/${subreddit}\nAuthor: u/${author}`, null, null, true)
@@ -323,7 +323,7 @@ module.exports = msgHandler = async (client = new Client(), message) => {
             case 'igs':
                 if (args.length !== 1) return client.reply(from, '⚠️ Harap masukkan username Instagram! Ketik *$menu4* untuk penggunaan. [WRONG FORMAT]', id)
                 const username = args.join(' ')
-                await client.reply(from, '_Mohon tunggu sebentar, proses ini akan memakan waktu beberapa menit..._\n\nMerasa terbantu karena bot ini? Bantu saya dengan cara donasi melalui pulsa:\n081294958473 (Telkomsel/OVO/GoPay)\n\nTerima kasih 🙏', id)
+                await client.reply(from, '_Mohon tunggu sebentar, proses ini akan memakan waktu beberapa menit..._\n\nMerasa terbantu karena bot ini? Bantu saya dengan cara donasi melalui:\n081294958473 (Telkomsel/OVO/GoPay)\n\nTerima kasih 🙏', id)
                 stalk.instagram(username)
                     .then(({ Biodata, Jumlah_Followers, Jumlah_Following, Jumlah_Post, Name, Profile_pic, Username, error }) => {
                         if (error) client.reply(from, error, id)
@@ -336,7 +336,7 @@ module.exports = msgHandler = async (client = new Client(), message) => {
             break
             case 'infogempa':
             case 'gempa':
-                await client.reply(from, '_Mohon tunggu sebentar, proses ini akan memakan waktu beberapa menit..._\n\nMerasa terbantu karena bot ini? Bantu saya dengan cara donasi melalui pulsa:\n081294958473 (Telkomsel/OVO/GoPay)\n\nTerima kasih 🙏', id)
+                await client.reply(from, '_Mohon tunggu sebentar, proses ini akan memakan waktu beberapa menit..._\n\nMerasa terbantu karena bot ini? Bantu saya dengan cara donasi melalui:\n081294958473 (Telkomsel/OVO/GoPay)\n\nTerima kasih 🙏', id)
                 gempa.info()
                     .then(({ kedalaman, koordinat, lokasi, magnitude, map, potensi, waktu }) => {
                         client.sendFileFromUrl(from, map, 'gempa.jpg', `${lokasi}\n${potensi}\n\nKoordinat: ${koordinat}\nMagnitudo: ${magnitude} SR\nKedalaman: ${kedalaman}\nWaktu: ${waktu}`, null, null, true)
@@ -354,7 +354,7 @@ module.exports = msgHandler = async (client = new Client(), message) => {
                 if (args.length !== 1) return client.reply(from, '⚠️ Harap masukkan nama daerah! Ketik *$menu4* untuk penggunaan.', id)
                 const namaDaerah = args.join(' ')
                 const daerah = namaDaerah.charAt(0).toUpperCase() + namaDaerah.slice(1)
-                await client.reply(from, '_Mohon tunggu sebentar, proses ini akan memakan waktu beberapa menit..._\n\nMerasa terbantu karena bot ini? Bantu saya dengan cara donasi melalui pulsa:\n081294958473 (Telkomsel/OVO/GoPay)\n\nTerima kasih 🙏', id)
+                await client.reply(from, '_Mohon tunggu sebentar, proses ini akan memakan waktu beberapa menit..._\n\nMerasa terbantu karena bot ini? Bantu saya dengan cara donasi melalui:\n081294958473 (Telkomsel/OVO/GoPay)\n\nTerima kasih 🙏', id)
                 jadwalShalat.jadwal(daerah)
                     .then(({ Ashar, Dhuha, Dzuhur, Imsyak, Isya, Maghrib, Subuh, error }) => {
                         if (error) return client.reply(from, error, id)
