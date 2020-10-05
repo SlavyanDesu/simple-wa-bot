@@ -153,27 +153,42 @@ Hapus pesan yang saya kirim.
 Aliases: *del*
 Penggunaan: reply pesan yang mau dihapus lalu ketik command *$delete*
 
-3. *$menu*
+3. *$infogempa*
+Mengambil info gempa terkini dari BMKG.
+Aliases: *gempa*
+Penggunaan: *$infogempa*
+
+4. *$igstalk*
+Mengambil info akun Instagram dari username yang diberikan.
+Aliases: *igs*
+Penggunaan: *$igstalk* <username>
+
+5. *$jadwalshalat*
+Menampilkan jadwal shalat dari daerah yang diberikan.
+Aliases: *jadwalsholat* - *shalat* - *sholat*
+Penggunaan: *$jadwalshalat* <daerah>
+
+6. *$menu*
 Buka menu.
 Aliases: *help* - *h*
 Penggunaan: *$menu*
 
-4. *$ping*
+7. *$ping*
 Cek kecepatan respon bot.
 Alias: *speed* - *p*
 Penggunaan: *$ping*
 
-5. *$readme*
+8. *$readme*
 Isinya copyright buat source code doang.
 Alias: *tnc*
 Penggunaan: *$readme*
 
-6. *$server*
+9. *$server*
 Cek spesifikasi server.
 Aliases: -
 Penggunaan: *$server*
 
-7. *$status*
+10. *$status*
 Untuk cek status bot.
 Aliases: *stats*
 Penggunaan: *$status*
@@ -197,11 +212,11 @@ exports.textMenu = () => {
 
             *LIST MENU*
 
-*$menu1* = Menu page 1 (Downloader) - NEW
+*$menu1* = Menu page 1 (Downloader)
 *$menu2* = Menu page 2 (Sticker)
-*$menu3* = Menu page 3 (Fun) - NEW
+*$menu3* = Menu page 3 (Fun)
 *$menu4* = Menu page 4 (Utility) - NEW
-*$menu5* = Menu page 5 (Weeb Zone) - NEW
+*$menu5* = Menu page 5 (Weeb Zone)
 *$menuall* = Tampilkan semua command
 *$admin* = Menu khusus grup
 *$donate* = Kasian bang ga ada duit
@@ -342,27 +357,42 @@ Hapus pesan yang saya kirim.
 Aliases: *del*
 Penggunaan: reply pesan yang mau dihapus lalu ketik command *$delete*
 
-3. *$menu*
+3. *$infogempa*
+Mengambil info gempa terkini dari BMKG.
+Aliases: *gempa*
+Penggunaan: *$infogempa*
+
+4. *$igstalk*
+Mengambil info akun Instagram dari username yang diberikan.
+Aliases: *igs*
+Penggunaan: *$igstalk* <username>
+
+5. *$jadwalshalat*
+Menampilkan jadwal shalat dari daerah yang diberikan.
+Aliases: *jadwalsholat* - *shalat* - *sholat*
+Penggunaan: *$jadwalshalat* <daerah>
+
+6. *$menu*
 Buka menu.
 Aliases: *help* - *h*
 Penggunaan: *$menu*
 
-4. *$ping*
+7. *$ping*
 Cek kecepatan respon bot.
 Alias: *speed* - *p*
 Penggunaan: *$ping*
 
-5. *$readme*
+8. *$readme*
 Isinya copyright buat source code doang.
 Alias: *tnc*
 Penggunaan: *$readme*
 
-6. *$server*
+9. *$server*
 Cek spesifikasi server.
 Aliases: -
 Penggunaan: *$server*
 
-7. *$status*
+10. *$status*
 Untuk cek status bot.
 Aliases: *stats*
 Penggunaan: *$status*

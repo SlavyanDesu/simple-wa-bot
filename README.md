@@ -64,12 +64,15 @@ After that scan the QR code and wait until it authenticated.
 | Hash MD5    |      ✔️      |
 | Mocking     |      ✔️      |
 
-|   Utility   | Availability |
-| :---------: | :----------: |
-| Ping        |      ✔️      |
-| Help        |      ✔️      |
-| Server      |      ✔️      |
-| Clock       |      ✔️      |
+|     Utility     | Availability |
+| :-------------: | :----------: |
+| Ping            |      ✔️      |
+| Help            |      ✔️      |
+| Server          |      ✔️      |
+| Clock           |      ✔️      |
+| Instagram Stalk |      ✔️      |
+| Jadwal Shalat   |      ✔️      |
+| Info Gempa      |      ✔️      |
 
 |      Weeb Zone     | Availability |
 | :----------------: | :----------: |

@@ -4,7 +4,7 @@ const os = require('os')
 const md5 = require('md5')
 const curse = require('curse-text')
 moment.tz.setDefault('Asia/Jakarta').locale('id')
-const { downloader, urlShortener, meme, fetish, lewd, waifu } = require('../../lib')
+const { downloader, urlShortener, meme, fetish, lewd, waifu, jadwalShalat, gempa, stalk } = require('../../lib')
 const { msgFilter, color, processTime, isUrl } = require('../../utils')
 
 const { textResponse } = require('./text')
@@ -319,6 +319,56 @@ module.exports = msgHandler = async (client = new Client(), message) => {
             case 'donasi':
                 client.sendText(from, menuId.donate())
             break
+            case 'igstalk':
+            case 'igs':
+                if (args.length !== 1) return client.reply(from, '⚠️ Harap masukkan username Instagram! Ketik *$menu4* untuk penggunaan. [WRONG FORMAT]', id)
+                const username = args.join(' ')
+                await client.reply(from, '_Mohon tunggu sebentar, proses ini akan memakan waktu beberapa menit..._\n\nMerasa terbantu karena bot ini? Bantu saya dengan cara donasi melalui pulsa:\n081294958473 (Telkomsel/OVO/GoPay)\n\nTerima kasih 🙏', id)
+                stalk.instagram(username)
+                    .then(({ Biodata, Jumlah_Followers, Jumlah_Following, Jumlah_Post, Name, Profile_pic, Username, error }) => {
+                        if (error) client.reply(from, error, id)
+                        client.sendFileFromUrl(from, Profile_pic, 'profile.jpg', `${Biodata}\n\nUsername: ${Username}\nName: ${Name}\nFollowers: ${Jumlah_Followers}\nFollowing: ${Jumlah_Following}\nPost: ${Jumlah_Post}`, null, null, true)
+                            .then(() => console.log('Berhasil mengirim info akun Instagram!'))
+                    })
+                    .catch((err) => {
+                        console.error(err)
+                    })
+            break
+            case 'infogempa':
+            case 'gempa':
+                await client.reply(from, '_Mohon tunggu sebentar, proses ini akan memakan waktu beberapa menit..._\n\nMerasa terbantu karena bot ini? Bantu saya dengan cara donasi melalui pulsa:\n081294958473 (Telkomsel/OVO/GoPay)\n\nTerima kasih 🙏', id)
+                gempa.info()
+                    .then(({ kedalaman, koordinat, lokasi, magnitude, map, potensi, waktu }) => {
+                        client.sendFileFromUrl(from, map, 'gempa.jpg', `${lokasi}\n${potensi}\n\nKoordinat: ${koordinat}\nMagnitudo: ${magnitude} SR\nKedalaman: ${kedalaman}\nWaktu: ${waktu}`, null, null, true)
+                            .then(() => console.log('Berhasil mengirim data gempa dari BMKG!'))
+                    })
+                    .catch((err) => {
+                        console.error(err)
+                        client.reply(from, `⚠️ Terjadi kesalahan!\n\n${err}`, id)
+                    })
+            break
+            case 'jadwalshalat':
+            case 'jadwalsholat':
+            case 'shalat':
+            case 'sholat':
+                if (args.length !== 1) return client.reply(from, '⚠️ Harap masukkan nama daerah! Ketik *$menu4* untuk penggunaan.', id)
+                const namaDaerah = args.join(' ')
+                const daerah = namaDaerah.charAt(0).toUpperCase() + namaDaerah.slice(1)
+                await client.reply(from, '_Mohon tunggu sebentar, proses ini akan memakan waktu beberapa menit..._\n\nMerasa terbantu karena bot ini? Bantu saya dengan cara donasi melalui pulsa:\n081294958473 (Telkomsel/OVO/GoPay)\n\nTerima kasih 🙏', id)
+                jadwalShalat.jadwal(daerah)
+                    .then(({ Ashar, Dhuha, Dzuhur, Imsyak, Isya, Maghrib, Subuh, error }) => {
+                        if (error) return client.reply(from, error, id)
+                        const array = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember']
+                        const tanggal = new Date().getDate()
+                        const bulan = new Date().getMonth()
+                        const tahun = new Date().getFullYear()
+                        client.sendText(from, `Assalamu'alaikum ${pushname}\nJadwal Shalat di ${daerah}\n${tanggal} ${array[bulan]} ${tahun}\n\nImsyak: ${Imsyak}\nSubuh: ${Subuh}\nDhuha: ${Dhuha}\nDzuhur: ${Dzuhur}\nAshar: ${Ashar}\nMaghrib: ${Maghrib}\nIsya: ${Isya}`)
+                            .then(() => console.log('Berhasil mengirim jadwal sholat!'))
+                    })
+                    .catch((err) => {
+                        console.error(err)
+                    })
+            break
             case 'menu':
             case 'help':
             case 'h':
@@ -430,7 +480,7 @@ module.exports = msgHandler = async (client = new Client(), message) => {
 
                 if (args.length !== 1) {
                     return client.reply(from, '⚠️ Silakan masukkan tag yang tersedia di *$hidden*! [WRONG FORMAT]', id)
-                } else if (request === 'armpits' || 'armpit') {
+                } else if (request === 'armpits') {
                     fetish.armpits()
                         .then(({ memes }) => {
                             for (i = 0; i < memes.length; i++) {
@@ -444,7 +494,7 @@ module.exports = msgHandler = async (client = new Client(), message) => {
                             console.error(err)
                             client.reply(from, `⚠️ Terjadi kesalahan! [ERR]\n\n${err}`)
                         })
-                } else if (request === 'feets' || 'feet') {
+                } else if (request === 'feets') {
                     fetish.feets()
                         .then(({ memes }) => {
                             for (i = 0; i < memes.length; i++) {
@@ -458,7 +508,7 @@ module.exports = msgHandler = async (client = new Client(), message) => {
                             console.error(err)
                             client.reply(from, `⚠️ Terjadi kesalahan! [ERR]\n\n${err}`)
                         })
-                } else if (request === 'thighs' || 'thigh') {
+                } else if (request === 'thighs') {
                     fetish.thighs()
                         .then(({ memes }) => {
                             for (i = 0; i < memes.length; i++) {
@@ -472,7 +522,7 @@ module.exports = msgHandler = async (client = new Client(), message) => {
                             console.error(err)
                             client.reply(from, `⚠️ Terjadi kesalahan! [ERR]\n\n${err}`)
                         })
-                } else if (request === 'booty' || 'ass') {
+                } else if (request === 'booty') {
                     fetish.booty()
                         .then(({ memes }) => {
                             for (i = 0; i < memes.length; i++) {
@@ -486,7 +536,7 @@ module.exports = msgHandler = async (client = new Client(), message) => {
                             console.error(err)
                             client.reply(from, `⚠️ Terjadi kesalahan! [ERR]\n\n${err}`)
                         })
-                } else if (request === 'boobs' || 'boob') {
+                } else if (request === 'boobs') {
                     fetish.boobs()
                         .then(({ memes }) => {
                             for (i = 0; i < memes.length; i++) {
@@ -500,7 +550,7 @@ module.exports = msgHandler = async (client = new Client(), message) => {
                             console.error(err)
                             client.reply(from, `⚠️ Terjadi kesalahan! [ERR]\n\n${err}`)
                         })
-                } else if (request === 'necks' || 'neck') {
+                } else if (request === 'necks') {
                     fetish.necks()
                         .then(({ memes }) => {
                             for (i = 0; i < memes.length; i++) {
@@ -528,7 +578,7 @@ module.exports = msgHandler = async (client = new Client(), message) => {
                             console.error(err)
                             client.reply(from, `⚠️ Terjadi kesalahan! [ERR]\n\n${err}`)
                         })
-                } else if (request === 'sideboobs' || 'sideboob') {
+                } else if (request === 'sideboobs') {
                     fetish.sideboobs()
                         .then(({ memes }) => {
                             for (i = 0; i < memes.length; i++) {
