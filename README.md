@@ -71,9 +71,9 @@ After that scan the QR code and wait until it authenticated.
 | Help             |      ✔️      |
 | Server           |      ✔️      |
 | Clock            |      ✔️      |
-| Instagram Stalk  |      ✔️      |
-| Jadwal Shalat    |      ✔️      |
-| Info Gempa       |      ✔️      |
+| Instagram stalk  |      ✔️      |
+| Jadwal shalat    |      ✔️      |
+| Info gempa       |      ✔️      |
 | Cuaca            |      ✔️      |
 | Corona Indonesia |      ✔️      |
 | Currency to IDR  |      ✔️      |
@@ -82,7 +82,7 @@ After that scan the QR code and wait until it authenticated.
 |      Weeb Zone     | Availability |
 | :----------------: | :----------: |
 | What Anime Is This |      ✔️      |
-| Random Waifu Image |      ✔️      |
+| Random waifu image |      ✔️      |
 
 |        NSFW        | Availability |
 | :----------------: | :----------: |
@@ -97,7 +97,7 @@ After that scan the QR code and wait until it authenticated.
 | Demote       |      ✔️      |
 | Leave        |      ✔️      |
 | Status       |      ✔️      |
-| Group Link   |      ✔️      |
+| Group link   |      ✔️      |
 
 ## 🙏 Special Thanks to
 * [`Open-Wa/wa-automate-nodejs`](https://github.com/open-wa/wa-automate-nodejs)
