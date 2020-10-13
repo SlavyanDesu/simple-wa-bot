@@ -4,11 +4,12 @@ const os = require('os')
 const md5 = require('md5')
 const curse = require('curse-text')
 moment.tz.setDefault('Asia/Jakarta').locale('id')
-const { downloader, urlShortener, meme, fetish, lewd, waifu, jadwalShalat, gempa, stalk } = require('../../lib')
+const { downloader, urlShortener, meme, fetish, lewd, waifu, jadwalShalat, gempa, stalk, dataCuaca, wikipedia, bapak, currToIdr, corona } = require('../../lib')
 const { msgFilter, color, processTime, isUrl } = require('../../utils')
 
 const { textResponse } = require('./text')
 const { menuId } = require('./text')
+const { copySync } = require('fs-extra')
 
 module.exports = msgHandler = async (client = new Client(), message) => {
     try {
@@ -30,6 +31,7 @@ module.exports = msgHandler = async (client = new Client(), message) => {
         const isCmd = body.startsWith(prefix)
         const uaOverride = 'WhatsApp/2.2029.4 Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.121 Safari/537.36'
         const url = args.length !== 0 ? args[0] : ''
+        const q = args.join(' ')
         const isQuotedImage = quotedMsg && quotedMsg.type === 'image'
 
         // Avoid spam
@@ -81,17 +83,36 @@ module.exports = msgHandler = async (client = new Client(), message) => {
                 if (!isUrl(url) && !url.includes('instagram.com')) return client.reply(from, '⚠️ Link tidak valid! [INVALID]', id)
                 await client.reply(from, '_Mohon tunggu sebentar, proses ini akan memakan waktu beberapa menit..._\n\nMerasa terbantu karena bot ini? Bantu saya dengan cara donasi melalui:\n081294958473 (Telkomsel/OVO/GoPay)\n\nTerima kasih 🙏', id)
                 downloader.insta(url)
-                    .then(async (data) => {
-                        if (data.descriptionc === null) {
+                    .then(async (hasil) => {
+                        if (hasil.media_type === 'photo') {
+                            await client.sendFileFromUrl(from, hasil.url, 'photo.jpg', '', null, null, true)
+                                .then((serialized) => console.log(`Sukses mengirim file dengan ID: ${serialized} Diproses selama: ${processTime(t, moment())} detik`))
+                                .catch((err) => console.error(err))
+                        } else if (hasil.media_type === 'video') {
+                            await client.sendFileFromUrl(from, hasil.url, 'video.mp4', `Berhasil diproses selama: ${processTime(t, moment())} detik`, null, null, true)
+                                .then((serialized) => console.log(`Sukses mengirim file dengan ID: ${serialized} Diproses selama: ${processTime(t, moment())} detik`))
+                                .catch((err) => console.error(err))
+                        } else if (hasil.media_type === 'slide') {
+                            function foreach(arr, func) {
+                                for (let i in arr) {
+                                    func(i, arr[i])
+                                }
+                            }
+                            if (hasil.data[0][0].type === 'foto') {
+                                foreach(hasil.data[0], function(i) {
+                                    client.sendFileFromUrl(from, hasil.data[0][i].url, 'slide.jpg', '', null, null, true)
+                                        .then(() => console.log('Berhasil mengirim file!'))
+                                        .catch((err) => console.error(err))
+                                })
+                            } else if (hasil.data[0][0].type === 'video') {
+                                foreach(hasil.data[0], function(i) {
+                                    client.sendFileFromUrl(from, hasil.data[0][i].url, 'slide.mp4', '', null, null, true)
+                                        .then(() => console.log('Berhasil mengirim file!'))
+                                        .catch(() => console.error(err))
+                                })
+                            }
+                        } else {
                             return client.reply(from, '⚠️ Link tidak valid atau user private! [INVALID]', id)
-                        } else if (data.mediatype === 'photo') {
-                            await client.sendFileFromUrl(from, data.descriptionc, 'photo.jpg', '', null, null, true)
-                                .then((serialized) => console.log(`Sukses mengirim file dengan ID: ${serialized} Diproses selama: ${processTime(t, moment())} detik`))
-                                .catch((err) => console.error(err))
-                        } else if (data.mediatype === 'video') {
-                            await client.sendFileFromUrl(from, data.descriptionc, 'video.mp4', `Berhasil diproses selama: ${processTime(t, moment())} detik`, null, null, true)
-                                .then((serialized) => console.log(`Sukses mengirim file dengan ID: ${serialized} Diproses selama: ${processTime(t, moment())} detik`))
-                                .catch((err) => console.error(err))
                         }
                     })
                     .catch((err) => {
@@ -199,7 +220,7 @@ module.exports = msgHandler = async (client = new Client(), message) => {
                         })
                         .catch((err) => {
                             console.error(err)
-                            client.reply(from, `⚠️ Terjadi kesalahan!\n\n${err}`, id)
+                            client.reply(from, `⚠️ Terjadi kesalahan! [ERR]\n\n${err}`, id)
                         })
                     } else if (args.length === 1) {
                         if (!isUrl(url)) return client.reply(from, '⚠️ Link tidak valid!', id)
@@ -221,6 +242,21 @@ module.exports = msgHandler = async (client = new Client(), message) => {
                 } else {
                     client.sendText(from, `Pertanyaan: *${question}* \n\nJawaban: ${answer}`)
                 }
+            break
+            case 'bapack':
+                const kata = args.join(' ')
+                if (!kata) return client.reply(from, '⚠️ Harap masukkan teks! [WRONG FORMAT]', id)
+                bapak.font(kata)
+                    .then(({ status, text }) => {
+                        if (status === null) {
+                            client.reply(from, '⚠️ Terjadi kesalahan! [ERR]', id)
+                        } else {
+                            client.sendText(from, text)
+                        }
+                    })
+                    .catch((err) => {
+                        console.error(err)
+                    })
             break
             case 'binary':
             case 'bin':
@@ -309,6 +345,35 @@ module.exports = msgHandler = async (client = new Client(), message) => {
             case 'waktu':
                 client.sendText(from, `Waktu Indonesia Barat: *${moment().utcOffset('+0700').format('HH:mm')}* WIB \nWaktu Indonesia Tengah: *${moment().utcOffset('+0800').format('HH:mm')}* WITA \nWaktu Indonesia Timur: *${moment().utcOffset('+0900').format('HH:mm')}* WIT`)
             break
+            case 'cuaca':
+                if (args.length !== 1) return client.reply(from, '⚠️ Harap masukkan nama lokasi yang valid! Ketik *$menu4* untuk penggunaan.', id)
+                await client.reply(from, '_Mohon tunggu sebentar, proses ini akan memakan waktu beberapa menit..._\n\nMerasa terbantu karena bot ini? Bantu saya dengan cara donasi melalui:\n081294958473 (Telkomsel/OVO/GoPay)\n\nTerima kasih 🙏', id)
+                dataCuaca.cuaca(q)
+                    .then(({ result, error }) => {
+                        if (error) return client.reply(from, error, id)
+                        const array = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember']
+                        const tanggal = new Date().getDate()
+                        const bulan = new Date().getMonth()
+                        const tahun = new Date().getFullYear()
+                        client.sendText(from, `*Data Cuaca di ${result.tempat}*\n${tanggal} ${array[bulan]} ${tahun}\n\nCuaca: ${result.cuaca}\nSuhu: ${result.suhu}\nKelembapan: ${result.kelembapan}\nAngin: ${result.angin}\nUdara:${result.udara}`)
+                            .then(() => console.log('Berhasil mengirim data cuaca!'))
+
+                    })
+                    .catch((err) => {
+                        console.error(err)
+                    })
+            break
+            case 'corona':
+                corona.indonesia()
+                    .then(({ total, kasus_baru, meninggal, meninggal_baru, sembuh, penanganan, terakhir }) => {
+                        client.sendText(from, `*DATA COVID-19 INDONESIA*\n\nReminder: _jaga jarak, gunakan masker, dan jangan berkerumun!_ 😷\n\nKasus baru: *${kasus_baru}*\nTotal kasus: *${total}*\nMeninggal baru: *${meninggal_baru}*\nTotal meninggal: *${meninggal}*\nSembuh: *${sembuh}*\nDalam penanganan: *${penanganan}*\n\n_Diupdate terakhir: ${terakhir}_`)
+                            .then(() => console.log('Berhasil mengirim data COVID-19!'))
+                            .catch((err) => console.error(err))
+                    })
+                    .catch((err) => {
+                        console.error(err)
+                    })
+            break
             case 'delete':
             case 'del':
                 if (!quotedMsg) return client.reply(from, '⚠️ Harap reply salah satu pesan! Ketik *$menu4* untuk penggunaan. [WRONG FORMAT]', id)
@@ -351,7 +416,7 @@ module.exports = msgHandler = async (client = new Client(), message) => {
             case 'jadwalsholat':
             case 'shalat':
             case 'sholat':
-                if (args.length !== 1) return client.reply(from, '⚠️ Harap masukkan nama daerah! Ketik *$menu4* untuk penggunaan.', id)
+                if (args.length !== 1) return client.reply(from, '⚠️ Harap masukkan nama daerah yang valid! Ketik *$menu4* untuk penggunaan.', id)
                 const namaDaerah = args.join(' ')
                 const daerah = namaDaerah.charAt(0).toUpperCase() + namaDaerah.slice(1)
                 await client.reply(from, '_Mohon tunggu sebentar, proses ini akan memakan waktu beberapa menit..._\n\nMerasa terbantu karena bot ini? Bantu saya dengan cara donasi melalui:\n081294958473 (Telkomsel/OVO/GoPay)\n\nTerima kasih 🙏', id)
@@ -410,6 +475,31 @@ module.exports = msgHandler = async (client = new Client(), message) => {
                 const chatIds = await client.getAllChatIds()
                 const groups = await client.getAllGroups()
                 await client.sendText(from, `Status :\n- *${loadedMsgs}* Message terload\n- *${groups.length}* Group\n- *${chatIds.length - groups.length}* Private chat\n- *${chatIds.length}* Total chat`)
+            break
+            case 'toidr':
+                if (args.length !== 2) return client.reply(from, '⚠️ Harap masukkan kurensi dan jumlah yang ingin di-convert! Ketik *$menu4* untuk penggunaan. [WRONG FORMAT]', id)
+                currToIdr.kurensi(args[0], args[1])
+                    .then(({ status, result }) => {
+                        if (status === 'false') return client.reply('⚠️ Kurensi tidak ditemukan! [WRONG FORMAT]', id)
+                        client.sendText(from, result.resultConvert)
+                    })
+                    .catch((err) => {
+                        console.error(err)
+                    })
+            break
+            case 'wikipedia':
+            case 'wiki':
+                if (!q) return client.reply(from, '⚠️ Harap masukkan sesuatu yang ingin dicari! Ketik *$menu4* untuk penggunaan.', id)
+                await client.reply(from, '_Mohon tunggu sebentar, proses ini akan memakan waktu beberapa menit..._\n\nMerasa terbantu karena bot ini? Bantu saya dengan cara donasi melalui:\n081294958473 (Telkomsel/OVO/GoPay)\n\nTerima kasih 🙏', id)
+                wikipedia.pencarian(q)
+                    .then(({ result, error }) => {
+                        if (error) return client.reply(from, error, id)
+                        client.sendText(from, result)
+                            .then(() => console.log('Berhasil mengirim wiki!'))
+                    })
+                    .catch((err) => {
+                        console.error(err)
+                    })
             break
 
             // Weeb Zone
@@ -501,7 +591,7 @@ module.exports = msgHandler = async (client = new Client(), message) => {
                                 let sauce = memes[i]
                                 client.sendFileFromUrl(from, sauce.url, 'lewd.jpg', '', null, null, true)
                                     .then(() => console.log('Sukses mengirim file!'))
-                                   .catch((err) => console.error(err))
+                                    .catch((err) => console.error(err))
                             }
                         })
                         .catch((err) => {

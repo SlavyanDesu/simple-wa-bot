@@ -56,7 +56,7 @@ Aliases: *fb*
 Penggunaan: *$facebook https://www.facebook.com/...*
 
 2. *$instagram*
-Untuk megunduh foto atau video dari Instagram. Belum support carousel.
+Untuk megunduh foto atau video dari Instagram.
 Aliases: *ig*
 Penggunaan: *$instagram https://www.instagram.com/p/...*
 
@@ -90,54 +90,59 @@ Fun:
 1. *$ask*
 Tanya tentang apa saja dan saya akan menjawab secara random.
 Aliases: *8ball*
-Penggunaan:: *$ask* <pertanyaan>
+Penggunaan: *$ask* <pertanyaan>
 
-2. *$binary*
+2. *$bapack*
+S4PI apHa YanG b1S4 nUL1S? sap1doL, XIX1X1Xi,,,,
+Aliases: *bapak*
+Penggunaan: *$bapack* <teks>
+
+3. *$binary*
 Ubah input teks mu ke dalam kode biner.
 Aliases: *biner* - *bin*
 Penggunaan: *$binary* <teks>
 
-3. *$coinflip*
+4. *$coinflip*
 Lempar koin.
 Aliases: *coin* - *flip*
 Penggunaan: *$coinflip*
 
-4. *$curse*
+5. *$curse*
 Bikin teks menjadi demonic style.
 Aliases: -
 Penggunaan: *$curse* <teks>
 
-5. *$lenny*
+6. *$lenny*
 ( ͡° ͜ʖ ͡°)
 Aliases: -
 Penggunaan: *$lenny*
 
-6. *$md5*
+7. *$md5*
 Enkripsi/hash teks mu ke MD5.
 Aliases: -
 Penggunaan: *$md5* <teks>
 
-7. *$mocking*
+8. *$mocking*
 iNi AdAlAh SeBuAh CoNtOh.
 Aliases: *mock*
 Penggunaan: *$mocking* <teks>
 
-8. *$randomeme*
+9. *$randomeme*
 Kirim random meme dari reddit.
 Aliases: *reddit*
 Penggunaan: *$randomeme*
 
-9. *$reverse*
+10. *$reverse*
 .nasilut nikilaB
 Aliases: - 
 Penggunaan: *$reverse* <teks>
 
-10. *$roll*
+11. *$roll*
 Roll angka.
 Aliases: *dice*
 Penggunaan: *$roll*
 
-11. *$say*
+12. *$say*
 It's just a say command, whatd'ya expect?
 Aliases: *talk*
 Penggunaan: *$say* <teks>
@@ -148,50 +153,70 @@ Cek waktu Indonesia sekitar.
 Aliases: *waktu* - *jam*
 Penggunaan: *$clock*
 
-2. *$delete*
+2. *$corona*
+Mengirim data terkini COVID-19 di Indonesia.
+Aliases: -
+Penggunaan: *$corona*
+
+3. *$cuaca*
+Cek cuaca di lokasi yang diberikan.
+Aliases: -
+Penggunaan: *$cuaca* <daerah>
+
+4. *$delete*
 Hapus pesan yang saya kirim.
 Aliases: *del*
 Penggunaan: reply pesan yang mau dihapus lalu ketik command *$delete*
 
-3. *$infogempa*
+5. *$infogempa*
 Mengambil info gempa terkini dari BMKG.
 Aliases: *gempa*
 Penggunaan: *$infogempa*
 
-4. *$igstalk*
+6. *$igstalk*
 Mengambil info akun Instagram dari username yang diberikan.
 Aliases: *igs*
 Penggunaan: *$igstalk* <username>
 
-5. *$jadwalshalat*
+7. *$jadwalshalat*
 Menampilkan jadwal shalat dari daerah yang diberikan.
 Aliases: *jadwalsholat* - *shalat* - *sholat*
 Penggunaan: *$jadwalshalat* <daerah>
 
-6. *$menu*
+8. *$menu*
 Buka menu.
 Aliases: *help* - *h*
 Penggunaan: *$menu*
 
-7. *$ping*
+9. *$ping*
 Cek kecepatan respon bot.
 Alias: *speed* - *p*
 Penggunaan: *$ping*
 
-8. *$readme*
-Isinya copyright buat source code doang.
+10. *$readme*
+Berisi copyright doang.
 Alias: *tnc*
 Penggunaan: *$readme*
 
-9. *$server*
+12. *$server*
 Cek spesifikasi server.
 Aliases: -
 Penggunaan: *$server*
 
-10. *$status*
+13. *$status*
 Untuk cek status bot.
 Aliases: *stats*
 Penggunaan: *$status*
+
+14. *$toidr*
+Konversikan kurensi luar negeri ke IDR.
+Aliases: -
+Penggunaan: *$toidr* <kurensi> <jumlah uang>
+
+15. *$wikipedia*
+Mencari apapun di Wikipedia.
+Aliases: *wiki*
+Penggunaan: *$wikipedia* <sesuatu>
 
 Weeb Zone:
 1. *$waifu*
@@ -212,14 +237,16 @@ exports.textMenu = () => {
 
             *LIST MENU*
 
-*$menu1* = Menu page 1 (Downloader)
+*$menu1* = Menu page 1 (Downloader) - *NEW UPDATE*
 *$menu2* = Menu page 2 (Sticker)
-*$menu3* = Menu page 3 (Fun)
-*$menu4* = Menu page 4 (Utility) - NEW
+*$menu3* = Menu page 3 (Fun) - *NEW UPDATE*
+*$menu4* = Menu page 4 (Utility) - *NEW UPDATE*
 *$menu5* = Menu page 5 (Weeb Zone)
 *$menuall* = Tampilkan semua command
 *$admin* = Menu khusus grup
 *$donate* = Kasian bang ga ada duit
+
+*COOLDOWN COMMAND 5 DETIK*
 
 Untuk request command, pertanyaan, kritik dan saran bisa chat owner:
 wa.me/6281294958473
@@ -240,7 +267,7 @@ Aliases: *fb*
 Penggunaan: *$facebook https://www.facebook.com/...*
 
 2. *$instagram*
-Untuk megunduh foto atau video dari Instagram. Belum support carousel.
+Untuk megunduh foto atau video dari Instagram.
 Aliases: *ig*
 Penggunaan: *$instagram https://www.instagram.com/p/...*
 
@@ -287,54 +314,59 @@ Fun:
 1. *$ask*
 Tanya tentang apa saja dan saya akan menjawab secara random.
 Aliases: *8ball*
-Penggunaan:: *$ask* <pertanyaan>
+Penggunaan: *$ask* <pertanyaan>
 
-2. *$binary*
+2. *$bapack*
+S4PI apHa YanG b1S4 nUL1S? sap1doL, XIX1X1Xi,,,,
+Aliases: *bapak*
+Penggunaan: *$bapack* <teks>
+
+3. *$binary*
 Ubah input teks mu ke dalam kode biner.
 Aliases: *biner* - *bin*
-Penggunaan: *$binary* <input>
+Penggunaan: *$binary* <teks>
 
-3. *$coinflip*
+4. *$coinflip*
 Lempar koin.
 Aliases: *coin* - *flip*
 Penggunaan: *$coinflip*
 
-4. *$curse*
+5. *$curse*
 Bikin teks menjadi demonic style.
 Aliases: -
 Penggunaan: *$curse* <teks>
 
-5. *$lenny*
+6. *$lenny*
 ( ͡° ͜ʖ ͡°)
 Aliases: -
 Penggunaan: *$lenny*
 
-6. *$md5*
+7. *$md5*
 Enkripsi/hash teks mu ke MD5.
 Aliases: -
 Penggunaan: *$md5* <teks>
 
-7. *$mocking*
+8. *$mocking*
 iNi AdAlAh SeBuAh CoNtOh.
 Aliases: *mock*
 Penggunaan: *$mocking* <teks>
 
-8. *$randomeme*
+9. *$randomeme*
 Kirim random meme dari reddit.
 Aliases: *reddit*
 Penggunaan: *$randomeme*
 
-9. *$reverse*
+10. *$reverse*
 .nasilut nikilaB
 Aliases: - 
 Penggunaan: *$reverse* <teks>
 
-10. *$roll*
+11. *$roll*
 Roll angka.
 Aliases: *dice*
 Penggunaan: *$roll*
 
-11. *$say*
+12. *$say*
 It's just a say command, whatd'ya expect?
 Aliases: *talk*
 Penggunaan: *$say* <teks>
@@ -352,50 +384,70 @@ Cek waktu Indonesia sekitar.
 Aliases: *waktu* - *jam*
 Penggunaan: *$clock*
 
-2. *$delete*
+2. *$corona*
+Mengirim data terkini COVID-19 di Indonesia.
+Aliases: -
+Penggunaan: *$corona*
+
+3. *$cuaca*
+Cek cuaca di lokasi yang diberikan.
+Aliases: -
+Penggunaan: *$cuaca* <daerah>
+
+4. *$delete*
 Hapus pesan yang saya kirim.
 Aliases: *del*
 Penggunaan: reply pesan yang mau dihapus lalu ketik command *$delete*
 
-3. *$infogempa*
+5. *$infogempa*
 Mengambil info gempa terkini dari BMKG.
 Aliases: *gempa*
 Penggunaan: *$infogempa*
 
-4. *$igstalk*
+6. *$igstalk*
 Mengambil info akun Instagram dari username yang diberikan.
 Aliases: *igs*
 Penggunaan: *$igstalk* <username>
 
-5. *$jadwalshalat*
+7. *$jadwalshalat*
 Menampilkan jadwal shalat dari daerah yang diberikan.
 Aliases: *jadwalsholat* - *shalat* - *sholat*
 Penggunaan: *$jadwalshalat* <daerah>
 
-6. *$menu*
+8. *$menu*
 Buka menu.
 Aliases: *help* - *h*
 Penggunaan: *$menu*
 
-7. *$ping*
+9. *$ping*
 Cek kecepatan respon bot.
 Alias: *speed* - *p*
 Penggunaan: *$ping*
 
-8. *$readme*
-Isinya copyright buat source code doang.
+10. *$readme*
+Berisi copyright doang.
 Alias: *tnc*
 Penggunaan: *$readme*
 
-9. *$server*
+12. *$server*
 Cek spesifikasi server.
 Aliases: -
 Penggunaan: *$server*
 
-10. *$status*
+13. *$status*
 Untuk cek status bot.
 Aliases: *stats*
 Penggunaan: *$status*
+
+14. *$toidr*
+Konversikan kurensi luar negeri ke IDR.
+Aliases: -
+Penggunaan: *$toidr* <kurensi> <jumlah uang>
+
+15. *$wikipedia*
+Mencari apapun di Wikipedia.
+Aliases: *wiki*
+Penggunaan: *$wikipedia* <sesuatu>
     `
 }
 

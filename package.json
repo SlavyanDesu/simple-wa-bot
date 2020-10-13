@@ -21,7 +21,7 @@
   "homepage": "https://github.com/SlavyanDesu/simple-wa-bot",
   "license": "MIT",
   "dependencies": {
-    "@open-wa/wa-automate": "^2.0.31",
+    "@open-wa/wa-automate": "^2.0.32",
     "assert": "^2.0.0",
     "chalk": "^4.1.0",
     "cheerio": "^1.0.0-rc.3",

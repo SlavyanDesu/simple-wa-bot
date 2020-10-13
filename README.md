@@ -62,16 +62,22 @@ After that scan the QR code and wait until it authenticated.
 | Curse       |      ✔️      |
 | Hash MD5    |      ✔️      |
 | Mocking     |      ✔️      |
+| Bapack font |      ✔️      |
 
-|     Utility     | Availability |
-| :-------------: | :----------: |
-| Ping            |      ✔️      |
-| Help            |      ✔️      |
-| Server          |      ✔️      |
-| Clock           |      ✔️      |
-| Instagram Stalk |      ✔️      |
-| Jadwal Shalat   |      ✔️      |
-| Info Gempa      |      ✔️      |
+
+|      Utility     | Availability |
+| :--------------: | :----------: |
+| Ping             |      ✔️      |
+| Help             |      ✔️      |
+| Server           |      ✔️      |
+| Clock            |      ✔️      |
+| Instagram Stalk  |      ✔️      |
+| Jadwal Shalat    |      ✔️      |
+| Info Gempa       |      ✔️      |
+| Cuaca            |      ✔️      |
+| Corona Indonesia |      ✔️      |
+| Currency to IDR  |      ✔️      |
+| Wikipedia        |      ✔️      |
 
 |      Weeb Zone     | Availability |
 | :----------------: | :----------: |
