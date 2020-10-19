@@ -15,10 +15,10 @@ const start = (client = new Client()) => {
     })
 
     // Set all received message to seen
-    client.onAck((x => {
+    client.onAck((x) => {
         const { to } = x
         if (x !== 3) client.sendSeen(to)
-    }))
+    })
 
     // Listening on message
     client.onMessage((message) => {
