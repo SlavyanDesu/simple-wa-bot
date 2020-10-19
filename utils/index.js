@@ -23,7 +23,7 @@ const processTime = (timestamp, now) => {
 }
 
 /**
- * Is it url?
+ * URL validator
  * @param  {String} url
  */
 const isUrl = (url) => {
