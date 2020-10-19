@@ -1,6 +1,6 @@
 {
   "name": "simple-wa-bot",
-  "version": "0.2.5",
+  "version": "0.3.0",
   "description": "A simple WhatsApp bot.",
   "main": "index.js",
   "engines": {
