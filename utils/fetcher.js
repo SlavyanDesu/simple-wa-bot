@@ -1,10 +1,10 @@
 const fetch = require('node-fetch')
 
 /**
- *Fetch JSON from URL
+ * Fetch JSON from URL
  *
- *@param {String} url
- *@param {Object} options
+ * @param {String} url
+ * @param {Object} options
  */
 const fetchJson = (url, options) => {
     return new Promise((resolve, reject) => {
@@ -40,6 +40,7 @@ const fetchText = (url, options) => {
 
 /**
  * Fetch Base64 from URL
+ *
  * @param {String} url
  */
 const fetchBase64 = (url, mimetype) => {
