@@ -5,7 +5,7 @@ const msgHandler = require('./handler/message')
 
 const start = (client = new Client()) => {
     console.log('[DEV]', color('Slavyan', 'orange'))
-    console.log('[CLIENT]', color('Bot is now online!', 'green'))
+    console.log('[CLIENT]', color('Bot is now online!', 'cyan'))
 
     // Force it to keep the current session
     client.onStateChanged((state) => {
