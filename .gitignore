@@ -1,6 +1,14 @@
+# Depedency directory
 node_modules
+
+# Log file
 debug.log
+
+# Session file
 *.data.json
-.node-persist
+
+# Workspace file
 *.code-workspace
+
+# Lock file
 package-lock.json
