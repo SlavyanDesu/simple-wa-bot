@@ -237,14 +237,15 @@ exports.textMenu = () => {
 
             *LIST MENU*
 
-*$menu1* = Menu page 1 (Downloader) - *NEW UPDATE*
-*$menu2* = Menu page 2 (Sticker)
-*$menu3* = Menu page 3 (Fun) - *NEW UPDATE*
-*$menu4* = Menu page 4 (Utility) - *NEW UPDATE*
-*$menu5* = Menu page 5 (Weeb Zone)
+*$menu1* = Downloader - *NEW UPDATE*
+*$menu2* = Sticker
+*$menu3* = Fun - *NEW UPDATE*
+*$menu4* = Utility - *NEW UPDATE*
+*$menu5* = Weeb Zone
 *$menuall* = Tampilkan semua command
-*$admin* = Menu khusus grup
+*$admin* = Khusus grup dan admin
 *$donate* = Kasian bang ga ada duit
+~_*$hidden*_~ = NSFW, jangan pake!
 
 *COOLDOWN COMMAND 5 DETIK*
 

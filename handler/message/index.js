@@ -361,7 +361,7 @@ module.exports = msgHandler = async (client = new Client(), message) => {
                         const tanggal = new Date().getDate()
                         const bulan = new Date().getMonth()
                         const tahun = new Date().getFullYear()
-                        client.sendText(from, `*Data Cuaca di ${result.tempat}*\n${tanggal} ${array[bulan]} ${tahun}\n\nCuaca: ${result.cuaca}\nSuhu: ${result.suhu}\nKelembapan: ${result.kelembapan}\nAngin: ${result.angin}\nUdara:${result.udara}`)
+                        client.sendText(from, `*Data Cuaca di ${result.tempat}*\n${tanggal} ${array[bulan]} ${tahun}\n\nCuaca: ${result.cuaca}\nSuhu: ${result.suhu}\nKelembapan: ${result.kelembapan}\nAngin: ${result.angin}\nUdara: ${result.udara}`)
                             .then(() => console.log('Berhasil mengirim data cuaca!'))
 
                     })
