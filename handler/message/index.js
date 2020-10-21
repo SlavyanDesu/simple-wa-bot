@@ -51,9 +51,6 @@ module.exports = msgHandler = async (client = new Client(), message) => {
         // Avoid spam
         msgFilter.addFilter(from)
 
-        // Ignore user except owner
-        if (!isOwner) return
-
         // Ignore blocked user
         if (isBlocked) return
 

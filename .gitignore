@@ -10,5 +10,8 @@ debug.log
 # Workspace file
 *.code-workspace
 
+# Executable path
+.node-persist
+
 # Lock file
 package-lock.json
