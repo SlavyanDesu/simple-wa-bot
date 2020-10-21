@@ -5,7 +5,7 @@ const md5 = require('md5')
 const curse = require('curse-text')
 const errorurl = 'https://steamuserimages-a.akamaihd.net/ugc/954087817129084207/5B7E46EE484181A676C02DFCAD48ECB1C74BC423/?imw=512&&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=false'
 moment.tz.setDefault('Asia/Jakarta').locale('id')
-const { downloader, urlShortener, meme, fetish, lewd, waifu, jadwalShalat, gempa, stalk, dataCuaca, wikipedia, bapak, currToIdr, corona, brainly } = require('../../lib')
+const { downloader, urlShortener, meme, fetish, lewd, waifu, jadwalShalat, gempa, stalk, dataCuaca, wikipedia, bapak, currToIdr, corona } = require('../../lib')
 const { msgFilter, color, processTime, isUrl } = require('../../utils')
 
 const { textResponse } = require('./text')
@@ -347,27 +347,6 @@ module.exports = msgHandler = async (client = new Client(), message) => {
             break
         
             // Utility
-            case 'brainly':
-                if (args.length >= 2) {
-                    let tanya = args.join(' ')
-                    let jum = Number(tanya.split('.')[1]) || 2
-                    if (jum > 10) return client.reply(from, 'Max 10!', id)
-                    if (Number(tanya[tanya.length - 1])) {
-                        tanya
-                    }
-                    await brainly.search(tanya.split('.')[0], Number(jum), function(res) {
-                        res.forEach((x) => {
-                            if (x.jawaban.fotoJawaban.length === 0) {
-                                client.reply(from, `=> *Pertanyaan*: ${x.pertanyaan}\n\n=> *Jawaban*: ${x.jawaban.judulJawaban}\n`, id)
-                            } else {
-                                client.reply(from, `=> *Pertanyaan*: ${x.pertanyaan}\n\n=> *Jawaban*: ${x.jawaban.judulJawaban}\n\n=> *Link foto jawaban*: ${x.jawaban.fotoJawaban.join('\n')}`, id)
-                            }
-                        })
-                    })
-                } else {
-                    client.reply(from, '⚠️ Format salah! Ketik *$menu4* untuk penggunaan [WRONG FORMAT]', id)
-                }
-            break
             case 'clock':
             case 'jam':
             case 'waktu':

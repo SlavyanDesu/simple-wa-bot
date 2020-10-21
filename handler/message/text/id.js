@@ -143,10 +143,10 @@ Aliases: *talk*
 Penggunaan: *$say* <teks>
 
 Utility:
-1. *$brainly*
-Cari jawaban di Brainly.
-Aliases: -
-Penggunaan: *$brainly* <soal> <.jumlah jawaban>
+~1. *$brainly*~
+~Cari jawaban di Brainly.~
+~Aliases: -~
+~Penggunaan: *$brainly* <soal> <.jumlah jawaban>~
 
 2. *$clock*
 Cek waktu Indonesia sekitar.
@@ -385,10 +385,10 @@ exports.textMenu4 = () => {
 
 *ABAIKAN TANDA <>*
 Utility:
-1. *$brainly*
-Cari jawaban di Brainly.
-Aliases: -
-Penggunaan: *$brainly* <soal> <.jumlah jawaban>
+~1. *$brainly*~
+~Cari jawaban di Brainly.~
+~Aliases: -~
+~Penggunaan: *$brainly* <soal> <.jumlah jawaban>~
 
 2. *$clock*
 Cek waktu Indonesia sekitar.
