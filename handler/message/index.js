@@ -4,12 +4,11 @@ const os = require('os')
 const md5 = require('md5')
 const curse = require('curse-text')
 moment.tz.setDefault('Asia/Jakarta').locale('id')
-const { downloader, urlShortener, meme, fetish, lewd, waifu, jadwalShalat, gempa, stalk, dataCuaca, wikipedia, bapak, currToIdr, corona } = require('../../lib')
+const { downloader, urlShortener, meme, fetish, lewd, waifu, jadwalShalat, gempa, stalk, dataCuaca, wikipedia, bapak, currToIdr, corona, brainly } = require('../../lib')
 const { msgFilter, color, processTime, isUrl } = require('../../utils')
 
 const { textResponse } = require('./text')
 const { menuId } = require('./text')
-const { copySync } = require('fs-extra')
 
 module.exports = msgHandler = async (client = new Client(), message) => {
     try {
@@ -19,10 +18,14 @@ module.exports = msgHandler = async (client = new Client(), message) => {
         let { pushname, verifiedName } = sender
         pushname = pushname || verifiedName
         const botNumber = await client.getHostNumber() + '@c.us'
+        const blockNumber = await client.getBlockedIds()
+        const ownerNumber = '6281294958473@c.us'
         const groupId = isGroupMsg ? chat.groupMetadata.id : ''
         const groupAdmins = isGroupMsg ? await client.getGroupAdmins(groupId) : ''
         const isGroupAdmins = groupAdmins.includes(sender.id) || false
         const isBotGroupAdmins = groupAdmins.includes(botNumber) || false
+        const isOwner = sender.id === ownerNumber
+        const isBlocked = blockNumber.includes(sender.id)
 
         const prefix = '$'
         body = (type === 'chat' && body.startsWith(prefix)) ? body : ((type === 'image' && caption) && caption.startsWith(prefix)) ? caption : ''
@@ -46,6 +49,9 @@ module.exports = msgHandler = async (client = new Client(), message) => {
 
         // Avoid spam
         msgFilter.addFilter(from)
+
+        // Ignore blocked user
+        if (isBlocked) return
 
         switch (command) {
             // Downloader
@@ -313,7 +319,7 @@ module.exports = msgHandler = async (client = new Client(), message) => {
             break
             case 'randomeme':
             case 'reddit':
-                await client.reply(from, '_Mohon tunggu sebentar, proses ini akan memakan waktu beberapa menit..._\n\nMerasa terbantu karena bot ini? Bantu saya dengan cara donasi melalui:\n081294958473 (Telkomsel/OVO/GoPay)\n\nTerima kasih 🙏', id)
+                client.reply(from, '_Mohon tunggu sebentar, proses ini akan memakan waktu beberapa menit..._\n\nMerasa terbantu karena bot ini? Bantu saya dengan cara donasi melalui:\n081294958473 (Telkomsel/OVO/GoPay)\n\nTerima kasih 🙏', id)
                 meme.random()
                     .then(({ subreddit, title, url, author }) => {
                         client.sendFileFromUrl(from, `${url}`, 'meme.jpg', `${title}\nTag: r/${subreddit}\nAuthor: u/${author}`, null, null, true)
@@ -725,7 +731,7 @@ module.exports = msgHandler = async (client = new Client(), message) => {
                 const user = args.join(' ')
                 if (!isGroupMsg) return client.reply(from, '❌ Command ini hanya bisa digunakan di group saja! [GROUP ONLY]', id)
                 if (!isGroupAdmins) return client.reply(from, '❌ Hanya admin yang bisa menggunakan command ini! [ADMIN ONLY]', id)
-                if (!isBotGroupAdmins) return client.reply(from, '❌ Jadikan saya admin terlebih dahulu! [NOT ADMIN]', id)
+                if (!isBotGroupAdmins) return client.reply(from, '❌ Jadikan saya admin terlebih dahulu! [BOT NOT ADMIN]', id)
                 if (!user || args.length > 1) return client.reply(from, '⚠️ Format salah! Ketik *$admin* untuk penggunaan. [WRONG FORMAT]', id)
                 try {
                     await client.addParticipant(from, `${user}@c.us`)
@@ -751,7 +757,7 @@ module.exports = msgHandler = async (client = new Client(), message) => {
             case 'demote':
                 if (!isGroupMsg) return client.reply(from, '❌ Command ini hanya bisa digunakan di group saja!', id)
                 if (!isGroupAdmins) return client.reply(from, '❌ Hanya admin yang bisa menggunakan command ini! [ADMIN ONLY]', id)
-                if (!isBotGroupAdmins) return client.reply(from, '❌ Jadikan saya admin terlebih dahulu! [NOT ADMIN]', id)
+                if (!isBotGroupAdmins) return client.reply(from, '❌ Jadikan saya admin terlebih dahulu! [BOT NOT ADMIN]', id)
                 if (mentionedJidList.length !== 1) return client.reply(from, '⚠️ Format salah! Ketik *$admin* untuk penggunaan. [WRONG FORMAT]', id)
                 if (!groupAdmins.includes(mentionedJidList[0])) return client.reply(from, '❌ Dia bukan admin, gimana gw demote-nya? [USER NOT AN ADMIN]', id)
                 if (mentionedJidList[0] === botNumber) return client.reply(from, '⚠️ Format salah! Ketik *$admin* untuk penggunaan. [WRONG FORMAT]', id)
@@ -761,12 +767,11 @@ module.exports = msgHandler = async (client = new Client(), message) => {
             case 'kick':
                 if (!isGroupMsg) return client.reply(from, '❌ Command ini hanya bisa digunakan di group saja! [GROUP ONLY]', id)
                 if (!isGroupAdmins) return client.reply(from, '❌ Hanya admin yang bisa menggunakan command ini! [ADMIN ONLY]', id)
-                if (!isBotGroupAdmins) return client.reply(from, '❌ Jadikan saya admin terlebih dahulu! [NOT ADMIN]', id)
+                if (!isBotGroupAdmins) return client.reply(from, '❌ Jadikan saya admin terlebih dahulu! [BOT NOT ADMIN]', id)
                 if (mentionedJidList.length === 0) return client.reply(from, '⚠️ Format salah! Ketik *$admin* untuk penggunaan. [WRONG FORMAT]', id)
                 if (mentionedJidList[0] === botNumber) return client.reply(from, '⚠️ Format salah! Ketik *$admin* untuk penggunaan. [WRONG FORMAT]', id)
                 await client.sendTextWithMentions(from, `✅ Siap mint, wisuda lu:\n${mentionedJidList.map(x => `@${x.replace('@c.us', '')}`).join('\n')}`)
                 for (let i = 0; i < mentionedJidList.length; i++) {
-                    if (groupAdmins.includes(mentionedJidList[i])) return await client.sendText(from, '❌ Gak bisa kick admin gw bro [NOT ALLOWED]')
                     await client.removeParticipant(groupId, mentionedJidList[i])
                 }
             break   
@@ -774,7 +779,7 @@ module.exports = msgHandler = async (client = new Client(), message) => {
             case 'linkgroup':
                 if (!isGroupMsg) return client.reply(from, '❌ Command ini hanya bisa digunakan di group saja! [GROUP ONLY]', id)
                 if (!isGroupAdmins) return client.reply(from, '❌ Hanya admin yang bisa menggunakan command ini! [ADMIN ONLY]', id)
-                if (!isBotGroupAdmins) return client.reply(from, '❌ Jadikan saya admin terlebih dahulu! [NOT ADMIN]', id)
+                if (!isBotGroupAdmins) return client.reply(from, '❌ Jadikan saya admin terlebih dahulu! [BOT NOT ADMIN]', id)
                 if (isGroupMsg) {
                     const inviteLink = await client.getGroupInviteLink(groupId)
                     await client.sendLinkWithAutoPreview(from, inviteLink, `\nLink grup *${name}*`)
@@ -783,12 +788,42 @@ module.exports = msgHandler = async (client = new Client(), message) => {
             case 'promote':
                 if (!isGroupMsg) return client.reply(from, '❌ Command ini hanya bisa digunakan di group saja! [GROUP ONLY]', id)
                 if (!isGroupAdmins) return client.reply(from, '❌ Hanya admin yang bisa menggunakan command ini! [ADMIN ONLY]', id)
-                if (!isBotGroupAdmins) return client.reply(from, '❌ Jadikan saya admin terlebih dahulu! [NOT ADMIN]', id)
+                if (!isBotGroupAdmins) return client.reply(from, '❌ Jadikan saya admin terlebih dahulu! [BOT NOT ADMIN]', id)
                 if (mentionedJidList.length != 1) return client.reply(from, '⚠️ Format salah! Ketik *$admin* untuk penggunaan. [WRONG FORMAT]', id)
-                if (groupAdmins.includes(mentionedJidList[0])) return client.reply(from, '❌ Dia udah jadi admin njir [ADMIN ALREADY]', id)
+                if (groupAdmins.includes(mentionedJidList[0])) return client.reply(from, '❌ Dia udah jadi admin njir [USER IS ADMIN]', id)
                 if (mentionedJidList[0] === botNumber) return client.reply(from, '⚠️ Format salah! Ketik *$admin* untuk penggunaan.', id)
                 await client.promoteParticipant(groupId, mentionedJidList[0])
                 await client.sendTextWithMentions(from, `✅ Siap mint, anjay sekarang @${mentionedJidList[0].replace('@c.us', '')} jadi admin.`)
+            break
+
+            // Owner only
+            case 'leaveall':
+                if (!isOwner) return client.reply(from, '⚠️ Command ini khusus owner bot! [DENIED]', id)
+                const allChats = await client.getAllChatIds()
+                const allGroups = await client.getAllGroups()
+                for (let gclist of allGroups) {
+                    await client.sendText(gclist.contact.id, `Bot sedang pembersihan, total chat aktif: ${allChats.length}`)
+                    await client.leaveGroup(gclist.contact.id)
+                }
+                client.reply(from, 'Sukses keluar dari semua grup!', id)
+            break
+            case 'clearall':
+                if (!isOwner) return client.reply(from, '⚠️ Command ini khusus owner bot! [DENIED]', id)
+                const allChatz = await client.getAllChats()
+                for (let dchat of allChatz) {
+                    await client.deleteChat(dchat.id)
+                }
+                client.reply(from, 'Sukses menghapus semua pesan!', id)
+            break
+            case 'bc':
+                if (!isOwner) return client.reply(from, '⚠️ Command ini khusus owner bot! [DENIED]', id)
+                const brodkes = args.join(' ')
+                const chatz = await client.getAllChatIds()
+                for (let bcz of chatz) {
+                    var cvk = await client.getChatById(bcz)
+                    if (!cvk.isReadOnly) await client.sendText(from, `[ KOSAKI BOT DEV BROADCAST ]\n\n${brodkes}`)
+                }
+                client.reply(from, 'Broadcast berhasil!', id)
             break
             
             default:

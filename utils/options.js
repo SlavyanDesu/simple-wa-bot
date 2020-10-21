@@ -32,6 +32,7 @@ module.exports = options = (headless, start) => {
         autoRefresh: true,
         restartOnCrash: start,
         cacheEnabled: false,
+        executablePath: execPath,
         useChrome: true,
         killProcessOnBrowserClose: true,
         throwErrorOnTosBlock: false,

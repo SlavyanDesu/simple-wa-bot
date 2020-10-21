@@ -318,7 +318,7 @@ Penggunaan: *$ask* <pertanyaan>
 
 2. *$bapack*
 S4PI apHa YanG b1S4 nUL1S? sap1doL, XIX1X1Xi,,,,
-Aliases: *bapak*
+Aliases: -
 Penggunaan: *$bapack* <teks>
 
 3. *$binary*
