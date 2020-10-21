@@ -1,26 +1,21 @@
-exports.textReadme = () => {
+exports.textRules = () => {
     return `
-MIT License
+>>> *THE RULES!* <<<
 
-Copyright (c) 2020 SlavyanDesu
-    
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-    
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-    
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+1. Dilarang menyalahgunakan bot seperti menyebarkan hoax. Block permanent.
+2. Dilarang spam. Warn atau block.
+3. Dilarang ngajak call/video call. Auto block.
+4. Gak usah ajak chat bot. Gak akan dibales.
+5. Hanya menerima grup dengan member >= 20 orang. Kurang dari itu, bot akan keluar secara otomatis.
+
+Ketik *$menu* untuk melihat list command.
+
+Untuk request command, pertanyaan, kritik dan saran bisa chat owner:
+wa.me/6281294958473
+
+Terima kasih! 🙏
+
+- Kal
     `
 }
 
@@ -94,7 +89,7 @@ Penggunaan: *$ask* <pertanyaan>
 
 2. *$bapack*
 S4PI apHa YanG b1S4 nUL1S? sap1doL, XIX1X1Xi,,,,
-Aliases: *bapak*
+Aliases: -
 Penggunaan: *$bapack* <teks>
 
 3. *$binary*
@@ -148,72 +143,82 @@ Aliases: *talk*
 Penggunaan: *$say* <teks>
 
 Utility:
-1. *$clock*
+1. *$brainly*
+Cari jawaban di Brainly.
+Aliases: -
+Penggunaan: *$brainly* <soal> <.jumlah jawaban>
+
+2. *$clock*
 Cek waktu Indonesia sekitar.
 Aliases: *waktu* - *jam*
 Penggunaan: *$clock*
 
-2. *$corona*
+3. *$corona*
 Mengirim data terkini COVID-19 di Indonesia.
 Aliases: -
 Penggunaan: *$corona*
 
-3. *$cuaca*
+4. *$cuaca*
 Cek cuaca di lokasi yang diberikan.
 Aliases: -
 Penggunaan: *$cuaca* <daerah>
 
-4. *$delete*
+5. *$delete*
 Hapus pesan yang saya kirim.
 Aliases: *del*
 Penggunaan: reply pesan yang mau dihapus lalu ketik command *$delete*
 
-5. *$infogempa*
+6. *$faq*
+Pertanyaan yang sering diajukan.
+Aliases: -
+Penggunaan: *$faq*
+
+7. *$infogempa*
 Mengambil info gempa terkini dari BMKG.
 Aliases: *gempa*
 Penggunaan: *$infogempa*
 
-6. *$igstalk*
+8. *$igstalk*
 Mengambil info akun Instagram dari username yang diberikan.
 Aliases: *igs*
 Penggunaan: *$igstalk* <username>
 
-7. *$jadwalshalat*
+9. *$jadwalshalat*
 Menampilkan jadwal shalat dari daerah yang diberikan.
 Aliases: *jadwalsholat* - *shalat* - *sholat*
 Penggunaan: *$jadwalshalat* <daerah>
 
-8. *$menu*
+10. *$menu*
 Buka menu.
 Aliases: *help* - *h*
 Penggunaan: *$menu*
 
-9. *$ping*
+11. *$ping*
 Cek kecepatan respon bot.
 Alias: *speed* - *p*
 Penggunaan: *$ping*
 
-10. *$readme*
-Berisi copyright doang.
-Alias: *tnc*
-Penggunaan: *$readme*
+12. *$rules*
+Baca peraturan bot!
+Alias: *rule*
+Penggunaan: *$rules*
 
-12. *$server*
+13. *$server*
 Cek spesifikasi server.
 Aliases: -
 Penggunaan: *$server*
 
-13. *$status*
+14. *$status*
 Untuk cek status bot.
 Aliases: *stats*
 Penggunaan: *$status*
 
-14. *$toidr*
+15. *$toidr*
 Konversikan kurensi luar negeri ke IDR.
 Aliases: -
 Penggunaan: *$toidr* <kurensi> <jumlah uang>
 
-15. *$wikipedia*
+16. *$wikipedia*
 Mencari apapun di Wikipedia.
 Aliases: *wiki*
 Penggunaan: *$wikipedia* <sesuatu>
@@ -237,13 +242,13 @@ exports.textMenu = () => {
 
             *LIST MENU*
 
-*$menu1* = Downloader - *NEW UPDATE*
+*$menu1* = Downloader
 *$menu2* = Sticker
-*$menu3* = Fun - *NEW UPDATE*
+*$menu3* = Fun
 *$menu4* = Utility - *NEW UPDATE*
 *$menu5* = Weeb Zone
 *$menuall* = Tampilkan semua command
-*$admin* = Khusus grup dan admin
+*$group* = Menu khusus grup - *NEW UPDATE*
 *$donate* = Kasian bang ga ada duit
 ~_*$hidden*_~ = NSFW, jangan pake!
 
@@ -380,72 +385,82 @@ exports.textMenu4 = () => {
 
 *ABAIKAN TANDA <>*
 Utility:
-1. *$clock*
+1. *$brainly*
+Cari jawaban di Brainly.
+Aliases: -
+Penggunaan: *$brainly* <soal> <.jumlah jawaban>
+
+2. *$clock*
 Cek waktu Indonesia sekitar.
 Aliases: *waktu* - *jam*
 Penggunaan: *$clock*
 
-2. *$corona*
+3. *$corona*
 Mengirim data terkini COVID-19 di Indonesia.
 Aliases: -
 Penggunaan: *$corona*
 
-3. *$cuaca*
+4. *$cuaca*
 Cek cuaca di lokasi yang diberikan.
 Aliases: -
 Penggunaan: *$cuaca* <daerah>
 
-4. *$delete*
+5. *$delete*
 Hapus pesan yang saya kirim.
 Aliases: *del*
 Penggunaan: reply pesan yang mau dihapus lalu ketik command *$delete*
 
-5. *$infogempa*
+6. *$faq*
+Pertanyaan yang sering diajukan.
+Aliases: -
+Penggunaan: *$faq*
+
+7. *$infogempa*
 Mengambil info gempa terkini dari BMKG.
 Aliases: *gempa*
 Penggunaan: *$infogempa*
 
-6. *$igstalk*
+8. *$igstalk*
 Mengambil info akun Instagram dari username yang diberikan.
 Aliases: *igs*
 Penggunaan: *$igstalk* <username>
 
-7. *$jadwalshalat*
+9. *$jadwalshalat*
 Menampilkan jadwal shalat dari daerah yang diberikan.
 Aliases: *jadwalsholat* - *shalat* - *sholat*
 Penggunaan: *$jadwalshalat* <daerah>
 
-8. *$menu*
+10. *$menu*
 Buka menu.
 Aliases: *help* - *h*
 Penggunaan: *$menu*
 
-9. *$ping*
+11. *$ping*
 Cek kecepatan respon bot.
 Alias: *speed* - *p*
 Penggunaan: *$ping*
 
-10. *$readme*
-Berisi copyright doang.
-Alias: *tnc*
-Penggunaan: *$readme*
+12. *$rules*
+Baca peraturan bot!
+Alias: *rule*
+Penggunaan: *$rules*
 
-12. *$server*
+13. *$server*
 Cek spesifikasi server.
 Aliases: -
 Penggunaan: *$server*
 
-13. *$status*
+14. *$status*
 Untuk cek status bot.
 Aliases: *stats*
 Penggunaan: *$status*
 
-14. *$toidr*
+15. *$toidr*
 Konversikan kurensi luar negeri ke IDR.
 Aliases: -
 Penggunaan: *$toidr* <kurensi> <jumlah uang>
 
-15. *$wikipedia*
+16. *$wikipedia*
 Mencari apapun di Wikipedia.
 Aliases: *wiki*
 Penggunaan: *$wikipedia* <sesuatu>
@@ -470,12 +485,12 @@ Penggunaan: kirim foto lalu tambahkan caption *$wait*
     `
 }
 
-exports.textAdmin = () => {
+exports.textGroup = () => {
     return `
-    ⚠️ *ADMIN ONLY* ⚠️
+    ⚠️ *GROUP COMMANDS* ⚠️
 
 *ABAIKAN TANDA <>*
-Gunakan command ini jika admin terlalu malas:
+Group only:
 1. *$add*
 Tambahkan orang ke grup.
 Aliases:-
@@ -486,22 +501,27 @@ Lengserin admin.
 Aliases: -
 Penggunaan: *$demote* @member
 
-3. *$kick*
+3. *$groupinfo*
+Mengambil data info group.
+Aliases: -
+Penggunaan: *$groupinfo*
+
+4. *$kick*
 Untuk kick member rese.
 Aliases: -
 Penggunaan: *$kick* @member
 
-4. *$leave*
+5. *$leave*
 Keluarkan saya dari grup.
 Aliases: *out* - *bye*
 Penggunaan: *$leave*
 
-5. *$linkgroup*
+6. *$linkgroup*
 Memberikan link group yang disinggahi.
 Aliases: *linkgrup*
 Penggunaan: *$linkgroup*
 
-6. *$promote*
+7. *$promote*
 Naikin jabatan member ke admin.
 Aliases: -
 Penggunaan: *$promote* @member
@@ -525,5 +545,44 @@ Penggunaan: *$multifetish <tag>*
 Kirim random foto lewd sebanyak 5 foto dalam 1 request.
 Aliases: *mlewds* - *mlewd*
 Penggunaan: *$multilewds*
+    `
+}
+
+exports.textFaq = () => {
+    return `
+    *Frequently Asked Question (FAQ)*
+
+Q: Cara bikin bot ini gimana?
+A: Ngoding
+
+Q: Tutor bikinnya dong bro?
+A: Belajar JS dan node.js, gak ada yang simple hidup ini
+
+Q: Kok bot kadang gak respon kalau banyak command?
+A: Cooldown command 5 detik, di bawah itu bakal terbaca spam sama bot
+
+Q: Bikin bot bayar ga?
+A: Gak, tapi buat jadi online 24/7 harus sewa server kayak gw, donate pls
+
+Q: Bikin bot kayak gini bakal kena banned gak?
+A: Mungkin aja, soalnya bot kayak gini unofficial
+
+Q: Ini bot kalau download pake kuota siapa?
+A: Kuota server
+
+Q: Kok command $ask gak nyambung?
+A: Karena responnya udah gw ketik dan si bot cuman milih random respon doang
+
+Q: Bro kalau misalnya bot maintenance ceknya di mana ya?
+A: Di info kontak si bot aja, kan ada tuh
+
+Q: Kalau mau donate harus berapa minimal?
+A: Sebelumnya, makasih udah mau donate. Gak ada minimal buat donate, berapa pun gw terima agar si bot ini online terus
+
+Q: Update-nya tiap kapan aja?
+A: Gak tentu sih, kadang 1 Minggu sekali atau 2 Minggu sekali
+
+Q: Kok bot-nya gak bisa diajak chat?
+A: Karena ini bukan chat bot
     `
 }

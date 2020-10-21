@@ -79,6 +79,7 @@ After that scan the QR code and wait until it authenticated.
 | Corona Indonesia |      ✔️      |
 | Currency to IDR  |      ✔️      |
 | Wikipedia        |      ✔️      |
+| Brainly          |      ✔️      |
 
 |      Weeb Zone     | Availability |
 | :----------------: | :----------: |
@@ -99,6 +100,7 @@ After that scan the QR code and wait until it authenticated.
 | Leave        |      ✔️      |
 | Status       |      ✔️      |
 | Group link   |      ✔️      |
+| Group info   |      ✔️      |
 
 ## 🙏 Special Thanks to
 * [`Open-Wa/wa-automate-nodejs`](https://github.com/open-wa/wa-automate-nodejs)

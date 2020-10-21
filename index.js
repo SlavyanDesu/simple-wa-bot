@@ -12,12 +12,25 @@ const start = (client = new Client()) => {
         console.log('[CLIENT STATE]', state)
         if (state === 'UNPAIRED') client.forceRefocus()
         if (state === 'CONFLICT') client.forceRefocus()
+        if (state === 'UNLAUNCHED') client.forceRefocus()
     })
 
     // Set all received message to seen
     client.onAck((x) => {
         const { to } = x
         if (x !== 3) client.sendSeen(to)
+    })
+
+    // Listening added to group
+    client.onAddedToGroup((chat) => {
+        let totalMember = chat.groupMetadata.participants.length
+        if (totalMember < 20) {
+            client.sendText(chat.id, `Jumlah member hanya *${totalMember}*. Minimal member harus *20*.`)
+                .then(() => client.leaveGroup(chat.id))
+                .then(() => client.deleteChat(chat.id))
+        } else {
+            client.sendText(chat.groupMetadata.id, `Terima kasih grup ${chat.contact.name} telah mengundangku! Ketik *$rules* terlebih dahulu!`)
+        }
     })
 
     // Listening on message
