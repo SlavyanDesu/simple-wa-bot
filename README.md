@@ -79,7 +79,7 @@ After that scan the QR code and wait until it authenticated.
 | Corona Indonesia |      ✔️      |
 | Currency to IDR  |      ✔️      |
 | Wikipedia        |      ✔️      |
-| Brainly          |      ✔️      |
+| Brainly          |      ✖️      |
 
 |      Weeb Zone     | Availability |
 | :----------------: | :----------: |
@@ -111,4 +111,4 @@ After that scan the QR code and wait until it authenticated.
 **simple-wa-bot** © [SlavyanDesu](https://github.com/SlavyanDesu), released under the MIT License.
 Authored and maintained by SlavyanDesu.
 
-> Facebook: Kal
+> Facebook: Kal (Slavyan)
