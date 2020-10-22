@@ -20,7 +20,7 @@ module.exports = msgHandler = async (client = new Client(), message) => {
         pushname = pushname || verifiedName
         const botNumber = await client.getHostNumber() + '@c.us'
         const blockNumber = await client.getBlockedIds()
-        const ownerNumber = '6281294958473@c.us'
+        const ownerNumber = '6281294958473@c.us' // Change this to your number
         const groupId = isGroupMsg ? chat.groupMetadata.id : ''
         const groupAdmins = isGroupMsg ? await client.getGroupAdmins(groupId) : ''
         const isGroupAdmins = groupAdmins.includes(sender.id) || false
@@ -42,9 +42,7 @@ module.exports = msgHandler = async (client = new Client(), message) => {
         if (isCmd && msgFilter.isFiltered(from) && !isGroupMsg) { return console.log(color('[SPAM]', 'red'), color(moment(t * 1000).format('DD/MM/YY HH:mm:ss'), 'yellow'), color(`${command} [${args.length}]`), 'from', color(pushname)) }
         if (isCmd && msgFilter.isFiltered(from) && isGroupMsg) { return console.log(color('[SPAM]', 'red'), color(moment(t * 1000).format('DD/MM/YY HH:mm:ss'), 'yellow'), color(`${command} [${args.length}]`), 'from', color(pushname), 'in', color(name || formattedTitle)) }
 
-        // Message log
-        if (!isCmd && !isGroupMsg) { return console.log('[RECV]', color(moment(t * 1000).format('DD/MM/YY HH:mm:ss'), 'yellow'), 'Message from', color(pushname)) }
-        if (!isCmd && isGroupMsg) { return console.log('[RECV]', color(moment(t * 1000).format('DD/MM/YY HH:mm:ss'), 'yellow'), 'Message from', color(pushname), 'in', color(name || formattedTitle)) }
+        // Command log
         if (isCmd && !isGroupMsg) { console.log(color('[EXEC]'), color(moment(t * 1000).format('DD/MM/YY HH:mm:ss'), 'yellow'), color(`${command} [${args.length}]`), 'from', color(pushname)) }
         if (isCmd && isGroupMsg) { console.log(color('[EXEC]'), color(moment(t * 1000).format('DD/MM/YY HH:mm:ss'), 'yellow'), color(`${command} [${args.length}]`), 'from', color(pushname), 'in', color(name || formattedTitle)) }
 
@@ -58,7 +56,8 @@ module.exports = msgHandler = async (client = new Client(), message) => {
             // Downloader
             case 'facebook':
             case 'fb':
-                if (args.length !== 1) return client.reply(from, '⚠️ Format salah! Ketik *$menu* untuk penggunaan. [WRONG FORMAT]', id)
+                return client.reply(from, '😩 Command ini lagi dalam masa pemeliharaan jadi gak bisa dipake dulu. [MAINTENANCE]', id)
+                /*if (args.length !== 1) return client.reply(from, '⚠️ Format salah! Ketik *$menu* untuk penggunaan. [WRONG FORMAT]', id)
                 if (!isUrl(url) && !url.includes('facebook.com')) return client.reply(from, '⚠️ Link tidak valid! [INVALID]', id)
                 await client.reply(from, '_Mohon tunggu sebentar, proses ini akan memakan waktu beberapa menit..._\n\nMerasa terbantu karena bot ini? Bantu saya dengan cara donasi melalui:\n081294958473 (Telkomsel/OVO/GoPay)\n\nTerima kasih 🙏', id)
                 downloader.facebook(url)
@@ -82,11 +81,12 @@ module.exports = msgHandler = async (client = new Client(), message) => {
                     .catch((err) => {
                         console.error(err)
                         client.reply(from, `⚠️ Terjadi kesalahan! [ERR]\n\n${err}`, id)
-                    })
+                    })*/
             break
             case 'instagram':
             case 'ig':
-                if (args.length !== 1) return client.reply(from, '⚠️ Format salah! Ketik *$menu1* untuk penggunaan. [WRONG FORMAT]', id)
+                return client.reply(from, '😩 Command ini lagi dalam masa pemeliharaan jadi gak bisa dipake dulu. [MAINTENANCE]', id)
+                /*if (args.length !== 1) return client.reply(from, '⚠️ Format salah! Ketik *$menu1* untuk penggunaan. [WRONG FORMAT]', id)
                 if (!isUrl(url) && !url.includes('instagram.com')) return client.reply(from, '⚠️ Link tidak valid! [INVALID]', id)
                 await client.reply(from, '_Mohon tunggu sebentar, proses ini akan memakan waktu beberapa menit..._\n\nMerasa terbantu karena bot ini? Bantu saya dengan cara donasi melalui:\n081294958473 (Telkomsel/OVO/GoPay)\n\nTerima kasih 🙏', id)
                 downloader.insta(url)
@@ -125,7 +125,7 @@ module.exports = msgHandler = async (client = new Client(), message) => {
                     .catch((err) => {
                         console.error(err)
                         client.reply(from, `⚠️ Terjadi kesalahan!\n\n${err}`, id)
-                    })
+                    })*/
             break
             case 'tiktok':
                 if (args.length !== 1) return client.reply(from, '⚠️ Format salah! Ketik *$menu1* untuk penggunaan. [WRONG FORMAT]', id)
