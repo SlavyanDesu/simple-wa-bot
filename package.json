@@ -26,7 +26,6 @@
     "chalk": "^4.1.0",
     "curse-text": "0.0.2",
     "fs-extra": "^9.0.1",
-    "instagram-fetcher": "^1.2.5",
     "md5": "^2.3.0",
     "moment-timezone": "^0.5.31",
     "node-fetch": "^2.6.1",
