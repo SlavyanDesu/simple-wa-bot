@@ -3,7 +3,7 @@ const { color } = require('./utils')
 const options = require('./utils/options')
 const msgHandler = require('./handler/message')
 
-const start = (client = new Client()) => {
+const start = async (client = new Client()) => {
     console.log('[DEV]', color('Slavyan', 'orange'))
     console.log('[CLIENT]', color('Bot is now online!', 'cyan'))
 
@@ -46,10 +46,10 @@ const start = (client = new Client()) => {
     })
 
     // When someone trying to call bot, he will be blocked
-    client.onIncomingCall(async (callData) => {
+    client.onIncomingCall((async (callData) => {
         await client.sendText(from, 'ID: Bot tidak menerima panggilan. Karena kamu telah melanggar rules, maka kamu telah diblok!\n\nEN: Bot is not receiving for calls. You has been blocked, because breaking the rules!')
             .then(() => client.contactBlock(callData.peerJid))
-    })
+    }))
 }
 
 // Creating *.data.json
