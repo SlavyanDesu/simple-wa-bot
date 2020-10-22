@@ -37,8 +37,8 @@ After that scan the QR code and wait until it authenticated.
 ## ❓ Features
 |       Downloader      | Availability |
 | :-------------------: | :----------: |
-| Facebook video        |      ✔️      |
-| Instagram video/image |      ✔️      |
+| Facebook video        |      ✖️      |
+| Instagram video/image |      ✖️      |
 | TikTok                |      ✔️      |
 | Twitter video         |      ✔️      |
 | YouTube MP4           |      ✔️      |
